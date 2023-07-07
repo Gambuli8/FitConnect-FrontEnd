@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
 const NavBar = () => {
   return (
-    <nav class="p-1 bg-black shadow md:flex md:items-center md:justify-between">
+    <nav class="p-05 bg-black shadow md:flex md:items-center md:justify-between">
       <div>
         <span>
-          <img class="h-20 inline" src={logo}></img>
+          <Link to="/">
+            <img class="h-24 inline mx-10" src={logo}></img>
+          </Link>
         </span>
       </div>
 
@@ -22,7 +24,7 @@ const NavBar = () => {
         <li class="mx-4">
           <Link
             to={"/contacto"}
-            class="text-white text-xl hover:text-yellow-500 duration-500"
+            class="text-white text-xl hover:text-yellow-500 duration-500 "
           >
             Contacto
           </Link>

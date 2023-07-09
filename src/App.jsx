@@ -1,4 +1,3 @@
-
 import { Route, Routes } from "react-router-dom";
 import Actividades from "./views/Actividades/Actividades";
 import Home from "./views/Home/Home";
@@ -17,7 +16,6 @@ function App() {
       </Routes>
     </div>
   );
-
 }
 
 export default App;

@@ -3,6 +3,7 @@ import Actividades from "./views/Actividades/Actividades";
 import Home from "./views/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Membresias from "./views/Membresias/Membresia";
+import "./App.css";
 
 function App() {
   return (

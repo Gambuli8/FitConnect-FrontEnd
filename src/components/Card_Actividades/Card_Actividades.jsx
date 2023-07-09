@@ -1,7 +1,7 @@
-function Card_Actividades() {
-  return (
-    <div>Card_Actividades</div>
-  )
-}
+import React from "react";
 
-export default Card_Actividades
+const Card_Actividades = () => {
+  return <div>Card_Actividades</div>;
+};
+
+export default Card_Actividades;

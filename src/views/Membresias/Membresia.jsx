@@ -1,7 +1,5 @@
 function Membresia() {
-  return (
-    <div>Membresia</div>
-  )
+  return <div>Membresia</div>;
 }
 
-export default Membresia
+export default Membresia;

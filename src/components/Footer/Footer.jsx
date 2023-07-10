@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 export default function Footer() {
-  return ( 
+  return (
     <div className="text-white bg-gradient-to-t from-gray-800 to-black w-[100%] h-[100px] font-light font-parrafo flex justify-around text-[12px] m-0 p-0 items-center">
       <div className="flex flex-col cursor-pointer ">
         <div className="text-[15px]">Politica de Privacidad</div>
@@ -11,11 +11,13 @@ export default function Footer() {
         Copyright (c) 2022 FITCONNECT. Todos los derechos reservados.
       </div>
       <div className="flex">
-      <a href="https://www.instagram.com/fitconnect"
+        <a
+          href="https://www.instagram.com/fitconnect"
           target="_blank"
-          rel="noreferrer">
+          rel="noreferrer"
+        >
           <svg
-          className='flex hover:w-[30px] hover:h-[30px] hover:transition-all hover:ease-linear hover:duration-700 mx-2'
+            className="flex hover:w-[30px] hover:h-[30px] hover:transition-all hover:ease-linear hover:duration-700 mx-2"
             width="20px"
             height="20px"
             viewBox="0 0 32 32"
@@ -144,4 +146,3 @@ export default function Footer() {
     </div>
   );
 }
-export default Footer

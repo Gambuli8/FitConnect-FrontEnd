@@ -144,3 +144,4 @@ export default function Footer() {
     </div>
   );
 }
+export default Footer

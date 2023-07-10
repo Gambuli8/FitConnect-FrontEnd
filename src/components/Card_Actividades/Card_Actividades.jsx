@@ -1,3 +1,4 @@
+ 
 function Card_Actividades() {
   return (
     <div className="w-[340px] h-[450px] border-[4px] border-[#ffd277] shadow-black shadow-xl bg-black  flex flex-col rounded-xl justify-center items-center m-4 bg-auto bg-no-repeat bg-center bg-origin-padding hover:translate-y-[-20px] duration-300">
@@ -21,5 +22,4 @@ function Card_Actividades() {
     </div>
   );
 }
-
 export default Card_Actividades;

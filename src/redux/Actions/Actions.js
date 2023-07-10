@@ -62,7 +62,7 @@ export const postActivity = (payload) => {
         alert("La actividad ha sido creada exitosamente");
         dispatch({ type: POST_ACTIVITIES, payload: response.data });
       } else {
-        throw new Error("Hubo un problema al crear el usuario");
+        throw new Error("Hubo un problema al crear la actividad");
       }
     } catch (error) {
       console.error("Error al crear la actividad:", error);

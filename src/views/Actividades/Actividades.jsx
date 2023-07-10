@@ -18,7 +18,7 @@ function Actividades() {
         NUESTRAS ACTIVIDADES
       </h1>
       <p className="font-titulo text-[22px] items-center text-white font-medium">
-        Estos son algunos de los servicios que ofrecemos en nuestro gimnasio.
+        Estos son algunos de los servicios que ofrecemos en nuestro gimnasio
       </p>
     </div>
       <div className=" w-[1200px] h-[2000px] grid grid-cols-3 grid-rows-4 justify-between items-star m-8 my-4">

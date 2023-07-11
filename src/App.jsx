@@ -1,10 +1,3 @@
- 
-import './App.css'
-import Actividades from './views/Actividades/Actividades'
-
-function App() {
-
-
 import { Route, Routes } from "react-router-dom";
 import Actividades from "./views/Actividades/Actividades";
 import Home from "./views/Home/Home";
@@ -15,11 +8,6 @@ import "./App.css";
 
 function App() {
   return (
- 
-    <div className='App'> 
-      <Actividades/>
-    </div>
-  )
 
     <div>
       <NavBar />
@@ -30,7 +18,6 @@ function App() {
       </Routes>
     </div>
   );
-
  
 }
 

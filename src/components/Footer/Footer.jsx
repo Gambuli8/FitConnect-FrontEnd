@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 export default function Footer() {
   return (
     <div className="text-white bg-gradient-to-t from-gray-800 to-black w-[100%] h-[100px] font-light font-parrafo flex justify-around text-[12px] m-0 p-0 items-center">

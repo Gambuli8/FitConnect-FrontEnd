@@ -4,6 +4,7 @@ import {
   GET_ACTIVITIES,
   GET_MEMBERSHIP,
   POST_USERS,
+  POST_ACTIVITIES,
 } from "../Actions/ActionsType";
 
 export const getUser = () => {
@@ -46,6 +47,25 @@ export const postUser = (payload) => {
       }
     } catch (error) {
       console.error("Error al crear el usuario:", error);
+    }
+  };
+};
+
+export const postActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        "https://jsonplaceholder.typicode.com/users",
+        payload
+      );
+      if (response.status === 201) {
+        alert("La actividad ha sido creada exitosamente");
+        dispatch({ type: POST_ACTIVITIES, payload: response.data });
+      } else {
+        throw new Error("Hubo un problema al crear la actividad");
+      }
+    } catch (error) {
+      console.error("Error al crear la actividad:", error);
     }
   };
 };

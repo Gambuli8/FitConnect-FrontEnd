@@ -2,6 +2,7 @@ import {
   GET_ACTIVITIES,
   GET_MEMBERSHIP,
   GET_USERS,
+  POST_ACTIVITIES,
   POST_USERS,
 } from "../Actions/ActionsType";
 
@@ -21,6 +22,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allMemberships: action.payload };
     case POST_USERS:
       return { ...state, allUsers: [...state.allUsers, action.payload] };
+    case POST_ACTIVITIES:
+      return {
+        ...state,
+        allActivities: [...state.allActivities, action.payload],
+      };
   }
   return state;
 };

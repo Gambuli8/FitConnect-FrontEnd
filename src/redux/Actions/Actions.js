@@ -18,9 +18,10 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const response = await axios("http://localhost:3001/activitie");
+      console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 };

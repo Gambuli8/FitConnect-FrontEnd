@@ -1,8 +1,22 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import { Link } from "react-router-dom";
+import { getActivities } from "../../redux/Actions/Actions";
 
 function Actividades() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getActivities());
+  }, [dispatch]);
+
+  const allActivities = useSelector((state) => state.allActivities);
+  console.log(allActivities);
+
   return (
     <div className="flex flex-col bg-black w-[100%] h-[100%] m-0 p-0 ">
       <Link to="/home">
@@ -48,18 +62,19 @@ function Actividades() {
         </p>
       </div>
       <div className=" w-[1200px] h-[2000px] grid grid-cols-3 grid-rows-4 justify-between items-star m-8 my-4">
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
-        <Card_Actividades />
+        {allActivities?.map((activity) => (
+          <Card_Actividades
+            key={activity?.id}
+            id={activity?.id}
+            name={activity?.name}
+            schedule={activity?.schedule}
+            rating={activity?.rating}
+            type_activity={activity?.type_activity}
+            image={activity?.image}
+            />
+        ))} 
+
       </div>
-      <div className=""></div>
     </div>
   );
 }

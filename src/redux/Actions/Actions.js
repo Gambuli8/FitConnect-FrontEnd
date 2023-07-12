@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GET_USERS,
   GET_ACTIVITIES,
@@ -6,19 +5,24 @@ import {
   POST_USERS,
   POST_ACTIVITIES,
 } from "../Actions/ActionsType";
+import axios from "axios";
 
 export const getUser = () => {
   return async (dispatch) => {
-    const response = await axios("https://jsonplaceholder.typicode.com/users");
+    const response = await axios("http://localhost:3001/user");
     return dispatch({ type: GET_USERS, payload: response.data });
   };
 };
 
 export const getActivities = () => {
-  return async (dispatch) => {
-    const response = await axios("https://jsonplaceholder.typicode.com/photos");
-    console.log(response);
-    return dispatch({ type: GET_ACTIVITIES, payload: response.data });
+  return async function (dispatch) {
+    try {
+      console.log("hola");
+      const response = await axios("http://localhost:3001/activitie");
+      dispatch({ type: GET_ACTIVITIES, payload: response.data });
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 };
 
@@ -34,10 +38,7 @@ export const getMembership = () => {
 export const postUser = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/users",
-        payload
-      );
+      const response = await axios.post("http://localhost:3001/user", payload);
       // Verificar si el usuario fue creado exitosamente
       if (response.status === 201) {
         alert("El usuario ha sido creado exitosamente");
@@ -55,7 +56,7 @@ export const postActivity = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/users",
+        "http://localhost:3001/activitie",
         payload
       );
       if (response.status === 201) {

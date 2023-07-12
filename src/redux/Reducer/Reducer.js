@@ -12,6 +12,8 @@ let initialState = {
   allMemberships: [],
 };
 
+console.log(initialState.allActivities);
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:

@@ -10,6 +10,7 @@ import {
 export const getUser = () => {
   return async (dispatch) => {
     const response = await axios("https://jsonplaceholder.typicode.com/users");
+    console.log(response.data);
     return dispatch({ type: GET_USERS, payload: response.data });
   };
 };
@@ -17,7 +18,6 @@ export const getUser = () => {
 export const getActivities = () => {
   return async (dispatch) => {
     const response = await axios("https://jsonplaceholder.typicode.com/photos");
-    console.log(response);
     return dispatch({ type: GET_ACTIVITIES, payload: response.data });
   };
 };

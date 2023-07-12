@@ -6,6 +6,7 @@ import {
   getMembership,
 } from "../../redux/Actions/Actions";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
+import Banner from "../../components/Banner/Banner";
 
 function Home() {
   const dispatch = useDispatch();

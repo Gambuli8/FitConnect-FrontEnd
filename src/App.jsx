@@ -4,12 +4,13 @@ import Home from "./views/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Membresias from "./views/Membresias/Membresia";
 import Footer from "./components/Footer/Footer";
-import "./App.css";
+import Banner from "./components/Banner/Banner";
 
 function App() {
   return (
     <div>
       <NavBar />
+      <Banner />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/actividades" element={<Actividades />} />

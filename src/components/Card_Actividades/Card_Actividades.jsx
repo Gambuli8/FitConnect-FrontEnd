@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 
- 
 function Card_Actividades({ name, schedule, type_activity, rating, image }) {
   return (
     <div className="w-[340px] h-[450px] border-[4px] border-[#ffd277] shadow-black shadow-xl bg-black  flex flex-col rounded-xl justify-center items-center m-4 bg-auto bg-no-repeat bg-center bg-origin-padding hover:translate-y-[-20px] duration-300">
@@ -14,11 +13,12 @@ function Card_Actividades({ name, schedule, type_activity, rating, image }) {
           {name}
         </h1>
         <h3 className="font-parrafo my-2 text-[20px]">Horario: {schedule}</h3>
-        <h3 className="font-parrafo my-2 text-[20px]">Tipo de actividad: {type_activity}</h3>
+        <h3 className="font-parrafo my-2 text-[20px]">
+          Tipo de actividad: {type_activity}
+        </h3>
         <h3 className="font-parrafo my-2 text-[20px]">Rating: {rating}</h3>
         <img src={image} alt="" />
-        <p className="font-Inconsolata my-2 text-[17px] font-medium capitalize text-gray-400">
-        </p>
+        <p className="font-Inconsolata my-2 text-[17px] font-medium capitalize text-gray-400"></p>
       </div>
     </div>
   );

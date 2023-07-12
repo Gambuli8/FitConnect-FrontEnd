@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getUser,
+  getActivities,
   getMembership,
 } from "../../redux/Actions/Actions";
 
@@ -14,12 +15,18 @@ function Home() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getMembership());
+
+    // dispatch(getActivities());
   }, [dispatch]);
 
-  return <div className="flex flex-col">
-    <h1>Home</h1>
-    <p>aca faltaria la seccion de 2 o 3 actividades y la seccion de membresias</p>
-  </div>;
+  return (
+    <div className="flex flex-col">
+      <h1>Home</h1>
+      <p>
+        aca faltaria la seccion de 2 o 3 actividades y la seccion de membresias
+      </p>
+    </div>
+  );
 }
 
 export default Home;

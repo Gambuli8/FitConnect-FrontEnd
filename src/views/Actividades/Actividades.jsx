@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { getActivities } from "../../redux/Actions/Actions";
 
 function Actividades() {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,9 +70,8 @@ function Actividades() {
             rating={activity?.rating}
             type_activity={activity?.type_activity}
             image={activity?.image}
-            />
-        ))} 
-
+          />
+        ))}
       </div>
     </div>
   );

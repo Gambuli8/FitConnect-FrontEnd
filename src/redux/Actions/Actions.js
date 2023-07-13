@@ -27,11 +27,13 @@ export const getActivities = () => {
 };
 
 export const getMembership = () => {
-  return async (dispatch) => {
-    const response = await axios(
-      "https://jsonplaceholder.typicode.com/comments"
-    );
-    return dispatch({ type: GET_MEMBERSHIP, payload: response.data });
+  return async function (dispatch) {
+    try {
+      const response = await axios("http://localhost:3001/membership");
+      dispatch({ type: GET_MEMBERSHIP, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

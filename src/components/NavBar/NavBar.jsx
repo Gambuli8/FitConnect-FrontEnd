@@ -30,7 +30,7 @@ const NavBar = () => {
         </li>
         <li className="mx-4">
           <Link
-            to={"/membresias"}
+            to={'#Membresia'}
             className="text-white text-xl hover:text-yellow-500 duration-500"
           >
             Membresias

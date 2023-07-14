@@ -5,6 +5,7 @@ import {
   POST_USERS,
   POST_ACTIVITIES,
   FILTER_ACTIVITIES,
+  FILTER_MEMBERSHIP
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -30,7 +31,7 @@ export const getActivities = () => {
 export const getMembership = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/membership");
+      const response = await axios("http://localhost:3001/membership?filter=31");
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -86,3 +87,16 @@ export const filterActivities = (filters) => {
     }
   };
 };
+
+export const filterMembership = (filter) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/membership?filter=${filter}`);
+      dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+FILTER_MEMBERSHIP

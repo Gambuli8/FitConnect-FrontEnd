@@ -98,5 +98,3 @@ export const filterMembership = (filter) => {
     }
   };
 };
-
-FILTER_MEMBERSHIP

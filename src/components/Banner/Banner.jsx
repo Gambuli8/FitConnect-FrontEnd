@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import bannerimage from "../../images/gym_img_2.jpg";
 
@@ -30,5 +29,7 @@ const Banner = () => {
     </section>
   );
 };
+
+//commit prueba Fede3
 
 export default Banner;

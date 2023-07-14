@@ -4,6 +4,7 @@ import {
   GET_USERS,
   POST_ACTIVITIES,
   POST_USERS,
+  FILTER_ACTIVITIES
 } from "../Actions/ActionsType";
 
 let initialState = {
@@ -27,6 +28,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allActivities: [...state.allActivities, action.payload],
       };
+    case FILTER_ACTIVITIES:
+      return { ...state, allActivities: action.payload };
   }
   return state;
 };

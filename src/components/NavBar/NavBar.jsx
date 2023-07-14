@@ -44,6 +44,14 @@ const NavBar = () => {
             Actividades
           </Link>
         </li>
+        <li className="mx-4">
+          <Link
+            className="text-white text-xl hover:text-yellow-500 duration-500"
+            to={"/signin"}
+          >
+            Sign In!
+          </Link>
+        </li>
       </ul>
     </nav>
   );

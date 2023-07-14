@@ -25,7 +25,7 @@ export default function Membresias() {
         return (
           <div key={membership?.id} className='bg-gray-700'>
             <Card_Membresias
-              levelMembreship={membership?.levelMembership}
+              levelMembreship={membership.levelMembership}
               price={membership?.price}
               duration={membership?.duration}
               idMembership={membership?.idMembership}

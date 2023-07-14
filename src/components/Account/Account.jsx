@@ -21,7 +21,7 @@ const Account = () => {
       <p className="text-white">✉️ User email: {user && user.email} </p>
       <button
         onClick={handleLogOut}
-        className="text-white border px-6 py-2 my-4"
+        className="text-black border px-6 py-2 my-4 bg-white"
       >
         Logout 🔙
       </button>

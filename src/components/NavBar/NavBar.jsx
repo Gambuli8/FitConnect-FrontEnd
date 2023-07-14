@@ -49,7 +49,7 @@ const NavBar = () => {
             className="text-white text-xl hover:text-yellow-500 duration-500"
             to={"/signin"}
           >
-            Sign In!
+            Sign in!
           </Link>
         </li>
       </ul>

@@ -9,6 +9,7 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { googleSignIn } = UserAuth();
+
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();

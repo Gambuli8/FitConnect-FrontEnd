@@ -7,7 +7,7 @@ const Banner = () => {
       <div className="mx-auto h-full">
         <div className="flex items-center h-full pl- -space-x-48 lg:-space-x-10">
           {/* text */}
-          <div className="flex-1 z-10">
+          <div className="text-center flex-1 z-10">
             <h1 className="text-7xl text-white mb-8 z-10">
               Saca con nosotros lo mejor de tu dia!
             </h1>

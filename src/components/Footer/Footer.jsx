@@ -1,7 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 export default function Footer() {
   return (
-    <div id="footer" className="text-white bg-gradient-to-t from-gray-800 to-black w-[100%] h-[100px] font-light font-parrafo flex justify-around text-[12px] m-0 p-0 items-center">
+    <div
+      id="footer"
+      className="text-white bg-gradient-to-t from-gray-800 to-black w-[100%] h-[100px] font-light font-parrafo flex justify-around text-[12px] m-0 p-0 items-center"
+    >
       <div className="flex flex-col cursor-pointer ">
         <div className="text-[15px]">Politica de Privacidad</div>
         <div className="text-[15px]">Terminos y Condiciones</div>

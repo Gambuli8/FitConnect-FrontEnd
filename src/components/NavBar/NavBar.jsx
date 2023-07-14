@@ -29,12 +29,9 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="mx-4">
-          <Link
-            to={'#Membresia'}
-            className="text-white text-xl hover:text-yellow-500 duration-500"
-          >
+          <a href="#Membresia" className="text-white text-xl hover:text-yellow-500 duration-500">
             Membresias
-          </Link>
+          </a>
         </li>
         <li className="mx-4">
           <Link

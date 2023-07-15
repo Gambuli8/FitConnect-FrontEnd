@@ -1,5 +1,5 @@
 import Card_Membresias from "../../components/Card_Membresias/Card_Membresias"
-import { getMembership, filterMembership } from "../../redux/Actions/Actions"
+import { filterMembership } from "../../redux/Actions/Actions"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -7,11 +7,9 @@ export default function Membresias() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMembership());
+    dispatch(filterMembership(31));
   }, [dispatch]);
-
   const allMemberships = useSelector((state) => state.allMemberships);
-  console.log(allMemberships);
 
   const [filter, setFilter] = useState(31)  
   const changeHandler = (event)=>{

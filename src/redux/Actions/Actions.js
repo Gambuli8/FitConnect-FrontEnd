@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 import {
   GET_USERS,
   GET_ACTIVITIES,
@@ -33,7 +35,7 @@ export const getActivities = () => {
 export const getMembership = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/membership?filter=31");
+      const response = await axios("http://localhost:3001/membership");
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -105,15 +107,21 @@ export const postUserBack = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("http://localhost:3001/user", payload);
-      // Verificar si el usuario fue creado exitosamente
-      if (response.status === 201) {
-        alert("El usuario ha sido creado exitosamente");
-        dispatch({ type: POST_USERSBACK, payload: response.data });
-      } else {
-        throw new Error("Hubo un problema al crear el usuario");
-      }
+      // Verificar si el usuario fue creado exitosamente 
+      Swal.fire({
+        icon: 'success',
+        title: 'Your user has been created',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch({ type: POST_USERSBACK, payload: response.data });
     } catch (error) {
-      console.error("Error al crear el usuario:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hubo un problema al crear el usuario!',
+        footer: `<p>Es posible que ya tengas una cuenta con el email ${payload.email}</p>`
+      })    
     }
   };
 };

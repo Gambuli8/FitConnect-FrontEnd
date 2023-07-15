@@ -5,7 +5,7 @@ import {
   POST_ACTIVITIES,
   POST_USERS,
   FILTER_ACTIVITIES,
-  FILTER_MEMBERSHIP
+  FILTER_MEMBERSHIP,
 } from "../Actions/ActionsType";
 
 let initialState = {

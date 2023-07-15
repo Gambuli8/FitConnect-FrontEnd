@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SingIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
+import Form from "./views/Form/Form"
 import Account from "./components/Account/Account";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/actividades" element={<Actividades />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/form" element={<Form />} />
           <Route
             path="/account"
             element={

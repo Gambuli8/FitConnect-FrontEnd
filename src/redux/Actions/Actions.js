@@ -5,7 +5,9 @@ import {
   POST_USERS,
   POST_ACTIVITIES,
   FILTER_ACTIVITIES,
-  FILTER_MEMBERSHIP
+  FILTER_MEMBERSHIP,
+  POST_USERSBACK,
+  USER_FIREBASE
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -93,6 +95,33 @@ export const filterMembership = (filter) => {
     try {
       const response = await axios(`http://localhost:3001/membership?filter=${filter}`);
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const postUserBack = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/user", payload);
+      // Verificar si el usuario fue creado exitosamente
+      if (response.status === 201) {
+        alert("El usuario ha sido creado exitosamente");
+        dispatch({ type: POST_USERSBACK, payload: response.data });
+      } else {
+        throw new Error("Hubo un problema al crear el usuario");
+      }
+    } catch (error) {
+      console.error("Error al crear el usuario:", error);
+    }
+  };
+};
+
+export const userFirebase = (user) => {
+  return async (dispatch) => {
+     try {
+      dispatch({ type: USER_FIREBASE, payload: user });
     } catch (error) {
       console.log(error);
     }

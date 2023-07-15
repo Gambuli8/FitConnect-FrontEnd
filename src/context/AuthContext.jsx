@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
+  signInWithRedirect,
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";

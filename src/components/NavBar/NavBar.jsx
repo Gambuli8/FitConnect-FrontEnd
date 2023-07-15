@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
+import { UserAuth } from "../../context/AuthContext";
 const NavBar = () => {
+  const { isLoggedIn, logout } = UserAuth();
   return (
     <nav className="p-05 bg-black shadow md:flex md:items-center md:justify-between">
       <div>
@@ -44,14 +46,25 @@ const NavBar = () => {
             Actividades
           </Link>
         </li>
-        <li className="mx-4">
-          <Link
-            className="text-white text-xl hover:text-yellow-500 duration-500"
-            to={"/signin"}
-          >
-            Sign in!
-          </Link>
-        </li>
+        {isLoggedIn ? (
+          <li className="mx-4">
+            <button
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </li>
+        ) : (
+          <li className="mx-4">
+            <Link
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+              to={"/signin"}
+            >
+              Sign in!
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

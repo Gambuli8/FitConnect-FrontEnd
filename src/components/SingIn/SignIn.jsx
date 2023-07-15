@@ -6,7 +6,7 @@ const SignIn = () => {
   const { signIn } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ email: "", password: "" });
   const { googleSignIn } = UserAuth();
   const navigate = useNavigate();
 
@@ -24,10 +24,10 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("/");
+    setError("");
     try {
       await signIn(email, password);
-      navigate("/account");
+      navigate("/");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -57,6 +57,7 @@ const SignIn = () => {
               type="email"
             ></input>
           </div>
+          {error.email}
           <div className="flex flex-col py-2 text-white">
             <label className="py-2 font-medium">Enter Password</label>
             <input
@@ -65,6 +66,7 @@ const SignIn = () => {
               type="password"
             ></input>
           </div>
+          {error.password}
           <button
             className="py-2 px-4 flex w-full mb-1 items-center justify-center bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-600 focus:ring-offset-yellow-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg "
             type="submit"

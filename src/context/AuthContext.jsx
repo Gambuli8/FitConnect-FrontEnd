@@ -6,29 +6,34 @@ import {
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
-  signInWithRedirect,
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";
-
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedOut, setLoggedOut] = useState(false);
 
   const createUser = (email, password) => {
+    setLoggedIn(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signIn = (email, password) => {
+    setLoggedIn(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
+    setLoggedIn(true);
     signInWithPopup(auth, provider);
   };
   const logout = () => {
+    setLoggedIn(false);
+    setLoggedOut(true);
     return signOut(auth);
   };
 
@@ -44,7 +49,15 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ createUser, user, logout, signIn, googleSignIn }}
+      value={{
+        createUser,
+        user,
+        logout,
+        signIn,
+        googleSignIn,
+        isLoggedIn,
+        isLoggedOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

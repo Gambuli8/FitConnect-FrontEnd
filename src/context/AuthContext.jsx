@@ -10,19 +10,27 @@ import {
   fetchSignInMethodsForEmail, // Add the fetchSignInMethodsForEmail import
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";
+import { useDispatch } from "react-redux";
+import { userFirebase } from "../redux/Actions/Actions";
+
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoggedOut, setLoggedOut] = useState(false);
+
+  useEffect(() => {
+    dispatch(userFirebase(user));
+  }, [user,dispatch]);
 
   const createUser = (email, password) => {
     setLoggedIn(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-
+  
   const signIn = (email, password) => {
     setLoggedIn(true);
     return signInWithEmailAndPassword(auth, email, password);

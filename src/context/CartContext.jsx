@@ -5,9 +5,11 @@ export const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => { 
     
-        const [cart, setCart] = useState([]);
+        const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
-            localStorage.setItem('cart', JSON.stringify(cart)); 
+        const saveCart = () => {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            }
 
     const addToCart = product => {
         const productIndex = cart.findIndex(p => p.id === product.id);
@@ -15,7 +17,7 @@ export const CartContextProvider = ({ children }) => {
         if (productIndex >= 0) {
             const newCart = structuredClone(cart)
             newCart[productIndex].quantity += 1
-            return setCart(newCart);
+            return setCart(newCart)  
         }
         setCart(prevState => [
             ...prevState,
@@ -25,6 +27,7 @@ export const CartContextProvider = ({ children }) => {
             },
         ])
     }
+    saveCart(cart)
 
     const removeFromCart = membership => {
         return setCart(prevState => prevState.filter(p => p.id !== membership.id));

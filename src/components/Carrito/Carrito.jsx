@@ -99,7 +99,7 @@ export default function Carrito() {
                 ))}
             </ul>
             {cart.length === 0 ? <p className='text-[20px]'>Carrito vacio</p> && <p className='text-[20px]'>Carrito vacio</p>
-            : <Link to={`/carrito/${cart.idMembership}`}><button className='items-end align-bottom'>Finalizar Compra</button></Link>
+            : <Link to={`/carrito/${cart[0].idMembership}`}><button className='items-end align-bottom'>Finalizar Compra</button></Link>
             }
           </aside>
         </div>

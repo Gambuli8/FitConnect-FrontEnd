@@ -16,30 +16,30 @@ function Actividades() {
   const allActivities = useSelector((state) => state.allActivities);
   console.log(allActivities);
 
- //logica del filter y order Activities.
+  //logica del filter y order Activities.
   const [filters, setFilters] = useState({
     filter: 0,
-    order: "az"
-  })
+    order: "az",
+  });
 
-  const changeHandler = (event)=>{
-    const property = event.target.name
+  const changeHandler = (event) => {
+    const property = event.target.name;
     const value = event.target.value;
     switch (property) {
-        case "memberships":
-          setFilters(()=>{
-            const updateFilter = {...filters, filter:value}
-            return updateFilter
-          });
-            break;
-        case "order":
-          setFilters(()=>{
-            const updateOrder = {...filters, order:value}
-            return updateOrder
-          });
-            break
+      case "memberships":
+        setFilters(() => {
+          const updateFilter = { ...filters, filter: value };
+          return updateFilter;
+        });
+        break;
+      case "order":
+        setFilters(() => {
+          const updateOrder = { ...filters, order: value };
+          return updateOrder;
+        });
+        break;
     }
-  };  
+  };
   useEffect(() => {
     dispatch(filterActivities(filters));
   }, [filters, dispatch]);
@@ -87,9 +87,9 @@ function Actividades() {
         <p className="font-titulo text-[22px] items-center text-white font-medium">
           Estos son algunos de los servicios que ofrecemos en nuestro gimnasio
         </p>
-
-{/*        filter y order activities
- */}      <div>
+        {/*        filter y order activities
+         */}{" "}
+        <div>
           <select name="memberships" onChange={changeHandler}>
             <option value={0}>All Memberships</option>
             <option value={1}>Basic</option>
@@ -101,8 +101,8 @@ function Actividades() {
             <option value="za">Z-A</option>
           </select>
         </div>
-   </div>
-        
+      </div>
+
       <div className=" w-[1200px] h-[2000px] grid grid-cols-3 grid-rows-4 justify-between items-star m-8 my-4">
         {allActivities?.map((activity) => (
           <Card_Actividades

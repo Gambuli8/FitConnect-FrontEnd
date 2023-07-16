@@ -17,22 +17,22 @@ function App() {
   return (
     <div>
       <CartContextProvider>
-      <NavBar />
-      <Carrito />
-      <AuthContextProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/actividades" element={<Actividades />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/carrito/:id" element={<DetailCart />} />
-          <Route
-            path="/account"
-            element={
-              <ProtectedRoute>
-                <Account />
-              </ProtectedRoute>
-            }
+        <Carrito />
+        <AuthContextProvider>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/actividades" element={<Actividades />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/carrito/:id" element={<DetailCart />} />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <Account />
+                </ProtectedRoute>
+              }
             />
         </Routes>
       </AuthContextProvider>

@@ -7,8 +7,10 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  fetchSignInMethodsForEmail, // Add the fetchSignInMethodsForEmail import
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -31,19 +33,33 @@ export const AuthContextProvider = ({ children }) => {
     setLoggedIn(true);
     signInWithPopup(auth, provider);
   };
+
   const logout = () => {
     setLoggedIn(false);
     setLoggedOut(true);
     return signOut(auth);
   };
 
+  const isEmailRegistered = async (email) => {
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      return signInMethods.length > 0;
+    } catch (error) {
+      console.log(
+        "An error occurred while checking email registration:",
+        error
+      );
+      return false;
+    }
+  };
+
   useEffect(() => {
-    const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
     });
     return () => {
-      unsuscribe();
+      unsubscribe();
     };
   }, []);
 
@@ -57,12 +73,14 @@ export const AuthContextProvider = ({ children }) => {
         googleSignIn,
         isLoggedIn,
         isLoggedOut,
+        isEmailRegistered,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 export const UserAuth = () => {
   return useContext(AuthContext);
 };

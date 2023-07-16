@@ -20,7 +20,7 @@ const Banner = () => {
             </p>
 
             <button className="bg-yellow-500 text-black font-medium py-2 px-10 rounded-full">
-              <Link to="/membresias">¡Asóciate ahora!</Link>
+              <a href="#Membresia">Asociate ahora!</a>
             </button>
           </div>
 

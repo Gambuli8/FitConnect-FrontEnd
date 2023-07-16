@@ -1,17 +1,27 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
 import { UserAuth } from "../../context/AuthContext";
-
-// import { ShoppingCart } from "react-feather";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const { isLoggedIn, logout } = UserAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
+
+  const handleLogout = () => {
+    logout();
+    setIsAuthenticated(false);
+  };
+
+  useEffect(() => {
+    setIsAuthenticated(isLoggedIn);
+  }, [isLoggedIn]);
+
   return (
     <nav className="p-05 bg-black shadow md:flex md:items-center md:justify-between">
       <div>
         <span>
           <Link to="/">
-            <img className="h-24 inline mx-10" src={logo}></img>
+            <img className="h-24 inline mx-10" src={logo} alt="Logo" />
           </Link>
         </span>
       </div>
@@ -26,25 +36,20 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="mx-4">
-          <Link
-            to={"/contacto"}
+          <a
+            href="#Contacto"
             className="text-white text-xl hover:text-yellow-500 duration-500 "
           >
             Contacto
-          </Link>
+          </a>
         </li>
         <li className="mx-4">
-          <Link
-            to={"#Membresia"}
+          <a
+            href="#Membresia"
             className="text-white text-xl hover:text-yellow-500 duration-500"
           >
-            <a
-              href="#Membresia"
-              className="text-white text-xl hover:text-yellow-500 duration-500"
-            >
-              Membresias
-            </a>
-          </Link>
+            Membresias
+          </a>
         </li>
         <li className="mx-4">
           <Link
@@ -54,11 +59,11 @@ const NavBar = () => {
             Actividades
           </Link>
         </li>
-        {isLoggedIn ? (
+        {isAuthenticated ? (
           <li className="mx-4">
             <button
               className="text-white text-xl hover:text-yellow-500 duration-500"
-              onClick={logout}
+              onClick={handleLogout}
             >
               Logout
             </button>

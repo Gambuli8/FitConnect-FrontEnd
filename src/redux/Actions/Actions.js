@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
   GET_USERS,
   GET_ACTIVITIES,
@@ -5,7 +6,7 @@ import {
   POST_USERS,
   POST_ACTIVITIES,
   FILTER_ACTIVITIES,
-  FILTER_MEMBERSHIP
+  FILTER_MEMBERSHIP,
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -31,7 +32,9 @@ export const getActivities = () => {
 export const getMembership = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/membership?filter=31");
+      const response = await axios(
+        "http://localhost:3001/membership?filter=31"
+      );
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -76,11 +79,13 @@ export const postActivity = (payload) => {
 };
 
 export const filterActivities = (filters) => {
-  const filter = filters.filter
-  const order = filters.order
+  const filter = filters.filter;
+  const order = filters.order;
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/activitie?filter=${filter}&&order=${order}`);
+      const response = await axios(
+        `http://localhost:3001/activitie?filter=${filter}&&order=${order}`
+      );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -91,7 +96,9 @@ export const filterActivities = (filters) => {
 export const filterMembership = (filter) => {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/membership?filter=${filter}`);
+      const response = await axios(
+        `http://localhost:3001/membership?filter=${filter}`
+      );
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
     } catch (error) {
       console.log(error);

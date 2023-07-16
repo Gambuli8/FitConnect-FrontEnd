@@ -9,9 +9,6 @@ import Membresias from "../Membresias/Membresias";
 
 function Home() {
   const dispatch = useDispatch();
-  // const allUsers = useSelector((state) => state.allUsers);
-  // const allMemberships = useSelector((state) => state.allMemberships);
-  // const allActivities = useSelector((state) => state.allActivities);
 
   useEffect(() => {
     dispatch(getUser());

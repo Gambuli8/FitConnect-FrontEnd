@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
+
 import { UserAuth } from "../../context/AuthContext";
+
+// import { ShoppingCart } from "react-feather";
+
 const NavBar = () => {
   const { isLoggedIn, logout } = UserAuth();
   return (
@@ -13,7 +17,7 @@ const NavBar = () => {
         </span>
       </div>
 
-      <ul className="md:flex md:items-center">
+      <ul className="md:flex md:items-center mr-5">
         <li className="mx-4">
           <Link
             to="/"
@@ -34,9 +38,13 @@ const NavBar = () => {
           <Link
             to={"#Membresia"}
             className="text-white text-xl hover:text-yellow-500 duration-500"
+          />
+          <a
+            href="#Membresia"
+            className="text-white text-xl hover:text-yellow-500 duration-500"
           >
             Membresias
-          </Link>
+          </a>
         </li>
         <li className="mx-4">
           <Link

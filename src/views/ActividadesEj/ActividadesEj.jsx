@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { getActivities } from "../../redux/Actions/Actions";
 import logo from "../../assets/Fotos de Actividades y Extra Actividades/Actividades/Crossfit.jpg";
 
@@ -30,7 +31,7 @@ const ActividadesEj = () => {
         <div className="bg-gray-950 rounded-lg p-4">
           <img
             className="h-64 w-full object-cover rounded-lg mb-4"
-            src={logo}
+            src={allActivities?.image}
             alt="Logo del ejercicio"
           />
           <h3 className="text-3xl font-bold mb-2">GAP</h3>

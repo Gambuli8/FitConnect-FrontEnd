@@ -36,7 +36,9 @@ function App() {
             />
         </Routes>
       </AuthContextProvider>
+      <section id="contacto">
       <Footer />
+      </section>
       </CartContextProvider>
     </div>
   );

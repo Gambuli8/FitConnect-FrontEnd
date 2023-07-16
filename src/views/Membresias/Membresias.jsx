@@ -53,20 +53,6 @@ export default function Membresias() {
           Anual
         </button>
       </div>
-      <div className="grid grid-cols-3">
-        {allMemberships?.map((membership) => {
-          return (
-            <div key={membership?.id} className="bg-gray-700">
-              <Card_Membresias
-                levelMembreship={membership.levelMembership}
-                price={membership?.price}
-                duration={membership?.duration}
-                idMembership={membership?.idMembership}
-              />
-            </div>
-          );
-        })}
-      </div>
 
       <div className="grid grid-cols-3">
         {allMemberships?.map((membership) => {

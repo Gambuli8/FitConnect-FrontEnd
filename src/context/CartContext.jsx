@@ -7,7 +7,9 @@ export const CartContextProvider = ({ children }) => {
     
         const [cart, setCart] = useState([]);
 
+        const saveCart = () => {
             localStorage.setItem('cart', JSON.stringify(cart)); 
+        }
 
     const addToCart = product => {
         const productIndex = cart.findIndex(p => p.id === product.id);
@@ -15,7 +17,10 @@ export const CartContextProvider = ({ children }) => {
         if (productIndex >= 0) {
             const newCart = structuredClone(cart)
             newCart[productIndex].quantity += 1
-            return setCart(newCart);
+            return (
+                setCart(newCart),
+                saveCart(newCart)
+            )
         }
         setCart(prevState => [
             ...prevState,

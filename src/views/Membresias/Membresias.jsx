@@ -1,10 +1,19 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
 import Card_Membresias from "../../components/Card_Membresias/Card_Membresias"
 import { filterMembership } from "../../redux/Actions/Actions"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import useCart from '../../Hooks/useCart';
 
 export default function Membresias() {
   const dispatch = useDispatch();
+
+  const {addToCart, cart, removeFromCart} = useCart();
+
+  const checkMembership = membership => {
+    return cart.some(p => p.id === membership.idMembership);
+  }
 
   useEffect(() => {
     dispatch(filterMembership(31));
@@ -32,6 +41,7 @@ export default function Membresias() {
       </div>
       <div className='grid grid-cols-3'>
       {allMemberships?.map((membership) => {
+        const isAdded = checkMembership(membership.idMembership);
         return (
           <div key={membership?.id} className='bg-gray-700'>
             <Card_Membresias
@@ -39,6 +49,20 @@ export default function Membresias() {
               price={membership?.price}
               duration={membership?.duration}
               idMembership={membership?.idMembership}
+               button = {<button
+                style={{backgroundColor: isAdded ? 'red' : 'yellow', width: '100px', textAlign: 'center', marginLeft: '100px', justifyContent: 'center'}}
+                onClick={() => {
+                  isAdded 
+                  ? removeFromCart(membership) 
+                  : addToCart(membership)
+                }}
+                className='w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center'>
+           {
+             isAdded
+             ? 'Eliminar'
+             : 'Comprar'
+            }
+              </button>}
             />
           </div>
         )})}

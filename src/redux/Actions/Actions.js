@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2'
-
 import {
   GET_USERS,
   GET_ACTIVITIES,
@@ -82,11 +81,13 @@ export const postActivity = (payload) => {
 };
 
 export const filterActivities = (filters) => {
-  const filter = filters.filter
-  const order = filters.order
+  const filter = filters.filter;
+  const order = filters.order;
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/activitie?filter=${filter}&&order=${order}`);
+      const response = await axios(
+        `http://localhost:3001/activitie?filter=${filter}&&order=${order}`
+      );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -97,7 +98,9 @@ export const filterActivities = (filters) => {
 export const filterMembership = (filter) => {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/membership?filter=${filter}`);
+      const response = await axios(
+        `http://localhost:3001/membership?filter=${filter}`
+      );
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
     } catch (error) {
       console.log(error);

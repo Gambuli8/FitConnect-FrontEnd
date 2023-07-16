@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
-
 import { UserAuth } from "../../context/AuthContext";
 
 // import { ShoppingCart } from "react-feather";
@@ -38,13 +37,14 @@ const NavBar = () => {
           <Link
             to={"#Membresia"}
             className="text-white text-xl hover:text-yellow-500 duration-500"
-          />
-          <a
-            href="#Membresia"
-            className="text-white text-xl hover:text-yellow-500 duration-500"
           >
-            Membresias
-          </a>
+            <a
+              href="#Membresia"
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+            >
+              Membresias
+            </a>
+          </Link>
         </li>
         <li className="mx-4">
           <Link

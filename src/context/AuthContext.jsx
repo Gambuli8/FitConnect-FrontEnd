@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  fetchSignInMethodsForEmail, // Add the fetchSignInMethodsForEmail import
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";
 import { useDispatch } from "react-redux";

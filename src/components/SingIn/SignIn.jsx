@@ -3,48 +3,49 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 
 const SignIn = () => {
-  const { signIn, isEmailRegistered } = UserAuth();
+  const { signIn } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { googleSignIn } = UserAuth();
   const navigate = useNavigate();
+  const [emailExists, setEmailExists] = useState(false);
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await googleSignIn();
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+      console.log(error.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setEmailExists(false);
+
     if (!email || !password) {
       setError("Please enter your email and password");
       return;
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
-    setIsSubmitting(true); // Actualizamos el estado a "true" mientras se está realizando el inicio de sesión
-
-    const emailRegistered = await isEmailRegistered(email);
-    if (!emailRegistered) {
-      setError("Email is not registered");
-      setIsSubmitting(false); // Restablecemos el estado a "false" si el correo electrónico no está registrado
-      return;
-    }
-
     try {
       await signIn(email, password);
       navigate("/");
     } catch (error) {
+      if (error.message === "Correo electrónico ya existente") {
+        setEmailExists(true);
+        return;
+      }
       setError("Invalid email or password");
       console.log(error.message);
     }
-
-    setIsSubmitting(false); // Restablecemos el estado a "false" una vez que se haya completado el inicio de sesión
   };
 
-  const isDisabled = !email || !password || isSubmitting;
+  const isDisabled = !email || !password;
 
   const handleDisabledClick = () => {
     if (isDisabled) {
@@ -57,10 +58,10 @@ const SignIn = () => {
       <div className="bg-black max-w-[700px] mx-auto my-16 p-4">
         <div>
           <h1 className="text-2xl font-bold py-2 text-white">
-            Sign in to your account!
-          </h1>
+            Sign in your account!
+          </h1>{" "}
           <p className="text-white">
-            Don't have an account yet?{" "}
+            Dont have an account yet?{" "}
             <Link className="underline text-white" to={"/signup"}>
               Sign up!
             </Link>
@@ -85,14 +86,19 @@ const SignIn = () => {
             ></input>
           </div>
           <button
-            className="py-2 px-4 flex w-full mb-1 items-center justify-center bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-600 focus:ring-offset-yellow-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+            className={`py-2 px-4 flex w-full mb-1 items-center justify-center bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-600 focus:ring-offset-yellow-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg${
+              isDisabled || emailExists
+                ? " disabled:opacity-50 cursor-not-allowed"
+                : ""
+            }`}
             type="submit"
-            disabled={isDisabled}
+            disabled={isDisabled || emailExists}
             onClick={handleDisabledClick}
           >
             Sign in with Email
           </button>
           <button
+            onClick={handleGoogleSignIn}
             type="button"
             className="py-2 px-4 flex justify-center items-center bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
           >

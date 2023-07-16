@@ -9,7 +9,9 @@ import {
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
   POST_USERSBACK,
-  USER_FIREBASE
+  USER_FIREBASE,
+  GET_USERID,
+  PUT_USER
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -132,6 +134,37 @@ export const userFirebase = (user) => {
       dispatch({ type: USER_FIREBASE, payload: user });
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const getUserId = (id) => {
+  return async (dispatch) => {
+    const response = await axios(`http://localhost:3001/user/${id}`);
+    return dispatch({ type: GET_USERID, payload: response.data });
+  };
+};
+
+
+export const putUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put("http://localhost:3001/user", payload);
+      // Verificar si el usuario fue actualizado exitosamente 
+      Swal.fire({
+        icon: 'success',
+        title: 'Your membership has been updated',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      dispatch({ type: PUT_USER, payload: response.data });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hubo un problema al actualizar la membresia!',
+        footer: `<p>Es posible que haya problemas con tu pago</p>`
+      })    
     }
   };
 };

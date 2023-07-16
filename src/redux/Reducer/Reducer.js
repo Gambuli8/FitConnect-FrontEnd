@@ -6,14 +6,17 @@ import {
   POST_USERS,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  USER_FIREBASE
+  USER_FIREBASE,
+  GET_USERID,
+  PUT_USER
 } from "../Actions/ActionsType";
 
 let initialState = {
   allUsers: [],
   allActivities: [],
   allMemberships: [],
-  user: {}
+  user: {},
+  userId: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -37,6 +40,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:
       return { ...state, user: action.payload };
+    case GET_USERID:
+      return { ...state, userId: action.payload };
+    case PUT_USER:
+      return { ...state, allUsers: [...state.allUsers, action.payload] };
   }
   return state;
 };

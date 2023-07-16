@@ -1,12 +1,12 @@
+/* eslint-disable react/prop-types */
 import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { getUserId, postUserBack, putUser } from "../../redux/Actions/Actions";
-import { useParams } from "react-router-dom";
 
-const Form = () => {
-  let {membershipId} = useParams()
+const Form = (props) => {
+  let membershipId = props.idMembership
   membershipId = Number(membershipId)
   const dispatch = useDispatch()
 

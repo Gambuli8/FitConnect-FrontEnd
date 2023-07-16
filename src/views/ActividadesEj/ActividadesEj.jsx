@@ -1,5 +1,6 @@
+
+import { useDispatch} from "react-redux";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { getActivities } from "../../redux/Actions/Actions";
 
 const ActividadesEj = () => {
@@ -8,8 +9,8 @@ const ActividadesEj = () => {
   useEffect(() => {
     dispatch(getActivities());
   }, [dispatch]);
-//eslint-disable-next-line
-  const allActivities = useSelector((state) => state.allActivities);
+
+  
 
   return (
     <div className="bg-gray-950 block pl-16">

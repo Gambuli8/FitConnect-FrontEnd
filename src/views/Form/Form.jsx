@@ -54,7 +54,6 @@ const Form = (props) => {
     };
   
   
-  
     return  (
       <div className="flex justify-center">
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded shadow-lg w-96">

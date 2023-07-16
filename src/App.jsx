@@ -34,9 +34,11 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          </Routes>
-        </AuthContextProvider>
-        <Footer />
+        </Routes>
+      </AuthContextProvider>
+      <section id="contacto">
+      <Footer />
+      </section>
       </CartContextProvider>
     </div>
   );

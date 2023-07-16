@@ -16,9 +16,8 @@ export default function Membresias() {
   };
 
   useEffect(() => {
-    dispatch(getMembership());
+    dispatch(filterMembership(31));
   }, [dispatch]);
-
   const allMemberships = useSelector((state) => state.allMemberships);
 
   const [filter, setFilter] = useState(31);

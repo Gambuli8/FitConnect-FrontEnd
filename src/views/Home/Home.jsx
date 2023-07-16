@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-  getUser,
-  getMembership,
-} from "../../redux/Actions/Actions";
+import { getUser, getMembership } from "../../redux/Actions/Actions";
 import Banner from "../../components/Banner/Banner";
 import Membresias from "../Membresias/Membresias";
+import ActividadesEj from "../ActividadesEj/ActividadesEj";
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,8 +17,9 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className='flex flex-col m-0 p-0'>
+    <div className="flex flex-col m-0 p-0">
       <Banner />
+      <ActividadesEj />
       <Membresias />
     </div>
   );

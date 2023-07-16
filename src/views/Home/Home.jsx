@@ -9,9 +9,6 @@ import Membresias from "../Membresias/Membresias";
 
 function Home() {
   const dispatch = useDispatch();
-  // const allUsers = useSelector((state) => state.allUsers);
-  // const allMemberships = useSelector((state) => state.allMemberships);
-  // const allActivities = useSelector((state) => state.allActivities);
 
   useEffect(() => {
     dispatch(getUser());
@@ -21,7 +18,9 @@ function Home() {
   return (
     <div className='flex flex-col m-0 p-0'>
       <Banner />
+      <section id="Membresia">
       <Membresias />
+      </section>
     </div>
   );
 }

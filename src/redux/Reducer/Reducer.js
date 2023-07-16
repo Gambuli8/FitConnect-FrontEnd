@@ -8,7 +8,7 @@ import {
   FILTER_MEMBERSHIP,
   USER_FIREBASE,
   GET_USERID,
-  PUT_USER
+  PUT_USER,
 } from "../Actions/ActionsType";
 
 let initialState = {
@@ -16,7 +16,7 @@ let initialState = {
   allActivities: [],
   allMemberships: [],
   user: {},
-  userId: {}
+  userId: null,
 };
 
 const rootReducer = (state = initialState, action) => {

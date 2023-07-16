@@ -46,7 +46,7 @@ function Actividades() {
 
   return (
     <div className="flex flex-col bg-black w-[100%] h-[100%] m-0 p-0 ">
-      <Link to="/home">
+      <Link to="/">
         <a
           href=""
           className="fixed cursor-pointer z-50 m-[20px] text-white flex-row"

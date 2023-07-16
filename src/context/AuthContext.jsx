@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  fetchSignInMethodsForEmail, // Add the fetchSignInMethodsForEmail import
 } from "firebase/auth";
 import { auth } from "../FireBase/firebase";
 import { useDispatch } from "react-redux";
@@ -18,45 +19,76 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedOut, setLoggedOut] = useState(false);
 
   useEffect(() => {
     dispatch(userFirebase(user));
   }, [user,dispatch]);
 
   const createUser = (email, password) => {
+    setLoggedIn(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   
   const signIn = (email, password) => {
+    setLoggedIn(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
+    setLoggedIn(true);
     signInWithPopup(auth, provider);
   };
+
   const logout = () => {
+    setLoggedIn(false);
+    setLoggedOut(true);
     return signOut(auth);
   };
 
+  const isEmailRegistered = async (email) => {
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      return signInMethods.length > 0;
+    } catch (error) {
+      console.log(
+        "An error occurred while checking email registration:",
+        error
+      );
+      return false;
+    }
+  };
+
   useEffect(() => {
-    const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
     });
     return () => {
-      unsuscribe();
+      unsubscribe();
     };
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ createUser, user, logout, signIn, googleSignIn }}
+      value={{
+        createUser,
+        user,
+        logout,
+        signIn,
+        googleSignIn,
+        isLoggedIn,
+        isLoggedOut,
+        isEmailRegistered,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 export const UserAuth = () => {
   return useContext(AuthContext);
 };

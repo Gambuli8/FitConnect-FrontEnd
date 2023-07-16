@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
-// import { ShoppingCart } from "react-feather";
+import { UserAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+
 const NavBar = () => {
+  const { isLoggedIn, logout } = UserAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
+
+  const handleLogout = () => {
+    logout();
+    setIsAuthenticated(false);
+  };
+
+  useEffect(() => {
+    setIsAuthenticated(isLoggedIn);
+  }, [isLoggedIn]);
+
   return (
     <nav className="p-05 bg-black shadow md:flex md:items-center md:justify-between">
       <div>
         <span>
           <Link to="/">
-            <img className="h-24 inline mx-10" src={logo}></img>
+            <img className="h-24 inline mx-10" src={logo} alt="Logo" />
           </Link>
         </span>
       </div>
@@ -22,15 +36,15 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="mx-4">
-          <Link
-            to={"/contacto"}
-            className="text-white text-xl hover:text-yellow-500 duration-500 "
-          >
-            Contacto
-          </Link>
+         <a href="#contacto" className="text-white text-xl hover:text-yellow-500 duration-500">
+          Contacto
+         </a>
         </li>
         <li className="mx-4">
-          <a href="#Membresia" className="text-white text-xl hover:text-yellow-500 duration-500">
+          <a
+            href="#Membresia"
+            className="text-white text-xl hover:text-yellow-500 duration-500"
+          >
             Membresias
           </a>
         </li>
@@ -42,22 +56,25 @@ const NavBar = () => {
             Actividades
           </Link>
         </li>
-        <li className="mx-4">
-          <Link
-            className="text-white text-xl hover:text-yellow-500 duration-500"
-            to={"/signin"}
-          >
-            Sign in!
-          </Link>
-          </li>
-          {/* <li>
-          <Link
-            className="text-white text-xl hover:text-yellow-500 duration-500"
-            to={"/carrito"}
+        {isAuthenticated ? (
+          <li className="mx-4">
+            <button
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+              onClick={handleLogout}
             >
-            <ShoppingCart />
-          </Link>
-            </li> */}
+              Logout
+            </button>
+          </li>
+        ) : (
+          <li className="mx-4">
+            <Link
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+              to={"/signin"}
+            >
+              Sign in!
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

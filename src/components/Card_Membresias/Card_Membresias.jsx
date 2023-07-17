@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
+// import { AuthContextProvider } from "../../context/AuthContext";
+// import { useContext } from "react";
+
 const Card_Membresias = ({levelMembreship, price, duration, idMembership, button }) => {
+
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   return (
     <div className='flex flex-col p-2 border border-black w-[300px] h-[480px] m-3 mx-8 rounded-[20px] bg-gray-950 text-white'>
@@ -23,7 +28,7 @@ const Card_Membresias = ({levelMembreship, price, duration, idMembership, button
       <p className='border-t-2 border-gray-300'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis soluta.</p>
       </div>
       <div>Precio: {price}</div>
-      <div>{button}</div>
+      { isLoggedIn === 'true' ? <div>{button}</div> : <div>Debes iniciar sesion</div>}
     </div>
   );
 };

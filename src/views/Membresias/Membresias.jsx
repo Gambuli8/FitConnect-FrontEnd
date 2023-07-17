@@ -8,6 +8,12 @@ import useCart from "../../Hooks/useCart";
 
 export default function Membresias() {
   const dispatch = useDispatch();
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const [aux, setAux] = useState(false);
+
+  useEffect(() => {
+    setAux(!aux);
+  }, [isLoggedIn, aux]);
 
   const { addToCart, cart, removeFromCart } = useCart();
 

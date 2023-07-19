@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import {
   GET_USERS,
   GET_ACTIVITIES,
@@ -10,7 +10,8 @@ import {
   POST_USERSBACK,
   USER_FIREBASE,
   GET_USERID,
-  PUT_USER
+  PUT_USER,
+  PUT_ACTIVITY,
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -68,7 +69,8 @@ export const postActivity = (payload) => {
         "http://localhost:3001/activitie",
         payload
       );
-      if (response.status === 201) {
+      console.log(response.status);
+      if (response.status === 200) {
         alert("La actividad ha sido creada exitosamente");
         dispatch({ type: POST_ACTIVITIES, payload: response.data });
       } else {
@@ -112,28 +114,28 @@ export const postUserBack = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("http://localhost:3001/user", payload);
-      // Verificar si el usuario fue creado exitosamente 
+      // Verificar si el usuario fue creado exitosamente
       Swal.fire({
-        icon: 'success',
-        title: 'Your user has been created',
+        icon: "success",
+        title: "Your user has been created",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       dispatch({ type: POST_USERSBACK, payload: response.data });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Hubo un problema al crear el usuario!',
-        footer: `<p>Es posible que ya tengas una cuenta con el email ${payload.email}</p>`
-      })    
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un problema al crear el usuario!",
+        footer: `<p>Es posible que ya tengas una cuenta con el email ${payload.email}</p>`,
+      });
     }
   };
 };
 
 export const userFirebase = (user) => {
   return async (dispatch) => {
-     try {
+    try {
       dispatch({ type: USER_FIREBASE, payload: user });
     } catch (error) {
       console.log(error);
@@ -148,26 +150,49 @@ export const getUserId = (id) => {
   };
 };
 
-
 export const putUser = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.put("http://localhost:3001/user", payload);
-      // Verificar si el usuario fue actualizado exitosamente 
+      // Verificar si el usuario fue actualizado exitosamente
       Swal.fire({
-        icon: 'success',
-        title: 'Your membership has been updated',
+        icon: "success",
+        title: "Your membership has been updated",
         showConfirmButton: false,
-        timer: 1500
-      })
+        timer: 1500,
+      });
       dispatch({ type: PUT_USER, payload: response.data });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Hubo un problema al actualizar la membresia!',
-        footer: `<p>Es posible que haya problemas con tu pago</p>`
-      })    
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un problema al actualizar la membresia!",
+        footer: `<p>Es posible que haya problemas con tu pago</p>`,
+      });
+    }
+  };
+};
+
+export const putActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/activitie",
+        payload
+      );
+      Swal.fire({
+        icon: "success",
+        title: "The Activity has been updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch({ type: PUT_ACTIVITY, payload: response.data });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un problema al actualizar la actividad",
+      });
     }
   };
 };

@@ -12,6 +12,7 @@ import Account from "./components/Account/Account";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CartContextProvider } from "./context/CartContext";
+import AdminDashboard from "./views/AdminDashboard/AdminDashboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/actividades" element={<Actividades />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
@@ -34,11 +36,11 @@ function App() {
                 </ProtectedRoute>
               }
             />
-        </Routes>
-      </AuthContextProvider>
-      <section id="contacto">
-      <Footer />
-      </section>
+          </Routes>
+        </AuthContextProvider>
+        <section id="contacto">
+          <Footer />
+        </section>
       </CartContextProvider>
     </div>
   );

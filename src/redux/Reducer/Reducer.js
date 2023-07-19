@@ -1,10 +1,12 @@
 import {
   GET_ACTIVITIES,
+  GET_EXTRA_ACTIVITIES,
   GET_MEMBERSHIP,
   GET_USERS,
   POST_ACTIVITIES,
   POST_USERS,
   FILTER_ACTIVITIES,
+  FILTER_EXTRA_ACTIVITIES,
   FILTER_MEMBERSHIP,
   USER_FIREBASE,
   GET_USERID,
@@ -14,10 +16,12 @@ import {
 let initialState = {
   allUsers: [],
   allActivities: [],
+  allExtraActivities: [],
   allMemberships: [],
   user: {},
   userId: null,
 };
+console.log(initialState.allExtraActivities);
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,6 +29,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allUser: action.payload };
     case GET_ACTIVITIES:
       return { ...state, allActivities: action.payload };
+    case GET_EXTRA_ACTIVITIES:
+      return { ...state, allExtraActivities: action.payload };
     case GET_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case POST_USERS:
@@ -36,6 +42,8 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_ACTIVITIES:
       return { ...state, allActivities: action.payload };
+    case FILTER_EXTRA_ACTIVITIES:
+      return { ...state, allExtraActivities: action.payload };
     case FILTER_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:

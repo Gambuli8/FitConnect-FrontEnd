@@ -3,18 +3,21 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
+import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities } from "../../redux/Actions/Actions";
 
 function Actividades() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getActivities());
+    dispatch(getExtraActivities());
   }, [dispatch]);
 
   const allActivities = useSelector((state) => state.allActivities);
-  console.log(allActivities);
+  const allExtraActivities = useSelector((state) => state.allExtraActivities);
+  console.log(allExtraActivities);
 
   //logica del filter y order Activities.
   const [filters, setFilters] = useState({
@@ -80,7 +83,7 @@ function Actividades() {
           </svg>
         </a>
       </Link>
-      <div className="flex flex-col items-center justify-center m-5">
+      <div id='titulo' className="flex flex-col items-center justify-center m-5">
         <h1 className="font-titulo text-center text-[#ffd277]  uppercase text-[35px]">
           NUESTRAS ACTIVIDADES
         </h1>
@@ -103,7 +106,7 @@ function Actividades() {
         </div>
       </div>
 
-      <div className=" w-[1200px] h-[2000px] grid grid-cols-3 grid-rows-4 justify-between items-star m-8 my-4">
+      <div className=" w-[1200px] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4">
         {allActivities?.map((activity) => (
           <Card_Actividades
             key={activity?.id}
@@ -113,8 +116,43 @@ function Actividades() {
             rating={activity?.rating}
             type_activity={activity?.type_activity}
             image={activity?.image}
-          />
+            />
         ))}
+      </div>
+      <div className=' text-center justify-center items-center'>
+      <h1 className='text-[#ffd277] font-bold uppercase text-[30px] my-8 ml-2 flex w-[620px]'>Every activity is an opportunity to...</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[400px] w-[500px]'>learn</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[530px] w-[500px]'>grow</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[850px] w-[400px]'>And have fun to the fullest.</h1>
+      <p className='flex justify-center items-center'>
+      <svg width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffd277">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+        <g id="SVGRepo_iconCarrier"> <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffd277" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.4" d="M8.4707 10.7402L12.0007 14.2602L15.5307 10.7402" stroke="#ffd277" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </svg>
+      </p>
+      </div>
+        <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Here are some Extras Activities that you will like!</h1>
+      <div className='mt-[120px] w-[1200px] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
+        {allExtraActivities.map((extraActivity) => (
+          <Card_Extras
+            key={extraActivity?.idExtraAct}
+            name={extraActivity?.name}
+            schedule={extraActivity?.schedule}
+            rating={extraActivity?.rating}
+            type_activity={extraActivity?.type_activity}
+            image={extraActivity?.image}
+            price={extraActivity?.price}
+          />  
+        ))}
+      </div>
+      <div className='flex justify-end items-end mr-5'>
+        <a href="#titulo">
+        <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='hover:-translate-y-3 transition-all duration-100'>
+          <path opacity="1" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#ffd277"/>
+          <path d="M15.5295 10.9699L12.5295 7.96994C12.2395 7.67994 11.7595 7.67994 11.4695 7.96994L8.46945 10.9699C8.17945 11.2599 8.17945 11.7399 8.46945 12.0299C8.75945 12.3199 9.23945 12.3199 9.52945 12.0299L11.2495 10.3099V15.4999C11.2495 15.9099 11.5895 16.2499 11.9995 16.2499C12.4095 16.2499 12.7495 15.9099 12.7495 15.4999V10.3099L14.4695 12.0299C14.6195 12.1799 14.8095 12.2499 14.9995 12.2499C15.1895 12.2499 15.3795 12.1799 15.5295 12.0299C15.8195 11.7399 15.8195 11.2599 15.5295 10.9699Z" fill="#292D32"/>
+        </svg>
+        </a>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ let initialState = {
   allActivities: [],
   allMemberships: [],
   user: {},
-  userId: null,
+  userId: {},
 };
 
 const rootReducer = (state = initialState, action) => {

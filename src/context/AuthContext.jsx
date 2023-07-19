@@ -19,8 +19,11 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('isLoggedIn')) || false);
   const [isLoggedOut, setLoggedOut] = useState(false);
+
+  localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
+  console.log(isLoggedIn);
 
   useEffect(() => {
     dispatch(userFirebase(user));

@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch} from "react-redux";
+import { useEffect } from "react";
 import { getActivities } from "../../redux/Actions/Actions";
-import logo from "../../assets/Fotos de Actividades y Extra Actividades/Actividades/Crossfit.jpg";
 
 const ActividadesEj = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const ActividadesEj = () => {
     dispatch(getActivities());
   }, [dispatch]);
 
-  const allActivities = useSelector((state) => state.allActivities);
+  
 
   return (
     <div className="bg-gray-950 block pl-16">
@@ -30,7 +30,7 @@ const ActividadesEj = () => {
         <div className="bg-gray-950 rounded-lg p-4">
           <img
             className="h-64 w-full object-cover rounded-lg mb-4"
-            src={logo}
+            src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689251008/samples/Activities/GAP_f0jdmy.jpg"
             alt="Logo del ejercicio"
           />
           <h3 className="text-3xl font-bold mb-2">GAP</h3>
@@ -45,7 +45,7 @@ const ActividadesEj = () => {
         <div className="bg-gray-950 rounded-lg p-4">
           <img
             className="h-64 w-full object-cover rounded-lg mb-4"
-            src={logo}
+            src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689251001/samples/Activities/Functional_kbpyoz.jpg"
             alt="Logo del ejercicio"
           />
           <h3 className="text-3xl font-bold mb-2">FUNCTIONAL</h3>
@@ -60,7 +60,7 @@ const ActividadesEj = () => {
         <div className="bg-gray-950 rounded-lg p-4">
           <img
             className="h-64 w-full object-cover rounded-lg mb-4"
-            src={logo}
+            src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689251001/samples/Activities/Pilates_eqaavv.jpg"
             alt="Logo del ejercicio"
           />
           <h1 className="text-3xl font-bold mb-2">PILATES</h1>
@@ -75,7 +75,7 @@ const ActividadesEj = () => {
         <div className="bg-gray-950 rounded-lg p-4">
           <img
             className="h-64 w-full object-cover rounded-lg mb-4"
-            src={logo}
+            src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689251005/samples/Activities/Yoga_kxm7li.jpg"
             alt="Logo del ejercicio"
           />
           <h3 className="text-3xl font-bold mb-2">YOGA</h3>

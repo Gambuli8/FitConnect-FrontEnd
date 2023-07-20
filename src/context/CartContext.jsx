@@ -12,20 +12,20 @@ export const CartContextProvider = ({ children }) => {
             }
 
     const addToCart = product => {
-        const productIndex = cart.findIndex(p => p.id === product.id);
+        const productIndex = cart.findIndex(p => p.id === product.idMembership);
 
         if (productIndex >= 0) {
             const newCart = structuredClone(cart)
             newCart[productIndex].quantity += 1
             return setCart(newCart)  
         }
-        setCart(prevState => [
+        setCart(prevState => ([
             ...prevState,
             {
                 ...product,
                 quantity: 1
             },
-        ])
+        ]))
     }
     saveCart(cart)
 

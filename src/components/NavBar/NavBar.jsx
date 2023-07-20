@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../images/fitconnectimg.png";
 import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
+import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
   const { isLoggedIn, logout } = UserAuth();
@@ -75,6 +76,9 @@ const NavBar = () => {
             </Link>
           </li>
         )}
+        <li className='mx-4'>
+        <Carrito />
+        </li>
       </ul>
     </nav>
   );

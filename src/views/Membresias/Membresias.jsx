@@ -18,7 +18,7 @@ export default function Membresias() {
   const { addToCart, cart, removeFromCart } = useCart();
 
   const checkMembership = (membership) => {
-    return cart.some((p) => p.id === membership.idMembership);
+    return cart.some((p) => p.id === membership?.idMembership);
   };
 
   useEffect(() => {
@@ -62,35 +62,31 @@ export default function Membresias() {
 
       <div className="grid grid-cols-3">
         {allMemberships?.map((membership) => {
-          const isAdded = checkMembership(membership.idMembership);
+          const isAdded = checkMembership(membership);
           return (
-            <div key={membership?.id} className="bg-gray-700">
+            <li key={membership?.idMembership}>
               <Card_Membresias
                 levelMembreship={membership.levelMembership}
                 price={membership?.price}
                 duration={membership?.duration}
                 idMembership={membership?.idMembership}
                 button={
-                  <button
-                    style={{
-                      backgroundColor: isAdded ? "red" : "yellow",
-                      width: "100px",
-                      textAlign: "center",
-                      marginLeft: "100px",
-                      justifyContent: "center",
-                    }}
-                    onClick={() => {
-                      isAdded
-                        ? removeFromCart(membership)
-                        : addToCart(membership);
-                    }}
-                    className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
-                  >
-                    {isAdded ? "Eliminar" : "Comprar"}
-                  </button>
+                  <button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
+              style={{backgroundColor: isAdded ? "red" : "#ffd277"}}
+              onClick={() => { 
+                isAdded 
+                ? removeFromCart(membership) 
+                : addToCart(membership)}}
+              >
+                {
+                isAdded 
+                ? "Eliminar" 
+                : "Comprar"
+                }
+              </button>
                 }
               />
-            </div>
+            </li>
           );
         })}
       </div>

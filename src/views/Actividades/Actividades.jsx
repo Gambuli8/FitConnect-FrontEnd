@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
 import { useSelector, useDispatch } from "react-redux";
@@ -6,9 +7,35 @@ import Card_Actividades from "../../components/Card_Actividades/Card_Actividades
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
 import { getActivities, filterActivities, getExtraActivities } from "../../redux/Actions/Actions";
+import useCart from "../../Hooks/useCart";
+import style from "./act.module.css";
+
 
 function Actividades() {
   const dispatch = useDispatch();
+
+
+  window.onscroll = function () {
+    if(scrollY > 100){
+      document.getElementById('container').classList.add(style.show);
+    }else{
+      document.getElementById('container').classList.remove(style.show);
+    }
+  }
+
+  const handlerButton = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const { cart, addToCart, removeFromCart } = useCart();
+
+  const checkActivity = (Activity) => {
+    return cart.some((p) => p.id === Activity?.idExtraAct);
+  };
+
 
   useEffect(() => {
     dispatch(getActivities());
@@ -106,7 +133,7 @@ function Actividades() {
         </div>
       </div>
 
-      <div className=" w-[1200px] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4">
+      <div className=" w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4">
         {allActivities?.map((activity) => (
           <Card_Actividades
             key={activity?.id}
@@ -133,9 +160,12 @@ function Actividades() {
       </p>
       </div>
         <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Here are some Extras Activities that you will like!</h1>
-      <div className='mt-[120px] w-[1200px] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
-        {allExtraActivities.map((extraActivity) => (
-          <Card_Extras
+      <div className='mt-[120px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
+        {allExtraActivities?.map((extraActivity) => {
+          const isAdded = checkActivity(extraActivity);
+          return (
+            <li key={extraActivity?.idExtraAct}>
+            <Card_Extras
             key={extraActivity?.idExtraAct}
             name={extraActivity?.name}
             schedule={extraActivity?.schedule}
@@ -143,16 +173,34 @@ function Actividades() {
             type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
-          />  
-        ))}
+            button={
+              <button
+          className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
+          style={{ backgroundColor: isAdded ? "red" : "#ffd277" }}
+          onClick={() => {
+            isAdded 
+            ? removeFromCart(extraActivity) 
+            : addToCart(extraActivity)}}
+          >
+          {
+          isAdded 
+          ? "Eliminar" 
+          : "Comprar"
+          }
+        </button>
+            }
+            />  
+          </li>
+          );
+          })}
       </div>
-      <div className='flex justify-end items-end mr-5'>
-        <a href="#titulo">
-        <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='hover:-translate-y-3 transition-all duration-100'>
+       <div id="container" className={style.container}>
+        <div id="button" className={style.btn}>
+        <svg onClick={handlerButton} width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute font-[1.7rem] top-[40%] left-[50%] translate-[-50%, 50%] scale-0 text-black transition-all duration-200'>
           <path opacity="1" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#ffd277"/>
           <path d="M15.5295 10.9699L12.5295 7.96994C12.2395 7.67994 11.7595 7.67994 11.4695 7.96994L8.46945 10.9699C8.17945 11.2599 8.17945 11.7399 8.46945 12.0299C8.75945 12.3199 9.23945 12.3199 9.52945 12.0299L11.2495 10.3099V15.4999C11.2495 15.9099 11.5895 16.2499 11.9995 16.2499C12.4095 16.2499 12.7495 15.9099 12.7495 15.4999V10.3099L14.4695 12.0299C14.6195 12.1799 14.8095 12.2499 14.9995 12.2499C15.1895 12.2499 15.3795 12.1799 15.5295 12.0299C15.8195 11.7399 15.8195 11.2599 15.5295 10.9699Z" fill="#292D32"/>
         </svg>
-        </a>
+        </div>
       </div>
     </div>
   );

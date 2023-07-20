@@ -116,8 +116,7 @@ const Form = (props) => {
           setData(JSON.stringify(newData)); // Guardar datos    
           dispatch(postUserForm(newData))      
           const response =  await axios.get(`http://localhost:3001/paystore/${membershipId}`)
-          console.log("aca te dejo la infooooooooo",  response.data);
-          window.location.href = response.data.success_url;
+          window.location.href = response.data.url;
     };
   
 

@@ -12,6 +12,7 @@ import {
   GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
+  POST_USERFORM,
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -193,6 +194,16 @@ export const putActivity = (payload) => {
         title: "Oops...",
         text: "Hubo un problema al actualizar la actividad",
       });
+    }
+  };
+};
+
+export const postUserForm = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: POST_USERFORM, payload: payload });
+    } catch (error) {
+      console.log(error);
     }
   };
 };

@@ -3,7 +3,8 @@ import Swal from 'sweetalert2'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { getUserId, postUserBack, putUser } from "../../redux/Actions/Actions";
+import { getUserId, postUserForm, putUser } from "../../redux/Actions/Actions";
+import axios from 'axios';
 
 const Form = (props) => {
   let membershipId = props.idMembership
@@ -102,34 +103,24 @@ const Form = (props) => {
   }else{
 
     //logica al apretar el boton del formulario
-    const onSubmit = (formData) => {
-      //alert de confirmacion
-      Swal.fire({
-        title: 'Seguro de realiazar la compra?',
-        showDenyButton: true,
-        confirmButtonText: 'si',
-        denyButtonText: `no`,
-        icon:`question`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          //llenamos el objeto "user" con todos los datos
-          const newData = {
-            ...formData,
-            uid,
-            password,
-            email,
-            membershipId
-          };
+    const onSubmit =  async (formData) => {
+        //llenamos el objeto "user" con todos los datos
+        const newData = {
+          ...formData,
+          uid,
+          password,
+          email,
+          membershipId
+        };
   
           setData(JSON.stringify(newData)); // Guardar datos    
-          dispatch(postUserBack(newData))      
-        } else if (result.isDenied) {
-          Swal.fire('No se guardaron los cambios', '', 'error')
-        }
-      })
+          dispatch(postUserForm(newData))      
+          const response =  await axios.get(`http://localhost:3001/paystore/${membershipId}`)
+          console.log("aca te dejo la infooooooooo",  response.data);
+          window.location.href = response.data.success_url;
     };
   
-  
+
   
   return   (
     <div className="flex justify-center">

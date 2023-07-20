@@ -18,6 +18,7 @@ import {
   getUser,
   getActivities,
   postActivity,
+  putActivity,
 } from "../../redux/Actions/Actions";
 
 export default function AdminDashboard() {
@@ -25,6 +26,13 @@ export default function AdminDashboard() {
   const allUsers = useSelector((state) => state.allUser);
   const allActivities = useSelector((state) => state.allActivities);
 
+  const [selectedActivity, setSelectedActivity] = useState({});
+
+  const handleEditActivity = (activity) => {
+    setSelectedActivity(activity);
+    setFormData(activity);
+    setShowForm(true);
+  };
   const [formData, setFormData] = useState({
     name: "",
     schedule: "",
@@ -39,18 +47,47 @@ export default function AdminDashboard() {
   const ratingRef = useRef();
   const imageRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newActivity = {
-      name: nameRef.current.value,
-      schedule: scheduleRef.current.value,
-      type_activity: typeRef.current.value,
-      rating: ratingRef.current.value,
-      image: imageRef.current.value,
-    };
-    dispatch(postActivity(newActivity));
-    console.log(newActivity);
-    setShowForm(false);
+    try {
+      if (selectedActivity.idAct) {
+        console.log(selectedActivity);
+        dispatch(putActivity(selectedActivity.idAct, formData));
+        console.log(formData);
+      } else {
+        const newActivity = {
+          name: nameRef.current.value,
+          schedule: scheduleRef.current.value,
+          type_activity: typeRef.current.value,
+          rating: ratingRef.current.value,
+          image: imageRef.current.files[0],
+        };
+
+        const imageFile = imageRef.current.files[0];
+        console.log(imageFile);
+        if (imageFile) {
+          const imageFormData = new FormData();
+          imageFormData.append("file", imageFile);
+          imageFormData.append("upload_preset", "Activities");
+          const response = await fetch(
+            "https://api.cloudinary.com/v1_1/djqwbu0my/upload",
+            {
+              method: "POST",
+              body: imageFormData,
+            }
+          );
+          const data = await response.json();
+          console.log(data);
+          newActivity.image = data.secure_url; // Update the newActivity object with the image URL
+        }
+
+        dispatch(postActivity(newActivity));
+        console.log(newActivity);
+        setShowForm(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [showForm, setShowForm] = useState(false);
@@ -134,13 +171,12 @@ export default function AdminDashboard() {
                   <div>
                     <label htmlFor="name">Image:</label>
                     <input
-                      type="text"
+                      type="file"
                       id="image"
                       name="image"
-                      value={formData.image}
                       ref={imageRef}
                       onChange={(e) =>
-                        setFormData({ ...formData, image: e.target.value })
+                        setFormData({ ...formData, image: e.target.files[0] })
                       }
                     />
                   </div>
@@ -228,6 +264,15 @@ export default function AdminDashboard() {
                       <TableCell>{act.type_activity}</TableCell>
                       <TableCell>{act.rating}</TableCell>
                       <TableCell>{act.true}</TableCell>
+                      <TableCell>
+                        <Button
+                          onClick={() => handleEditActivity(act)}
+                          className="bg-yellow-500"
+                          size="xl"
+                        >
+                          Edit
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

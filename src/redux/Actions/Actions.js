@@ -3,13 +3,15 @@ import {
   GET_USERS,
   GET_ACTIVITIES,
   GET_MEMBERSHIP,
+  GET_USERID,
+  GET_EXTRA_ACTIVITIES,
   POST_USERS,
   POST_ACTIVITIES,
+  POST_USERSBACK,
+  POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  POST_USERSBACK,
   USER_FIREBASE,
-  GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
 } from "../Actions/ActionsType";
@@ -26,6 +28,18 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const response = await axios("http://localhost:3001/activitie");
+      console.log(response);
+      dispatch({ type: GET_EXTRA_ACTIVITIES, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getExtraActivities = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios("http://localhost:3001/extra");
       console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
@@ -82,6 +96,22 @@ export const postActivity = (payload) => {
   };
 };
 
+export const postExtraActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/extra", payload);
+      console.log(response.data);
+      if (response.status === 200) {
+        alert("La actividad ha sido creada exitosamente");
+        dispatch({ type: POST_EXTRA_ACTIVITIES, payload: response.data });
+      } else {
+        throw new Error("Hubo un problema al crear la actividad");
+      }
+    } catch (error) {
+      console.error("Error al crear la actividad:", error);
+    }
+  };
+};
 export const filterActivities = (filters) => {
   const filter = filters.filter;
   const order = filters.order;

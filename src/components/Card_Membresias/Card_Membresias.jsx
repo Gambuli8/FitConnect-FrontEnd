@@ -2,8 +2,10 @@
 // import { AuthContextProvider } from "../../context/AuthContext";
 // import { useContext } from "react";
 
-const Card_Membresias = ({levelMembreship, price, duration, idMembership, button }) => {
+import { useSelector } from "react-redux";
 
+const Card_Membresias = ({levelMembreship, price, duration, idMembership, activities, button }) => {
+  const allActivities = useSelector((state) => state.allActivities);
   const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   return (
@@ -16,13 +18,12 @@ const Card_Membresias = ({levelMembreship, price, duration, idMembership, button
         </div>
         <h6 className='text-[18px] text-gray-700'>Actividades</h6>
       <div className='flex flex-col items-center m-5'>
-      <ul className='grid grid-cols-3'>
-        <li className='m-1'>aaaaa</li>
-        <li className='m-1'>bbbbb</li>
-        <li className='m-1'>ccccc</li>
-        <li className='m-1'>ddddd</li>
-        <li className='m-1'>eeeee</li>
-        <li className='m-1'>fffff</li>
+      <ul className='grid grid-cols-2'>
+      {activities?.map((a, index)=>{
+        const act = allActivities?.filter(all=>all.idAct==a.activityId)
+        return (<li className='m-1' key={index}>{act[0]?.name}</li>
+        ) 
+      })}
       </ul>
       </div>
       <p className='border-t-2 border-gray-300'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis soluta.</p>

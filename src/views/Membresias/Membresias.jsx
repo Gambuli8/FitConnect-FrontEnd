@@ -70,6 +70,7 @@ export default function Membresias() {
                 price={membership?.price}
                 duration={membership?.duration}
                 idMembership={membership?.idMembership}
+                activities={membership?.activities}
                 button={
                   <button
                     style={{

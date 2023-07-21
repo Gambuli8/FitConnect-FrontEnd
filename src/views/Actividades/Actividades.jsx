@@ -4,17 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, filterMembership } from "../../redux/Actions/Actions";
 
 function Actividades() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getActivities());
+    dispatch(filterMembership(31))
   }, [dispatch]);
 
   const allActivities = useSelector((state) => state.allActivities);
-  console.log(allActivities);
 
   //logica del filter y order Activities.
   const [filters, setFilters] = useState({
@@ -113,6 +113,7 @@ function Actividades() {
             rating={activity?.rating}
             type_activity={activity?.type_activity}
             image={activity?.image}
+            memberships={activity?.memberships}
           />
         ))}
       </div>

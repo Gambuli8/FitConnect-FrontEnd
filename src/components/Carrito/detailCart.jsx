@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import useCart from "../../Hooks/useCart";
-import logo from "../../assets/logoFitConnect.jpg";
 import Form from "../../views/Form/Form";
 import { useParams } from "react-router";
 
@@ -21,7 +20,7 @@ export default function detailCart() {
               key={membership?.id}
               className=" h-[100px] items-center flex justify-around text-[20px] bg-gray-700"
             >
-              <img className="w-[200px]" src={logo} alt="" />
+              <img className="w-[200px]" src={membership.image} alt="" />
               <div className="flex flex-col m-10">
                 <p>Id: {membership.idMembership}</p>
                 <h3 className="m-2">Membership: {membership.levelMembership}</h3>

@@ -8,13 +8,12 @@ import { ShoppingCart } from "react-feather";
 import style from "./Carrito.module.css";
 import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
-import logo from '../../assets/logoFitConnect.jpg'
 
- function CartItem({idMembership,levelMembership, price, duration, quantity, removeFromCart}) {
+ function CartItem({idMembership,levelMembership, price, duration, quantity, removeFromCart, image}) {
   return (
     <li className='flex flex-col items-center justify-between '>
     <div>
-      <img src={logo} alt="image de membresia"/>
+      <img src={image} alt="image de membresia"/>
       <p>id: {idMembership}</p>
       <h3>Membership: {levelMembership}</h3>
       <p>Duration: {duration} Days</p>

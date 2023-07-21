@@ -15,7 +15,7 @@ export default function Membresias() {
     setAux(!aux);
   }, [isLoggedIn, aux]);
 
-  const { addToCart, cart, removeFromCart } = useCart();
+  const { addToCart, cart, removeFromCart, cleanCart } = useCart();
 
   const checkMembership = (membership) => {
     return cart.some((p) => p.id === membership?.idMembership);
@@ -71,6 +71,7 @@ export default function Membresias() {
                 duration={membership?.duration}
                 idMembership={membership?.idMembership}
                 activities={membership?.activities}
+                cleanCart={cleanCart}
                 button={
                   <button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
               style={{backgroundColor: isAdded ? "red" : "#ffd277"}}

@@ -22,7 +22,6 @@ let initialState = {
   user: {},
   userId: {},
 };
-console.log(initialState.allExtraActivities);
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {

@@ -174,6 +174,7 @@ function Actividades() {
             type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
+            description={extraActivity?.description}
             button={ 
               <button
           className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"

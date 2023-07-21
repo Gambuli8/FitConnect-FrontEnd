@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getUser, getMembership } from "../../redux/Actions/Actions";
+import { getUser, getMembership, getActivities } from "../../redux/Actions/Actions";
 import Banner from "../../components/Banner/Banner";
 import Membresias from "../Membresias/Membresias";
 import ActividadesEj from "../ActividadesEj/ActividadesEj";
@@ -11,6 +11,7 @@ function Home() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getMembership());
+    dispatch(getActivities())
   }, [dispatch]);
 
   return (

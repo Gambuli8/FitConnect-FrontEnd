@@ -11,6 +11,7 @@ import {
   USER_FIREBASE,
   GET_USERID,
   PUT_USER,
+  PUT_ACTIVITY,
 } from "../Actions/ActionsType";
 
 let initialState = {
@@ -19,7 +20,7 @@ let initialState = {
   allExtraActivities: [],
   allMemberships: [],
   user: {},
-  userId: null,
+  userId: {},
 };
 console.log(initialState.allExtraActivities);
 
@@ -52,6 +53,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, userId: action.payload };
     case PUT_USER:
       return { ...state, allUsers: [...state.allUsers, action.payload] };
+    case PUT_ACTIVITY:
+      return {
+        ...state,
+        allActivities: [...state.allActivities, action.payload],
+      };
   }
   return state;
 };

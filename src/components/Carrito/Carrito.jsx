@@ -136,7 +136,7 @@ function CartItemActivity({ name, schedule, type_activity, image, price, quantit
 
 export default function Carrito() {
   const cartCheck = useId();
-  const {cart, ClearCart, addToCart} = useCart();
+  const {cart, addToCart, removeFromCart} = useCart();
   console.log(cart);
   return (
     <div className="w-[50%]">
@@ -152,20 +152,18 @@ export default function Carrito() {
                 <CartItem
                 key={item?.idMembership}
                 id={item.idMembership}
+                levelMembership={item.levelMembership}
                 addToCart={() => addToCart(item)}
                 removeFromCart={() => removeFromCart(item)}
-                levelMembership={item.levelMembership}
-                ClearCart={() => ClearCart(item)}
                 {...item}
                 /> ))
                 : cart[0]?.idExtraAct ? cart.map((item1) => (
                     <CartItemActivity
                     key={item1?.idExtraAct}
                     id={item1.idExtraAct}
+                    type_activity={item1.type_activity}
                     addToCart={() => addToCart(item1)}
                     removeFromCart={() => removeFromCart(item1)}
-                    type_activity={item1.type_activity}
-                    ClearCart={() => ClearCart(item1)}
                     {...item1}
                     /> )) : <p className='text-[20px]'>Carrito vacio</p> 
                   }

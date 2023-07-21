@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities, getExtraActivities } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities, filterMembership } from "../../redux/Actions/Actions";
 import useCart from "../../Hooks/useCart";
 import style from "./act.module.css";
-
 
 function Actividades() {
   const dispatch = useDispatch();
@@ -40,6 +39,7 @@ function Actividades() {
   useEffect(() => {
     dispatch(getActivities());
     dispatch(getExtraActivities());
+    dispatch(filterMembership(31))
   }, [dispatch]);
 
   const allActivities = useSelector((state) => state.allActivities);
@@ -143,7 +143,8 @@ function Actividades() {
             rating={activity?.rating}
             type_activity={activity?.type_activity}
             image={activity?.image}
-            />
+            memberships={activity?.memberships}
+          />
         ))}
       </div>
       <div className=' text-center justify-center items-center'>
@@ -173,23 +174,20 @@ function Actividades() {
             type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
-            button={
+            button={ 
               <button
           className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
           style={{ backgroundColor: isAdded ? "red" : "#ffd277" }}
           onClick={() => {
             isAdded 
-            ? removeFromCart(extraActivity) 
-            : addToCart(extraActivity)}}
+            ? removeFromCart(extraActivity)
+            : addToCart(extraActivity) && alert('Actividad agregada al carrito')
+          }}
           >
-          {
-          isAdded 
-          ? "Eliminar" 
-          : "Comprar"
-          }
+          {isAdded.id ? "Remove from cart" : "Add to cart"}
         </button>
-            }
-            />  
+        }
+            />
           </li>
           );
           })}

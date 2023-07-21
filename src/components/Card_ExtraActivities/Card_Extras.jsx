@@ -31,7 +31,10 @@ export default function Card_Extras({
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
           doloribus
         </p>
-        { isLoggedIn === 'true' ? <div>{button}</div> : <p className='flex justify-center items-center text-[30px] uppercase font-semibold text-[#ffd277]' >Debes iniciar sesion</p>}
+        { isLoggedIn === 'true' 
+        ? <div>{button}</div> 
+        : <p className='flex justify-center items-center text-[30px] uppercase font-semibold text-[#ffd277]' >Debes iniciar sesion</p>
+        }
       </div>
     </div>
   );

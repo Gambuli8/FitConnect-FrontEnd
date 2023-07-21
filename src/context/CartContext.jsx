@@ -14,7 +14,7 @@ export const CartContextProvider = ({ children }) => {
     const addToCart = product => {
         const productIndex = cart.findIndex(p => p.id === product.idMembership);
 
-        if (productIndex >= 0) {
+        if (productIndex >= 0 && cart[productIndex].quantity < 1) {
             const newCart = structuredClone(cart)
             newCart[productIndex].quantity += 1
             return setCart(newCart)  
@@ -23,14 +23,23 @@ export const CartContextProvider = ({ children }) => {
             ...prevState,
             {
                 ...product,
-                quantity: 1
+                quantity: 1,
+
             },
         ]))
     }
     saveCart(cart)
 
     const removeFromCart = membership => {
-        return setCart(prevState => prevState.filter(p => p.id !== membership.id));
+        const productIndex = cart.findIndex(p => p.id === membership.idMembership || p.id === membership.idExtraAct);
+        if (productIndex >= 0) {
+            const newCart = structuredClone(cart)
+            newCart[productIndex].quantity -= 1
+            if (newCart[productIndex].quantity === 0) {
+                newCart.splice(productIndex, 1)
+            }
+            return setCart(newCart)
+        }
     }
 
     const ClearCart = () => {

@@ -11,3 +11,4 @@ export const POST_USERSBACK = "POST_USERSBACK";
 export const USER_FIREBASE = "USER_FIREBASE";
 export const GET_USERID = "GET_USERID";
 export const PUT_USER = "PUT_USER";
+export const PUT_ACTIVITY = "PUT_ACTIVITY";

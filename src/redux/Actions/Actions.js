@@ -12,6 +12,7 @@ import {
   USER_FIREBASE,
   GET_USERID,
   PUT_USER,
+  PUT_ACTIVITY,
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -81,7 +82,8 @@ export const postActivity = (payload) => {
         "http://localhost:3001/activitie",
         payload
       );
-      if (response.status === 201) {
+      console.log(response.status);
+      if (response.status === 200) {
         alert("La actividad ha sido creada exitosamente");
         dispatch({ type: POST_ACTIVITIES, payload: response.data });
       } else {
@@ -179,6 +181,30 @@ export const putUser = (payload) => {
         title: "Oops...",
         text: "Hubo un problema al actualizar la membresia!",
         footer: `<p>Es posible que haya problemas con tu pago</p>`,
+      });
+    }
+  };
+};
+
+export const putActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/activitie",
+        payload
+      );
+      Swal.fire({
+        icon: "success",
+        title: "The Activity has been updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch({ type: PUT_ACTIVITY, payload: response.data });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un problema al actualizar la actividad",
       });
     }
   };

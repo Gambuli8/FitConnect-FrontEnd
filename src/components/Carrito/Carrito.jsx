@@ -9,8 +9,7 @@ import style from "./Carrito.module.css";
 import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 
-
- function CartItem({idMembership,levelMembership, price, duration, quantity, ClearCart, addToCart}) {
+ function CartItem({idMembership,levelMembership, price, duration, quantity, removeFromCart, image}) {
   return (
     <li className='flex flex-col items-center justify-between '>
     <div>
@@ -21,9 +20,9 @@ import useCart from "../../Hooks/useCart";
       <p>Price: ${price}</p>
     </div>
     <footer>
-      <small onClick={addToCart}>Cantidad: {quantity}</small>
+      <small>Cantidad: {quantity}</small>
     </footer>
-    <button onClick={ClearCart}>
+    <button onClick={removeFromCart}>
       <svg
         width="30px"
         height="30px"
@@ -72,10 +71,71 @@ import useCart from "../../Hooks/useCart";
   )
 }
 
+function CartItemActivity({ name, schedule, type_activity, image, price, quantity, removeFromCart}) {
+  return (
+    <li className='flex flex-col items-center justify-between'>
+    <div>
+      <img src={image} alt="image de membresia"/>
+      <h3>Activity: {name}</h3>
+      <p>Schedule: {schedule}</p>
+      <p>Type Activity: {type_activity}</p>
+      <p>Price: ${price}</p>
+    </div>
+    <footer>
+      <small>Cantidad: {quantity}</small>
+    </footer>
+    <button onClick={removeFromCart}>
+      <svg
+        width="30px"
+        height="30px"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 12V17"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M14 12V17"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M4 7H20"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+    </li>
+  )}
+
 
 export default function Carrito() {
   const cartCheck = useId();
-  const {cart, ClearCart} = useCart();
+  const {cart, addToCart, removeFromCart} = useCart();
   console.log(cart);
   return (
     <div className="w-[50%]">
@@ -87,19 +147,27 @@ export default function Carrito() {
           <input type="checkbox" id={cartCheck} hidden />
           <aside id={style.cart} className={style.cart}>
             <ul>
-              {cart.map((item) => ( 
+              {cart[0]?.idMembership ? cart.map((item) => ( 
                 <CartItem
-                key={item.idMembership}
+                key={item?.idMembership}
                 id={item.idMembership}
-                addToCart={() => addToCart(item)}
                 levelMembership={item.levelMembership}
-                ClearCart={() => ClearCart(item)}
+                addToCart={() => addToCart(item)}
+                removeFromCart={() => removeFromCart(item)}
                 {...item}
-                />
-                ))}
+                /> ))
+                : cart[0]?.idExtraAct ? cart.map((item1) => (
+                    <CartItemActivity
+                    key={item1?.idExtraAct}
+                    id={item1.idExtraAct}
+                    type_activity={item1.type_activity}
+                    addToCart={() => addToCart(item1)}
+                    removeFromCart={() => removeFromCart(item1)}
+                    {...item1}
+                    /> )) : <p className='text-[20px]'>Carrito vacio</p> 
+                  }
             </ul>
-            {cart.length === 0 ? <p className='text-[20px]'>Carrito vacio</p> && <p className='text-[20px]'>Carrito vacio</p>
-            : <Link to={`/carrito/${cart[0].idMembership}`}><button className='items-end align-bottom'>Finalizar Compra</button></Link>
+            {cart.length !== 0 ? <Link to={`/carrito/${cart[0].idMembership}`}><button className='items-end align-bottom'>Finalizar Compra</button></Link> : null
             }
           </aside>
         </div>

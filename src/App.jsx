@@ -17,8 +17,8 @@ import AdminDashboard from "./views/AdminDashboard/AdminDashboard";
 function App() {
   return (
     <div>
-      <CartContextProvider>
         <AuthContextProvider>
+      <CartContextProvider>
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -36,11 +36,11 @@ function App() {
               }
             />
           </Routes>
-        </AuthContextProvider>
+      </CartContextProvider>
         <section id="contacto">
           <Footer />
         </section>
-      </CartContextProvider>
+        </AuthContextProvider>
     </div>
   );
 }

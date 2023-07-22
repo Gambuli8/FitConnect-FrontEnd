@@ -31,15 +31,7 @@ export const CartContextProvider = ({ children }) => {
     saveCart(cart)
 
     const removeFromCart = membership => {
-        const productIndex = cart.findIndex(p => p.id === membership.idMembership || p.id === membership.idExtraAct);
-        if (productIndex >= 0) {
-            const newCart = structuredClone(cart)
-            newCart[productIndex].quantity -= 1
-            if (newCart[productIndex].quantity === 0) {
-                newCart.splice(productIndex, 1)
-            }
-            return setCart(newCart)
-        }
+       setCart(cart.filter(item => item.idMembership !== membership.idMembership || item.idExtraAct !== membership.idExtraAct))
     }
 
     const ClearCart = () => {

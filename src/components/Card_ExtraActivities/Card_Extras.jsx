@@ -26,8 +26,6 @@ export default function Card_Extras({
     setRating(index + 1);
   };
 
-  console.log('rating:', rating,)
-
   const handlerMouseOver = (index) => {
     setHover(index + 1);
   };
@@ -46,7 +44,6 @@ export default function Card_Extras({
   }, [userId, isLoggedIn]);
   return (
     <div className="w-[340px] h-[500px] border-[4px] border-[#ffd277] shadow-black shadow-xl bg-black  flex flex-col rounded-xl justify-center items-center m-4 bg-auto bg-no-repeat bg-center bg-origin-padding hover:translate-y-[-20px] duration-300">
-      {console.log(userId)}
       <div className="flex flex-col text-justify p-1 items-center text-white">
         <img
           src={`${image}`}

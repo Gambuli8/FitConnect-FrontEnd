@@ -18,7 +18,13 @@ export default function Membresias() {
   const { addToCart, cart, removeFromCart, cleanCart } = useCart();
 
   const checkMembership = (membership) => {
-    return cart.some((p) => p.id === membership?.idMembership);
+    const membershipIndex = cart.findIndex(
+      (p) => p.idMembership === membership.idMembership
+    );
+    if (membershipIndex >= 0 && cart[membershipIndex].quantity > 0) {
+      return true;
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -62,7 +68,7 @@ export default function Membresias() {
 
       <div className="grid grid-cols-3">
         {allMemberships?.map((membership) => {
-          const isAdded = checkMembership(membership);
+          const isAdded = checkMembership(membership);  
           return (
             <li key={membership?.idMembership}>
               <Card_Membresias
@@ -73,20 +79,16 @@ export default function Membresias() {
                 activities={membership?.activities}
                 cleanCart={cleanCart}
                 button={
-                  <button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
-              style={{backgroundColor: isAdded ? "red" : "#ffd277"}}
-              onClick={() => { 
-                isAdded 
-                ? removeFromCart(membership) 
-                : addToCart(membership)}}
-              >
-                {
-                isAdded 
-                ? "Eliminar" 
-                : "Comprar"
-                }
-              </button>
-                }
+                    isAdded ? <button className="border-[2px] border-slate-950 text-black items-center justify-center rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
+                    onClick={() => removeFromCart(membership)}
+                    >
+                      Eliminar
+                    </button> : <button className="border-[2px] border-slate-950 text-black rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
+                    onClick={() => addToCart(membership)}
+                    >
+                      Comprar
+                    </button> 
+                  }
               />
             </li>
           );

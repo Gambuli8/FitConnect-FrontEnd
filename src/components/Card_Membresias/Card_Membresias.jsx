@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // import { AuthContextProvider } from "../../context/AuthContext";
 // import { useContext } from "react";
 import { useSelector } from "react-redux";
 
-const Card_Membresias = ({levelMembreship, price, duration, activities, button }) => {
+const Card_Membresias = ({levelMembreship, price, duration, activities, button, idMembership }) => {
   const allActivities = useSelector((state) => state.allActivities);
   const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+
 
   return (
     <div className='flex flex-col p-2 border border-black w-[300px] h-[480px] m-3 mx-8 rounded-[20px] bg-gray-950 text-white'>
@@ -29,7 +32,9 @@ const Card_Membresias = ({levelMembreship, price, duration, activities, button }
       <p className='border-t-2 border-gray-300'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis soluta.</p>
       </div>
       <div>Precio: {price}</div>
-      { isLoggedIn === 'true' ? <div>{button}</div> : <div>Debes iniciar sesion</div>}
+      { isLoggedIn === 'true' ? <a href={`/carrito/${idMembership}`}><div className='flex items-center justify-center'>{button}</div></a> 
+      : <div className='flex max-w-[100%] m-3 text-center items-center text-[20px] text-[#ffd277]'>Debes iniciar sesion</div>
+      }
     </div>
   );
 };

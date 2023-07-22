@@ -20,7 +20,7 @@ export default function detailCart() {
               key={membership?.idMembership}
               className=" h-[100px] items-center my-20 flex justify-around text-[20px] bg-gray-700"
             >
-              <img className="w-[200px] h-[100px] m-3" src={membership.image} alt="" />
+              <img className="w-[200px] h-[100px] m-3" src='https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png' alt="" />
               <div className="flex flex-col">
                 <h3 className="text-[20px] uppercase text-[#ffd277]">Membership: {membership.levelMembership}</h3>
                 <p className="">Duration: {membership.duration} Days</p>

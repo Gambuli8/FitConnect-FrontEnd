@@ -13,7 +13,7 @@ import useCart from "../../Hooks/useCart";
   return (
     <li className='flex flex-col items-center justify-between '>
     <div>
-      <img src={image} alt="image de membresia"/>
+      <img src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png" />
       <p>id: {idMembership}</p>
       <h3>Membership: {levelMembership}</h3>
       <p>Duration: {duration} Days</p>

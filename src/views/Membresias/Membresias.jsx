@@ -13,6 +13,7 @@ export default function Membresias() {
 
   useEffect(() => {
     setAux(!aux);
+    return;
   }, [isLoggedIn, aux]);
 
   const { addToCart, cart, removeFromCart, cleanCart } = useCart();

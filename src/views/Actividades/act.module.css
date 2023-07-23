@@ -1,0 +1,59 @@
+.container{
+    position: fixed;
+    bottom: 0rem;
+    right: 0rem;
+    width: 6.6rem;
+    height: 6.6rem;
+    z-index: -1;
+}
+
+.btn{
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    cursor: pointer;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.btn svg{
+position: absolute;
+top: 48%;
+left: 50%;
+font-size: 1.7rem;
+transform: translate(-50%, -50%) scale(0);
+transition: .2s;
+color: black;
+}
+
+.show{
+    z-index: 5;
+}
+
+.show .btn{
+    animation: poup .3s ease-in-out;
+    width: 6.6rem;
+    height: 6.6rem;
+    z-index: 11;
+}
+
+.show svg{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes poup{
+    0%{
+        width: 0rem;
+        height: 0rem;
+    }
+    50%{
+        width: 8rem;
+        height: 8rem;
+    }
+    100%{
+        width: 6.6rem;
+        height: 6.6rem;
+    }
+}

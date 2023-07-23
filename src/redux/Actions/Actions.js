@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import {
   GET_USERS,
   GET_ACTIVITIES,
+  GET_EXTRA_ACTIVITIES,
   GET_MEMBERSHIP,
   POST_USERS,
   POST_ACTIVITIES,
@@ -28,6 +29,18 @@ export const getActivities = () => {
       const response = await axios("http://localhost:3001/activitie");
       console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getExtraActivities = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios("http://localhost:3001/extra");
+      console.log(response);
+      dispatch({ type: GET_EXTRA_ACTIVITIES, payload: response.data });
     } catch (error) {
       console.log(error);
     }

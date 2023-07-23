@@ -136,7 +136,6 @@ function CartItemActivity({ name, schedule, type_activity, image, price, quantit
 export default function Carrito() {
   const cartCheck = useId();
   const {cart, addToCart, removeFromCart} = useCart();
-  console.log(cart);
   return (
     <div className="w-[50%]">
       <div className="flex flex-col items-center justify-center">

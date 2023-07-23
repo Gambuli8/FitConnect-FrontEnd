@@ -23,7 +23,6 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoggedOut, setLoggedOut] = useState(false);
 
   localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-  console.log(isLoggedIn);
 
   useEffect(() => {
     dispatch(userFirebase(user));
@@ -56,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
       return signInMethods.length > 0;
     } catch (error) {
-      console.log(
+      alert(
         "An error occurred while checking email registration:",
         error
       );
@@ -66,7 +65,6 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
     return () => {

@@ -27,10 +27,9 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const response = await axios("http://localhost:3001/activitie");
-      console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -39,10 +38,9 @@ export const getExtraActivities = () => {
   return async function (dispatch) {
     try {
       const response = await axios("http://localhost:3001/extra");
-      console.log(response);
       dispatch({ type: GET_EXTRA_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -53,7 +51,7 @@ export const getMembership = () => {
       const response = await axios("http://localhost:3001/membership");
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -70,7 +68,7 @@ export const postUser = (payload) => {
         throw new Error("Hubo un problema al crear el usuario");
       }
     } catch (error) {
-      console.error("Error al crear el usuario:", error);
+      alert("Error al crear el usuario:", error);
     }
   };
 };
@@ -82,7 +80,6 @@ export const postActivity = (payload) => {
         "http://localhost:3001/activitie",
         payload
       );
-      console.log(response.status);
       if (response.status === 200) {
         alert("La actividad ha sido creada exitosamente");
         dispatch({ type: POST_ACTIVITIES, payload: response.data });
@@ -90,7 +87,7 @@ export const postActivity = (payload) => {
         throw new Error("Hubo un problema al crear la actividad");
       }
     } catch (error) {
-      console.error("Error al crear la actividad:", error);
+      alert("Error al crear la actividad:", error);
     }
   };
 };
@@ -105,7 +102,7 @@ export const filterActivities = (filters) => {
       );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -118,7 +115,7 @@ export const filterMembership = (filter) => {
       );
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -151,7 +148,7 @@ export const userFirebase = (user) => {
     try {
       dispatch({ type: USER_FIREBASE, payload: user });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };

@@ -1,25 +1,36 @@
-function Card_Actividades() {
+/* eslint-disable react/prop-types */
+
+import { useSelector } from "react-redux";
+
+function Card_Actividades({ name, schedule, type_activity, rating, image, memberships }) {
+
+  const allMemberships = useSelector((state) => state.allMemberships);
+
   return (
-    <div className="w-[340px] h-[450px] border-[4px] border-[#ffd277] shadow-black shadow-xl bg-black  flex flex-col rounded-xl justify-center items-center m-4 bg-auto bg-no-repeat bg-center bg-origin-padding hover:translate-y-[-20px] duration-300">
-      <div className="flex flex-col text-justify p-2 items-center text-white">
-        <img
-          src="https://thumbs.dreamstime.com/b/meditaci%C3%B3n-de-yoga-y-mujer-tranquila-en-la-alfombra-para-el-ejercicio-respiratorio-bienestar-cuerpo-saludable-estudio-espiritual-277878330.jpg"
+    <div className="w-[340px] h-[450px] border-[4px] border-[#ffd277] shadow-black shadow-xl bg-black  flex flex-col rounded-xl justify-center items-center m-8 bg-auto bg-no-repeat bg-center bg-origin-padding hover:translate-y-[-20px] duration-300">
+      <div className="flex flex-col text-justify p-2 items-center text-white"> 
+        <img 
+          src={`${image}`}
           alt="imagen de la actividad"
-          className="rounded-full mx-auto w-32 h-32 object-cover"
+          className="mx-auto w-50 h-40 object-cover"
         />
         <h1 className="font-titulo text-center text-[#ffd277]  uppercase text-[25px] my-2">
-          nombre de actividad
+          {name}
         </h1>
-        <h3 className="font-parrafo my-2 text-[20px]">horario de actividad</h3>
-        <p className="font-Inconsolata my-2 text-[17px] font-medium capitalize text-gray-400">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
-          blanditiis minus ut necessitatibus quos sed laborum, dolore
-          voluptatibus deleniti? Minus mollitia impedit ipsa voluptate
-          voluptatem quae eos voluptatum omnis nihil.
-        </p>
+        <h3 className="font-parrafo my-2 text-[20px]">Horario: {schedule}</h3>
+        <h3 className="font-parrafo my-2 text-[20px]">
+          Tipo de actividad: {type_activity}
+        </h3>
+        <h3 className="font-parrafo my-2 text-[20px]">Rating: {rating}</h3>
+        <h3 className="font-parrafo my-2 text-[14px]">Memberships:</h3>
+        <div className='grid grid-cols-3 text-[#fff990]'>
+          {memberships?.map((m, index)=>{
+            const memb = allMemberships?.filter(all=>all.idMembership==m.membershipId)
+            return (<p className='m-1' key={index}>{memb[0]?.levelMembership}</p>) 
+          })}
+        </div>
       </div>
     </div>
   );
 }
-
 export default Card_Actividades;

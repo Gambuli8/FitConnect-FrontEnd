@@ -5,6 +5,7 @@ import { getMembership, filterMembership } from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useCart from "../../Hooks/useCart";
+import { Link } from "react-router-dom";
 
 export default function Membresias() {
   const dispatch = useDispatch();
@@ -84,11 +85,10 @@ export default function Membresias() {
                     onClick={() => removeFromCart(membership)}
                     >
                       Eliminar
-                    </button> : <button className="border-[2px] border-slate-950 text-black rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
-                    onClick={() => addToCart(membership)}
+                    </button> : <Link to={`/carrito/${membership?.idMembership}`} onClick={() => addToCart(membership)}><button className="border-[2px] border-slate-950 text-black rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
                     >
                       Comprar
-                    </button> 
+                    </button></Link> 
                   }
               />
             </li>

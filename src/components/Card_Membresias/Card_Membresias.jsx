@@ -8,8 +8,6 @@ const Card_Membresias = ({levelMembreship, price, duration, activities, button, 
   const allActivities = useSelector((state) => state.allActivities);
   const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-
-
   return (
     <div className='flex flex-col p-2 border border-black w-[300px] h-[480px] m-3 mx-8 rounded-[20px] bg-gray-950 text-white'>
       <div className='flex flex-col'>

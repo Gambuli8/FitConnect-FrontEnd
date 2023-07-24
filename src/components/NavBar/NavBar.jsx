@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import logo from "../../images/fitconnectimg.png";
 import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
+import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
   const { isLoggedIn, logout } = UserAuth();
@@ -21,7 +21,7 @@ const NavBar = () => {
       <div>
         <span>
           <Link to="/">
-            <img className="h-24 inline mx-10" src={logo} alt="Logo" />
+            <img className="h-24 inline mx-10" src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png"  />
           </Link>
         </span>
       </div>
@@ -75,6 +75,9 @@ const NavBar = () => {
             </Link>
           </li>
         )}
+        <li className='mx-4'>
+        <Carrito />
+        </li>
       </ul>
     </nav>
   );

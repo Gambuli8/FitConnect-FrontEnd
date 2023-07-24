@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {FaStar} from 'react-icons/fa';
+import { FaStar } from "react-icons/fa";
 
 /* eslint-disable react/prop-types */
 export default function Card_Extras({
@@ -57,22 +57,33 @@ export default function Card_Extras({
         <h3 className="font-parrafo my-1 text-[20px]">
           Type Activity: {type_activity}
         </h3>
-        <h3 className="font-parrafo text-[23px] uppercase text-[#ffd277]">Price: ${price}</h3>
+        <h3 className="font-parrafo text-[23px] uppercase text-[#ffd277]">
+          Price: ${price}
+        </h3>
         <p className="font-Inconsolata my-1 text-[17px] font-medium capitalize text-gray-400">
           {description}
         </p>
         <div className="flex">
           {starRating.map((_, index) => {
             return (
-              <img 
-              style={{transition: "color 200ms", width: '20px', height:'20px', outline: 'none', margin: '0 2px', padding: '0', fontSize: '1.2rem', color: ''}}
-              src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/star-vacia_zygqve.svg" 
-              alt='estrella rating' 
-              onClick={() => handlerClick(index)}
-              onMouseOver={() => handlerMouseOver(index)}
-              onMouseLeave={handlerMouseLeave}
-              color={(hover || rating) > index ? colorRelleno : colorVacio}
-              key={index}
+              <img
+                style={{
+                  transition: "color 200ms",
+                  width: "20px",
+                  height: "20px",
+                  outline: "none",
+                  margin: "0 2px",
+                  padding: "0",
+                  fontSize: "1.2rem",
+                  color: "",
+                }}
+                src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/star-vacia_zygqve.svg"
+                alt="estrella rating"
+                onClick={() => handlerClick(index)}
+                onMouseOver={() => handlerMouseOver(index)}
+                onMouseLeave={handlerMouseLeave}
+                color={(hover || rating) > index ? colorRelleno : colorVacio}
+                key={index}
               />
             );
           })}

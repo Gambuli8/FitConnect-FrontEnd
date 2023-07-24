@@ -7,7 +7,6 @@ import {
   TableRow,
   Card,
   Title,
-  Text,
   Grid,
   Col,
   TableCell,

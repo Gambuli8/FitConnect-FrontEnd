@@ -1,4 +1,3 @@
-
 const Banner = () => {
   return (
     <section className="bg-gray-950 h-[500px]">
@@ -23,7 +22,10 @@ const Banner = () => {
           </div>
 
           <div className="w-full h-full bg-cover bg-left bg-no-repeat flex-1">
-            <img src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689782268/gym_img_2_l8jumg.jpg" alt="Banner" />
+            <img
+              src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689782268/gym_img_2_l8jumg.jpg"
+              alt="Banner"
+            />
           </div>
         </div>
       </div>

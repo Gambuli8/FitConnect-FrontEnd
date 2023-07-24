@@ -21,7 +21,10 @@ const NavBar = () => {
       <div>
         <span>
           <Link to="/">
-            <img className="h-24 inline mx-10" src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png"  />
+            <img
+              className="h-24 inline mx-10"
+              src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png"
+            />
           </Link>
         </span>
       </div>
@@ -36,9 +39,12 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="mx-4">
-         <a href="#contacto" className="text-white text-xl hover:text-yellow-500 duration-500">
-          Contacto
-         </a>
+          <a
+            href="#contacto"
+            className="text-white text-xl hover:text-yellow-500 duration-500"
+          >
+            Contacto
+          </a>
         </li>
         <li className="mx-4">
           <a
@@ -75,8 +81,8 @@ const NavBar = () => {
             </Link>
           </li>
         )}
-        <li className='mx-4'>
-        <Carrito />
+        <li className="mx-4">
+          <Carrito />
         </li>
       </ul>
     </nav>

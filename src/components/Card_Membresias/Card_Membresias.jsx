@@ -50,9 +50,7 @@ const Card_Membresias = ({
       </div>
       <div>Precio: {price}</div>
       {isLoggedIn === "true" ? (
-        <a href={`/carrito/${idMembership}`}>
-          <div className="flex items-center justify-center">{button}</div>
-        </a>
+        <div className="flex items-center justify-center">{button}</div>
       ) : (
         <div className="flex max-w-[100%] m-3 text-center items-center text-[20px] text-[#ffd277]">
           Debes iniciar sesion

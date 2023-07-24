@@ -69,6 +69,8 @@ export default function Card_Extras({
               <img
                 style={{
                   transition: "color 200ms",
+                  width: "20px",
+                  height: "20px",
                   outline: "none",
                   margin: "0 2px",
                   padding: "0",

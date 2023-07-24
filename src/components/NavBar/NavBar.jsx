@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
@@ -85,6 +85,9 @@ const NavBar = () => {
           <Carrito />
         </li>
       </ul>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Outlet />
+      </Suspense>
     </nav>
   );
 };

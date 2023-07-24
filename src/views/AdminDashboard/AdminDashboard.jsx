@@ -48,6 +48,7 @@ export default function AdminDashboard() {
     setShowForm(true);
     setExtraShowForm(false);
   };
+
   const [formData, setFormData] = useState({
     name: "",
     schedule: "",
@@ -112,6 +113,7 @@ export default function AdminDashboard() {
       if (selectedActivity.idAct) {
         console.log(selectedActivity);
         dispatch(putActivity(selectedActivity.idAct, formData));
+        console.log(selectedActivity.idAct);
         console.log(formData);
       } else {
         const newActivity = {
@@ -450,7 +452,7 @@ export default function AdminDashboard() {
                 </TableHead>
                 <TableBody>
                   {/* actividades normales */}
-                  {allExtraActivities?.map((act) => (
+                  {allActivities?.map((act) => (
                     <TableRow key={act.idAct}>
                       <TableCell>{act.idAct}</TableCell>
                       <TableCell>{act.name}</TableCell>
@@ -487,7 +489,7 @@ export default function AdminDashboard() {
                 </TableHead>
                 <TableBody>
                   {/* extra actividades */}
-                  {allActivities?.map((ext) => (
+                  {allExtraActivities?.map((ext) => (
                     <TableRow key={ext.idExtraAct}>
                       <TableCell>{ext.idExtraAct}</TableCell>
                       <TableCell>{ext.type_activity}</TableCell>

@@ -12,7 +12,6 @@ import {
   GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
-  GET_EXTRA_ACTIVITIES,
   POST_EXTRA_ACTIVITIES,
 } from "../Actions/ActionsType";
 

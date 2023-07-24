@@ -4,13 +4,14 @@ import {
   GET_ACTIVITIES,
   GET_EXTRA_ACTIVITIES,
   GET_MEMBERSHIP,
+  GET_USERID,
   POST_USERS,
   POST_ACTIVITIES,
+  POST_USERSBACK,
+  POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  POST_USERSBACK,
   USER_FIREBASE,
-  GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
 } from "../Actions/ActionsType";
@@ -92,6 +93,22 @@ export const postActivity = (payload) => {
   };
 };
 
+export const postExtraActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/extra", payload);
+      console.log(response.data);
+      if (response.status === 200) {
+        alert("La actividad ha sido creada exitosamente");
+        dispatch({ type: POST_EXTRA_ACTIVITIES, payload: response.data });
+      } else {
+        throw new Error("Hubo un problema al crear la actividad");
+      }
+    } catch (error) {
+      console.error("Error al crear la actividad:", error);
+    }
+  };
+};
 export const filterActivities = (filters) => {
   const filter = filters.filter;
   const order = filters.order;

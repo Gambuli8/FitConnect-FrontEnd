@@ -65,7 +65,7 @@ export default function Card_Extras({
           {starRating.map((_, index) => {
             return (
               <img 
-              style={{transition: "color 200ms", outline: 'none', margin: '0 2px', padding: '0', fontSize: '1.2rem', color: ''}}
+              style={{transition: "color 200ms", width: '20px', height:'20px', outline: 'none', margin: '0 2px', padding: '0', fontSize: '1.2rem', color: ''}}
               src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/star-vacia_zygqve.svg" 
               alt='estrella rating' 
               onClick={() => handlerClick(index)}

@@ -42,7 +42,7 @@ const NavBar = () => {
         </li>
         <li className="mx-4">
           <a
-            href="#Membresia"
+            href="/#Membresia"
             className="text-white text-xl hover:text-yellow-500 duration-500"
           >
             Membresias

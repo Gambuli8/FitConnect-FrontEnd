@@ -34,8 +34,6 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allExtraActivities: action.payload };
     case GET_ACTIVITIES:
       return { ...state, allActivities: action.payload };
-    case GET_EXTRA_ACTIVITIES:
-      return { ...state, allExtraActivities: action.payload };
     case GET_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case POST_USERS:

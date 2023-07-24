@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 // import { AuthContextProvider } from "../../context/AuthContext";
 // import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Card_Membresias = ({levelMembreship, price, duration, activities, button, idMembership }) => {
@@ -30,7 +31,7 @@ const Card_Membresias = ({levelMembreship, price, duration, activities, button, 
       <p className='border-t-2 border-gray-300'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis soluta.</p>
       </div>
       <div>Precio: {price}</div>
-      { isLoggedIn === 'true' ? <a href={`/carrito/${idMembership}`}><div className='flex items-center justify-center'>{button}</div></a> 
+      { isLoggedIn === 'true' ? <Link to={`/carrito/${idMembership}`}><div className='flex items-center justify-center'>{button}</div></Link> 
       : <div className='flex max-w-[100%] m-3 text-center items-center text-[20px] text-[#ffd277]'>Debes iniciar sesion</div>
       }
     </div>

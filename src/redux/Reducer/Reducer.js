@@ -20,7 +20,6 @@ let initialState = {
   allActivities: [],
   allExtraActivities: [],
   allMemberships: [],
-  allExtraActivities: [],
   user: {},
   userId: {},
 };
@@ -50,7 +49,12 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_ACTIVITIES:
       return { ...state, allActivities: action.payload };
     case FILTER_EXTRA_ACTIVITIES:
-      return { ...state, allExtraActivities: action.payload };
+      return {
+        ...state,
+        allExtraActivities: [...state.allExtraActivities].sort((a, b) =>
+          a.price.localeCompare(b.price)
+        ),
+      };
     case FILTER_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:

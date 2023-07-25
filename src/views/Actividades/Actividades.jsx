@@ -44,13 +44,27 @@ function Actividades() {
 
   const allActivities = useSelector((state) => state.allActivities);
   const allExtraActivities = useSelector((state) => state.allExtraActivities);
-  console.log(allExtraActivities);
-
+  
   //logica del filter y order Activities.
   const [filters, setFilters] = useState({
     filter: 0,
     order: "az",
   });
+
+  const [Search, setSearch] = useState('');
+  
+  const searchHandler = (event) => {
+    setSearch(event.target.value);
+  };
+  
+  let result = [];
+  if(Search.length > 0){
+    result = allExtraActivities.filter((extraActivity) => {
+      return extraActivity.name.toLowerCase().includes(Search.toLowerCase())
+    })
+  } else {
+    result = allExtraActivities;
+  }
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -67,6 +81,8 @@ function Actividades() {
           const updateOrder = { ...filters, order: value };
           return updateOrder;
         });
+        break;
+      default:
         break;
     }
   };
@@ -157,8 +173,30 @@ function Actividades() {
       </p>
       </div>
         <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Here are some Extras Activities that you will like!</h1>
-      <div className='mt-[120px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
-        {allExtraActivities?.map((extraActivity) => {
+      
+      <div className='flex items-center mt-20 justify-evenly'>
+        <select name="Categori" onChange={changeHandler}>
+          <option value="all">All</option>
+          {allExtraActivities?.map((extraActivity) => (
+            <option key={extraActivity?.idExtraAct} value={extraActivity?.type_activity}>
+              {extraActivity?.type_activity}
+            </option>
+          ))
+        }
+        </select>
+        <div className=''>
+        <input value={Search} onChange={searchHandler} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-black font-medium justify-center text-center rounded-xl w-[200px]' />
+        </div>
+        <select name="OrderPrice">
+          <option value="all">All</option>
+          <option value="0-5000">$0-$5000</option>
+          <option value="5000-0">$5000-$0</option>
+        </select>
+      </div>
+      
+      
+      <div className='mt-[100px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
+        {result?.map((extraActivity) => {
           const isAdded = checkActivity(extraActivity);
           return (
             <li key={extraActivity?.idExtraAct}>

@@ -11,6 +11,7 @@ import {
   POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
+  // FILTER_EXTRA_ACTIVITIES,
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
@@ -124,6 +125,21 @@ export const filterActivities = (filters) => {
     }
   };
 };
+
+// export const FilterExtraAct = (filters) => {
+//   const filter = filters.filter;
+//   const order = filters.order;
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios(
+//         `http://localhost:3001/extra?filter=${filter}&&order=${order}`
+//       );
+//       dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data);
+//     }
+//   };
+// };
 
 export const filterMembership = (filter) => {
   return async function (dispatch) {

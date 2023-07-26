@@ -64,11 +64,14 @@ const NavBar = () => {
         </li>
         {isLoggedIn && user ? (
           <>
-            <li className="mx-4 text-white">
+            <p className="mx-3 text-white text-lg font-semibold mt-1">
               {user.displayName ? `Hello, ${user.displayName}!` : "Hello!"}
-            </li>
-            <li className="mx-4 text-white">{user.email}</li>
-            <li className="mx-4">
+            </p>
+            <p className="mx-3 text-white font-semibold mt-1 text-lg">
+              {" "}
+              ✉️{user.email}
+            </p>
+            <li className="mx-3">
               <button
                 className="text-white text-xl hover:text-yellow-500 duration-500"
                 onClick={handleLogout}

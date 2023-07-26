@@ -199,15 +199,11 @@ export default function AdminDashboard() {
         {/* Main section */}
         <Col numColSpanLg={6}>
           <Card className="h-full border-4 border-gray-500 bg-gray-200 flex-1">
-            <Button
-              className="bg-blue"
-              onClick={() => setShowForm(true)}
-              size="xl"
-            >
-              Create
+            <Button className="text-xl" onClick={() => setShowForm(true)}>
+              PUSH ME TO CREATE AN ACTIVITY!
             </Button>
             <Button className="bg-blue" onClick={handleShowExtraForm} size="xl">
-              Create Extra Activity
+              PUSH ME TO CREATE AN EXTRA ACTIVITY!
             </Button>
 
             {showExtraForm && (
@@ -215,7 +211,10 @@ export default function AdminDashboard() {
                 <Card>
                   {" "}
                   {/* Nuevo formulario para actividades extra */}
-                  <Title>Create Extra Activity</Title>
+                  <Title>Please complete all the fields!</Title>
+                  <p className="text-3xl text-center text-red-600 font-semibold">
+                    Create an extra activity!
+                  </p>
                   <form onSubmit={handleExtraSubmit}>
                     <div>
                       <label htmlFor="name">Name:</label>
@@ -345,7 +344,10 @@ export default function AdminDashboard() {
             )}
             {showForm && (
               <Card>
-                <Title>Create Actividad</Title>
+                <Title>Please complete all the fields!</Title>
+                <p className="text-3xl text-red-600 text-center font-semibold">
+                  Create a Activity!
+                </p>
                 <form onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="name">Name:</label>
@@ -427,8 +429,6 @@ export default function AdminDashboard() {
                 </form>
               </Card>
             )}
-            <Button size="xl">Delete</Button>
-            <Button size="xl">Put</Button>
             <div className="h-60" />
           </Card>
         </Col>

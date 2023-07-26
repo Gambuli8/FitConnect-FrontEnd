@@ -209,14 +209,14 @@ export default function AdminDashboard() {
           <Col numColSpanLg={6}>
             <Card className="h-full border-4 border-gray-500 bg-gray-200 flex-1">
               <Button className="text-xl" onClick={() => setShowForm(true)}>
-                PUSH ME TO CREATE AN ACTIVITY!
+                PUSH ME TO CREATE or EDIT AN ACTIVITY!
               </Button>
               <Button
                 className="bg-blue"
                 onClick={handleShowExtraForm}
                 size="xl"
               >
-                PUSH ME TO CREATE AN EXTRA ACTIVITY!
+                PUSH ME TO CREATE or EDIT AN EXTRA ACTIVITY!
               </Button>
 
               {showExtraForm && (
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
                     {/* Nuevo formulario para actividades extra */}
                     <Title>Please complete all the fields!</Title>
                     <p className="text-3xl text-center text-red-600 font-semibold">
-                      Create an extra activity!
+                      Create or Edit an Extra Activity!
                     </p>
                     <form onSubmit={handleExtraSubmit}>
                       <div>
@@ -359,7 +359,7 @@ export default function AdminDashboard() {
                 <Card>
                   <Title>Please complete all the fields!</Title>
                   <p className="text-3xl text-red-600 text-center font-semibold">
-                    Create a Activity!
+                    Create or Edit Activity!
                   </p>
                   <form onSubmit={handleSubmit}>
                     <div>

@@ -11,9 +11,6 @@ import {
   POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  FILTER_EXTRA_ACTIVITIES,
-  FILTER_EXTRA_ACTIVITIES_ORDER,
-  SEARCH_ACTIVITIES,
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
@@ -125,36 +122,6 @@ export const filterActivities = (filters) => {
         `http://localhost:3001/activitie?filter=${filter}&&order=${order}`
       );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const filterActivitiesForCAtegori = (filters) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: FILTER_EXTRA_ACTIVITIES_ORDER, payload: filters });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const FilterExtraAct = (order) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: order });
-    } catch (error) {
-      alert(error.response.data);
-    }
-  };
-};
-
-export const searchActivities = (name) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: SEARCH_ACTIVITIES, payload: name });
     } catch (error) {
       alert(error.message);
     }
@@ -297,7 +264,9 @@ export const postUserForm = (payload) => {
 
 export const getPaymentIdUser = (idUser) => {
   return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/paystore/last/${idUser}`);
+    const response = await axios.get(
+      `http://localhost:3001/paystore/last/${idUser}`
+    );
     return dispatch({ type: GET_PAYMENT_ID_USER, payload: response.data });
   };
 };

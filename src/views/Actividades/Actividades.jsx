@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori, getUserId } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities, filterMembership, getUserId } from "../../redux/Actions/Actions";
 import useCart from "../../Hooks/useCart";
 import style from "./act.module.css";
 
@@ -18,7 +18,7 @@ function Actividades() {
   }, [dispatch, user]);
 
   window.onscroll = function () {
-    if(scrollY > 100){
+    if(scrollY > 150){
       document.getElementById('container').classList.add(style.show);
     }else{
       document.getElementById('container').classList.remove(style.show);
@@ -30,6 +30,7 @@ function Actividades() {
       top: 0,
       behavior: 'smooth'
     })
+    console.log('click');
   }
 
   const { cart, addToCart, removeFromCart } = useCart();
@@ -55,12 +56,6 @@ function Actividades() {
     filter: 0,
     order: "az",
   });
-
-  const filterOrder = (e) => {
-    dispatch(FilterExtraAct(e.target.value));
-    dispatch(filterActivitiesForCAtegori(e.target.value));
-    // dispatch(searchActivities(e.target.value));
-  };
 
   const [Search, setSearch] = useState('');
   
@@ -186,25 +181,12 @@ function Actividades() {
         <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Aquí tienes algunas Actividades Extras que te van a gustar!</h1>
       
       <div className='flex items-center mt-20 justify-evenly'>
-        <select name="Categori" onChange={e => filterOrder(e)}>
-          <option value="all">All</option>
-          {allExtraActivities?.map((extraActivity) => (
-            <option key={extraActivity?.idExtraAct} value={extraActivity?.type_activity}>
-              {extraActivity?.type_activity}
-            </option>
-          ))}
-        </select>
         <input value={Search} onChange={e => searchHandler(e)} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-gray-600 font-medium justify-center text-center rounded-xl w-[200px]' />
-        <select name="OrderPrice" onChange={e => filterOrder(e)}>
-          <option value="all">Order for Price</option>
-          <option value="asc">ASC</option>
-          <option value="desc">DESC</option>
-        </select>
       </div>
       
       
       <div className='mt-[100px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
-        {(filterExtraAct || result)?.map((extraActivity) => {
+        {result?.map((extraActivity) => {
           const isAdded = checkActivity(extraActivity);
           return (
             <li key={extraActivity?.idExtraAct}>
@@ -236,8 +218,8 @@ function Actividades() {
           })}
       </div>
        <div id="container" className={style.container}>
-        <div id="button" className={style.btn}>
-          <img onClick={handlerButton} fill='#ffd277' className='w-[60px] h-[60px] absolute font-[1.7rem] top-[40%] left-[50%] translate-[-50%, 50%] scale-0 text-black transition-all duration-200 ' src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/arrow-up-svgrepo-com_mtjlma.svg" alt="" />
+        <div onClick={handlerButton} id="button" className={style.btn}>
+          <img fill='#ffd277' className='w-[60px] h-[60px] absolute font-[1.7rem] top-[40%] left-[50%] translate-[-50%, 50%] scale-0 text-black transition-all duration-200 ' src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/arrow-up-svgrepo-com_mtjlma.svg" alt="" />
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute font-[1.7rem] top-[40%] left-[50%] translate-[-50%, 50%] scale-0 text-black transition-all duration-200'>
           <path opacity="1" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#ffd277"/>
           <path d="M15.5295 10.9699L12.5295 7.96994C12.2395 7.67994 11.7595 7.67994 11.4695 7.96994L8.46945 10.9699C8.17945 11.2599 8.17945 11.7399 8.46945 12.0299C8.75945 12.3199 9.23945 12.3199 9.52945 12.0299L11.2495 10.3099V15.4999C11.2495 15.9099 11.5895 16.2499 11.9995 16.2499C12.4095 16.2499 12.7495 15.9099 12.7495 15.4999V10.3099L14.4695 12.0299C14.6195 12.1799 14.8095 12.2499 14.9995 12.2499C15.1895 12.2499 15.3795 12.1799 15.5295 12.0299C15.8195 11.7399 15.8195 11.2599 15.5295 10.9699Z" fill="#292D32"/>

@@ -41,15 +41,15 @@ export default function detailExtraAct() {
                     <h1 className="font-titulo text-center text-[#ffd277] mb-10 uppercase text-[35px] my-2">
                     {extraAct?.name}
                     </h1>
-                    <h3 className="font-parrafo my-3 text-[20px]">Schedule: {extraAct?.schedule}</h3>
+                    <h3 className="font-parrafo my-3 text-[20px]">Horario: {extraAct?.schedule}</h3>
                     <h3 className="font-parrafo my-3 text-[20px]">
-                    Type Activity: {extraAct?.type_activity}
+                    tipo de Actividad: {extraAct?.type_activity}
+                    </h3>
+                    <h3 className="text-[20px] text-black w-[150px] rounded-xl text-center bg-green-500 uppercase font-semibold">
+                    Precio: ${extraAct?.price}
                     </h3>
                     <h3 className="font-parrafo text-[23px] my-3 uppercase text-[#ffd277]">
-                    Price: {extraAct?.price}
-                    </h3>
-                    <h3 className="font-parrafo text-[23px] my-3 uppercase text-[#ffd277]">
-                    Description: {extraAct?.description}
+                    Descripcion: {extraAct?.description}
                     </h3>
                     {isLoggedIn === "true" && userId?.uid?.length > 0 ? (
                     <button className="bg-[#ffd277] text-black font-parrafo text-[20px] rounded-xl px-4 py-2 my-2 hover:bg-[#fab62c] duration-300"

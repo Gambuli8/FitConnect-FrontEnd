@@ -14,6 +14,7 @@ export default function Card_Extras({
   price,
   button,
   description,
+  buttonInfo
 }) {
   const starRating = Array(5).fill(0);
 
@@ -61,7 +62,7 @@ export default function Card_Extras({
           Price: ${price}
         </h3>
         <p className="font-Inconsolata my-1 text-[17px] font-medium capitalize text-gray-400">
-          {description}
+          {buttonInfo}
         </p>
         <div className="flex">
           {starRating.map((_, index) => {

@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori, getUserId } from "../../redux/Actions/Actions";
 import useCart from "../../Hooks/useCart";
 import style from "./act.module.css";
 
 function Actividades() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
+  useEffect(() => {
+      dispatch(getUserId(user.uid));
+  }, [dispatch, user]);
 
   window.onscroll = function () {
     if(scrollY > 100){

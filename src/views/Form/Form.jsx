@@ -39,7 +39,7 @@ const Form = (props) => {
 
         setData(JSON.stringify(newData)); // Guardar datos    
         dispatch(postUserForm(newData))      
-        const response =  await axios.get(`http://localhost:3001/paystore?idMembership=${membershipId}&uid=${newData.uid}&put=${true}`)
+        const response =  await axios.get(`http://localhost:3001/paystore?idMembership=${membershipId}&uid=${userId.uid}&email=${newData.email}&name=${userId.name}&surname=${userId.surname}&password=${userId.password}&put=${true}`)
         window.location.href = response.data.url;
   };
 
@@ -86,7 +86,7 @@ return   (
   
           setData(JSON.stringify(newData)); // Guardar datos    
           dispatch(postUserForm(newData))      
-          const response =  await axios.get(`http://localhost:3001/paystore?idMembership=${membershipId}&uid=${newData.uid}&email=${newData.email}&name=${formData.name}&surname=${formData.name}&password=${newData.password}&put=${false}`)
+          const response =  await axios.get(`http://localhost:3001/paystore?idMembership=${membershipId}&uid=${newData.uid}&email=${newData.email}&name=${formData.name}&surname=${formData.surname}&password=${newData.password}&put=${false}`)
           window.location.href = response.data.url;
     };
   

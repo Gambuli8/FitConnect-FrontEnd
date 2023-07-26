@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   GET_ACTIVITIES,
   GET_EXTRA_ACTIVITIES,
@@ -7,6 +8,7 @@ import {
   POST_USERS,
   FILTER_ACTIVITIES,
   FILTER_EXTRA_ACTIVITIES,
+  FILTER_EXTRA_ACTIVITIES_ORDER,
   FILTER_MEMBERSHIP,
   USER_FIREBASE,
   GET_USERID,
@@ -14,6 +16,7 @@ import {
   PUT_ACTIVITY,
   POST_EXTRA_ACTIVITIES,
   DELETE_USER,
+  SEARCH_ACTIVITIES,
 } from "../Actions/ActionsType";
 
 let initialState = {
@@ -21,16 +24,23 @@ let initialState = {
   allActivities: [],
   allExtraActivities: [],
   allMemberships: [],
+  filterExtraAct: [],
   user: {},
   userId: {},
 };
+
+console.log(initialState?.filterExtraAct);
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:
       return { ...state, allUser: action.payload };
     case GET_EXTRA_ACTIVITIES:
-      return { ...state, allExtraActivities: action.payload };
+      return {
+        ...state,
+        allExtraActivities: action.payload,
+        filterExtraAct: action.payload,
+      };
     case GET_ACTIVITIES:
       return { ...state, allActivities: action.payload };
     case GET_MEMBERSHIP:
@@ -50,12 +60,39 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_ACTIVITIES:
       return { ...state, allActivities: action.payload };
     case FILTER_EXTRA_ACTIVITIES:
-      return {
-        ...state,
-        allExtraActivities: [...state.allExtraActivities].sort((a, b) =>
-          a.price.localeCompare(b.price)
-        ),
-      };
+      if (action.payload === "asc") {
+        return {
+          ...state,
+          filterExtraAct: [state.allExtraActivities]?.sort((a, b) => {
+            if (a.price > b.price) return 1;
+            if (a.price < b.price) return -1;
+            return 0;
+          }),
+        };
+      } else if (action.payload === "desc") {
+        return {
+          ...state,
+          filterExtraAct: [state.allExtraActivities]?.sort((a, b) => {
+            if (a.price < b.price) return 1;
+            if (a.price > b.price) return -1;
+            return 0;
+          }),
+        };
+      }
+      break;
+    case FILTER_EXTRA_ACTIVITIES_ORDER:
+      const filter = [...state.allExtraActivities];
+      const filterCategories =
+        action.payload === "all"
+          ? filter
+          : filter.filter((e) => e.type_activity?.includes(action.payload));
+      return { ...state, filterExtraAct: filterCategories };
+    case SEARCH_ACTIVITIES:
+      const search = state.allExtraActivities;
+      const searchActivities = search.filter((e) =>
+        e.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      return { ...state, filterExtraAct: searchActivities };
     case FILTER_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:

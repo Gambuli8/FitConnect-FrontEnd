@@ -7,20 +7,12 @@ import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SingIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import DetailCart from "./components/Carrito/detailCart";
+import DetailExtraAct from "./views/detailExtraAct/detailExtraAct";
 import Account from "./components/Account/Account";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CartContextProvider } from "./context/CartContext";
 import AdminDashboard from "./views/AdminDashboard/AdminDashboard";
-
-// const Home = lazy(() => import("./views/Home/Home"));
-// const AdminDashboard = lazy(() => import("./views/AdminDashboard/AdminDashboard"));
-// const Actividades = lazy(() => import("./views/Actividades/Actividades"));
-// const SignIn = lazy(() => import("./components/SingIn/SignIn"));
-// const SignUp = lazy(() => import("./components/SignUp/SignUp"));
-// const DetailCart = lazy(() => import("./components/Carrito/detailCart"));
-// const Account = lazy(() => import("./components/Account/Account"));
-// const Footer = lazy(() => import("./components/Footer/Footer"));
 
 function App() {
   return (
@@ -32,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>}/>
             <Route path="/actividades" element={<Actividades />} />
+            <Route path= "/detailExtraAct/:id" element={<DetailExtraAct />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/carrito/:id" element={<DetailCart />} />

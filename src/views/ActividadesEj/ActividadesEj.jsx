@@ -1,5 +1,4 @@
-
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getActivities } from "../../redux/Actions/Actions";
 
@@ -10,11 +9,9 @@ const ActividadesEj = () => {
     dispatch(getActivities());
   }, [dispatch]);
 
-  
-
   return (
     <div className="bg-gray-950 block pl-16">
-      <div className="flex text-center flex-col items-center my-3">
+      <div className="flex text-center flex-col items-center my-0.5">
         <h1 className="text-4xl font-lg text-white flex-1 z-10">
           NUESTRAS <span className="text-yellow-500">ACTIVIDADES</span>{" "}
           EXCLUSIVAS

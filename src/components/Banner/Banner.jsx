@@ -5,7 +5,7 @@ const Banner = () => {
         <div className="flex items-center h-full pl- -space-x-48 lg:-space-x-10">
           {/* text */}
           <div className="text-center flex-1 z-10 px-12">
-            <h1 className="text-4xl text-white mb-8 z-10">
+            <h1 className="text-5xl text-white mb-8 z-10">
               SACA CON <span className="text-yellow-500">NOSOTROS</span> LO{" "}
               <span className="text-yellow-500">MEJOR</span> DE TU DIA!
             </h1>
@@ -17,7 +17,7 @@ const Banner = () => {
             </p>
 
             <button className="bg-yellow-500 text-black font-medium py-2 px-10 rounded-full">
-              <a href="#Membresia">Asociate ahora!</a>
+              <a href="#Membresia">¡Asóciate ahora!</a>
             </button>
           </div>
 

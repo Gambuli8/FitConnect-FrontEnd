@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const priceRef = useRef();
   const descRef = useRef();
 
-  //                                                                          HANDLE DEL PUT
+  //HANDLE DEL PUT
   const handleEditActivity = (activity) => {
     setSelectedActivity(activity);
     setFormData(activity);
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
     setExtraShowForm(false);
   };
 
-  //                                              HABILITAR Y DESHABILITAR USUARIO
+  //HABILITAR Y DESHABILITAR USUARIO
   const handleDisableUser = (userId, email) => {
     try {
       const updatedUserData = {
@@ -85,7 +85,7 @@ export default function AdminDashboard() {
     }
   };
 
-  //                                                           INPUTS DE FORM ACT y EXTRA ACT
+  //INPUTS DE FORM ACT y EXTRA ACT
   const [formData, setFormData] = useState({
     name: "",
     schedule: "",
@@ -147,7 +147,7 @@ export default function AdminDashboard() {
     }
   };
 
-  //                                            handle del form de Activities
+  //handle del form de Activities
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -194,9 +194,10 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getUserId(user.uid));
     dispatch(getActivities());
     dispatch(getExtraActivities());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   // RENDERIZACION
 
@@ -209,14 +210,14 @@ export default function AdminDashboard() {
           <Col numColSpanLg={6}>
             <Card className="h-full border-4 border-gray-500 bg-gray-200 flex-1">
               <Button className="text-xl" onClick={() => setShowForm(true)}>
-                PUSH ME TO CREATE or EDIT AN ACTIVITY!
+                PUSH ME TO CREATE AN ACTIVITY!
               </Button>
               <Button
                 className="bg-blue"
                 onClick={handleShowExtraForm}
                 size="xl"
               >
-                PUSH ME TO CREATE or EDIT AN EXTRA ACTIVITY!
+                PUSH ME TO CREATE AN EXTRA ACTIVITY!
               </Button>
 
               {showExtraForm && (
@@ -226,7 +227,7 @@ export default function AdminDashboard() {
                     {/* Nuevo formulario para actividades extra */}
                     <Title>Please complete all the fields!</Title>
                     <p className="text-3xl text-center text-red-600 font-semibold">
-                      Create or Edit an Extra Activity!
+                      Create an extra activity!
                     </p>
                     <form onSubmit={handleExtraSubmit}>
                       <div>
@@ -359,7 +360,7 @@ export default function AdminDashboard() {
                 <Card>
                   <Title>Please complete all the fields!</Title>
                   <p className="text-3xl text-red-600 text-center font-semibold">
-                    Create or Edit Activity!
+                    Create a Activity!
                   </p>
                   <form onSubmit={handleSubmit}>
                     <div>

@@ -14,7 +14,7 @@ function Actividades() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user)
   useEffect(() => {
-      dispatch(getUserId(user.uid));
+      dispatch(getUserId(user?.uid));
   }, [dispatch, user]);
 
   window.onscroll = function () {

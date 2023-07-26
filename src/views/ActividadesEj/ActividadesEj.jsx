@@ -13,8 +13,8 @@ const ActividadesEj = () => {
     <div className="bg-gray-950 block pl-16">
       <div className="flex text-center flex-col items-center my-0.5">
         <h1 className="text-4xl font-lg text-white flex-1 z-10">
-          NUESTRAS <span className="text-yellow-500">ACTIVIDADES</span>{" "}
-          EXCLUSIVAS
+          ALGUNAS DE NUESTRAS{" "}
+          <span className="text-yellow-500">ACTIVIDADES</span> EXCLUSIVAS
         </h1>
         <p className="py-2 text-xl font-xl text-white">
           Combinamos actividades para trabajar todo tu cuerpo.

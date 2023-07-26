@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
-  const { isLoggedIn, logout } = UserAuth();
+  const { user, isLoggedIn, logout } = UserAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
 
   const handleLogout = () => {
@@ -63,14 +63,36 @@ const NavBar = () => {
           </Link>
         </li>
         {isAuthenticated ? (
-          <li className="mx-4">
-            <button
-              className="text-white text-xl hover:text-yellow-500 duration-500"
-              onClick={handleLogout}
-            >
-              Cerrar sesion
-            </button>
-          </li>
+          <div>
+            <li className="mx-4">
+              <button
+                className="text-white text-xl hover:text-yellow-500 duration-500"
+                onClick={handleLogout}
+              >
+                Cerrar sesion
+              </button>
+            </li>
+            {isLoggedIn && user ? (
+              <>
+                <p className="mx-3 text-white text-lg font-semibold mt-1">
+                  {user.displayName ? `Hello, ${user.displayName}!` : "Hello!"}
+                </p>
+                <p className="mx-3 text-white font-semibold mt-1 text-lg">
+                  {" "}
+                  ✉️{user.email}
+                </p>
+              </>
+            ) : (
+              <li className="mx-4">
+                <Link
+                  className="text-white text-xl hover:text-yellow-500 duration-500"
+                  to={"/signin"}
+                >
+                  Iniciar sesion!
+                </Link>
+              </li>
+            )}
+          </div>
         ) : (
           <li className="mx-4">
             <Link
@@ -81,6 +103,7 @@ const NavBar = () => {
             </Link>
           </li>
         )}
+
         <li className="mx-4">
           <Carrito />
         </li>

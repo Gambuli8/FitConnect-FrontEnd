@@ -17,6 +17,7 @@ import {
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
+  DELETE_USER,
 } from "../Actions/ActionsType";
 import axios from "axios";
 
@@ -217,7 +218,7 @@ export const putUser = (payload) => {
       // Verificar si el usuario fue actualizado exitosamente
       Swal.fire({
         icon: "success",
-        title: "Your membership has been updated",
+        title: "Has been modified!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -226,8 +227,8 @@ export const putUser = (payload) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Hubo un problema al actualizar la membresia!",
-        footer: `<p>Es posible que haya problemas con tu pago</p>`,
+        text: "A problem ocurred!",
+        footer: `Detalles del error ${error.message}`,
       });
     }
   };
@@ -252,7 +253,31 @@ export const putActivity = (payload) => {
         icon: "error",
         title: "Oops...",
         text: "Hubo un problema al actualizar la actividad",
+        footer: `Error details: ${error.message}`,
       });
+    }
+  };
+};
+
+export const deleteUser = (userId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`http://localhost:3001/${userId}`);
+      dispatch({ type: DELETE_USER, payload: userId });
+      Swal.fire({
+        icon: "success",
+        title: "El usuario ha sido eliminado exitosamente",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al eliminar el usuario",
+        footer: `Detalles del error: ${error.message}`,
+      });
+      console.log(error);
     }
   };
 };

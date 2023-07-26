@@ -17,6 +17,8 @@ import {
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
+  POST_USERFORM,
+  GET_PAYMENT_ID_USER,
   DELETE_USER,
 } from "../Actions/ActionsType";
 import axios from "axios";
@@ -32,6 +34,7 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const response = await axios("http://localhost:3001/activitie");
+      console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
       alert(error.message);
@@ -279,5 +282,22 @@ export const deleteUser = (userId) => {
       });
       console.log(error);
     }
+  };
+};
+
+export const postUserForm = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: POST_USERFORM, payload: payload });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getPaymentIdUser = (idUser) => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/paystore/last/${idUser}`);
+    return dispatch({ type: GET_PAYMENT_ID_USER, payload: response.data });
   };
 };

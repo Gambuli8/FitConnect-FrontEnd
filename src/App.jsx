@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CartContextProvider } from "./context/CartContext";
 import AdminDashboard from "./views/AdminDashboard/AdminDashboard";
+import Success from "./views/Success/Success";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/carrito/:id" element={<DetailCart />} />
+            <Route path="/success" element={<Success />} />
             <Route path="/account" element={<ProtectedRoute> <Account /> </ProtectedRoute>}/>
           </Routes>
       </CartContextProvider>

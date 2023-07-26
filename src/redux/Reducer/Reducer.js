@@ -14,6 +14,8 @@ import {
   GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
+  POST_USERFORM,
+  GET_PAYMENT_ID_USER,
   POST_EXTRA_ACTIVITIES,
   DELETE_USER,
   SEARCH_ACTIVITIES,
@@ -27,6 +29,8 @@ let initialState = {
   filterExtraAct: [],
   user: {},
   userId: {},
+  form: {},
+  paymentIduser:{}
 };
 
 console.log(initialState?.filterExtraAct);
@@ -112,6 +116,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allActivities: [...state.allActivities, action.payload],
       };
+    case POST_USERFORM:
+        return { ...state, form: action.payload };
+    case GET_PAYMENT_ID_USER:
+        return { ...state, paymentIduser: action.payload };
   }
   return state;
 };

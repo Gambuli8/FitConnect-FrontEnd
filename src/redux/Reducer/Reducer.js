@@ -26,7 +26,6 @@ let initialState = {
   filterExtraAct: [],
   user: {},
   userId: {},
-  filtered: false,
 };
 
 console.log(initialState?.filterExtraAct);
@@ -63,38 +62,36 @@ const rootReducer = (state = initialState, action) => {
       if (action.payload === "asc") {
         return {
           ...state,
-          filterExtraAct: [...state.allExtraActivities].sort((a, b) => {
+          filterExtraAct: [state.allExtraActivities]?.sort((a, b) => {
             if (a.price > b.price) return 1;
             if (a.price < b.price) return -1;
             return 0;
           }),
-          filter,
         };
       } else if (action.payload === "desc") {
         return {
           ...state,
-          filterExtraAct: [...state.allExtraActivities].sort((a, b) => {
+          filterExtraAct: [state.allExtraActivities]?.sort((a, b) => {
             if (a.price < b.price) return 1;
             if (a.price > b.price) return -1;
             return 0;
           }),
-          filtered: true,
         };
       }
       break;
     case FILTER_EXTRA_ACTIVITIES_ORDER:
-      const filter = state.allExtraActivities;
+      const filter = [...state.allExtraActivities];
       const filterCategories =
         action.payload === "all"
           ? filter
           : filter.filter((e) => e.type_activity?.includes(action.payload));
-      return { ...state, filterExtraAct: filterCategories, filtered: true };
+      return { ...state, filterExtraAct: filterCategories };
     case SEARCH_ACTIVITIES:
       const search = state.allExtraActivities;
       const searchActivities = search.filter((e) =>
         e.name.toLowerCase().includes(action.payload.toLowerCase())
       );
-      return { ...state, filterExtraAct: searchActivities, filtered: true };
+      return { ...state, filterExtraAct: searchActivities };
     case FILTER_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:

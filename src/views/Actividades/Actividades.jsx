@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori, searchActivities } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori } from "../../redux/Actions/Actions";
 import useCart from "../../Hooks/useCart";
 import style from "./act.module.css";
 
 function Actividades() {
   const dispatch = useDispatch();
-
 
   window.onscroll = function () {
     if(scrollY > 100){
@@ -45,7 +44,6 @@ function Actividades() {
   const allActivities = useSelector((state) => state.allActivities);
   const allExtraActivities = useSelector((state) => state.allExtraActivities);
   const filterExtraAct = useSelector((state) => state.filterExtraAct);
-  const Filtered = useSelector((state) => state.filtered);
   
   console.log(filterExtraAct);
   //logica del filter y order Activities.
@@ -57,23 +55,23 @@ function Actividades() {
   const filterOrder = (e) => {
     dispatch(FilterExtraAct(e.target.value));
     dispatch(filterActivitiesForCAtegori(e.target.value));
-    dispatch(searchActivities(e.target.value));
+    // dispatch(searchActivities(e.target.value));
   };
 
-  // const [Search, setSearch] = useState('');
+  const [Search, setSearch] = useState('');
   
-  // const searchHandler = (event) => {
-  //   setSearch(event.target.value);
-  // };
+  const searchHandler = (event) => {
+    setSearch(event.target.value);
+  };
   
-  // let result = [];
-  // if(Search.length > 0){
-  //   result = allExtraActivities.filter((extraActivity) => {
-  //     return extraActivity.name.toLowerCase().includes(Search.toLowerCase())
-  //   })
-  // } else {
-  //   result = allExtraActivities;
-  // }
+  let result = [];
+  if(Search.length > 0){
+    result = allExtraActivities.filter((extraActivity) => {
+      return extraActivity.name.toLowerCase().includes(Search.toLowerCase())
+    })
+  } else {
+    result = allExtraActivities;
+  }
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -173,15 +171,15 @@ function Actividades() {
         ))}
       </div>
       <div className=' text-center justify-center items-center'>
-      <h1 className='text-[#ffd277] font-bold uppercase text-[30px] my-8 ml-2 flex w-[620px]'>Every activity is an opportunity to...</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[400px] w-[500px]'>learn</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[530px] w-[500px]'>grow</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[850px] w-[400px]'>And have fun to the fullest.</h1>
+      <h1 className='text-[#ffd277] font-bold uppercase text-[30px] my-8 ml-2 flex w-[620px]'>Cada actividad es una oportunidad para...</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[400px] w-[500px]'>aprender</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[530px] w-[500px]'>crecer</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[850px] w-[400px]'>Y diviértete al máximo.</h1>
       <p className='flex justify-center items-center'>
         <img className='w-[80px] h-[80px]' src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/arrow-circle-down-svgrepo-com_1_dhcqqr.svg" alt="" />
       </p>
       </div>
-        <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Here are some Extras Activities that you will like!</h1>
+        <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Aquí tienes algunas Actividades Extras que te van a gustar!</h1>
       
       <div className='flex items-center mt-20 justify-evenly'>
         <select name="Categori" onChange={e => filterOrder(e)}>
@@ -192,7 +190,7 @@ function Actividades() {
             </option>
           ))}
         </select>
-        <input name="search" onChange={e => filterOrder(e)} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-gray-600 font-medium justify-center text-center rounded-xl w-[200px]' />
+        <input value={Search} onChange={e => searchHandler(e)} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-gray-600 font-medium justify-center text-center rounded-xl w-[200px]' />
         <select name="OrderPrice" onChange={e => filterOrder(e)}>
           <option value="all">Order for Price</option>
           <option value="asc">ASC</option>
@@ -202,7 +200,7 @@ function Actividades() {
       
       
       <div className='mt-[100px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
-        {filterExtraAct?.map((extraActivity) => {
+        {(filterExtraAct || result)?.map((extraActivity) => {
           const isAdded = checkActivity(extraActivity);
           return (
             <li key={extraActivity?.idExtraAct}>
@@ -214,7 +212,7 @@ function Actividades() {
             type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
-            buttonInfo= {<Link to={`/detailExtraAct/${extraActivity?.idExtraAct}`}><button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center">More Info</button></Link>}
+            buttonInfo= {<Link to={`/detailExtraAct/${extraActivity?.idExtraAct}`}><button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center">Mas Info</button></Link>}
             button={ 
               <button
           className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"

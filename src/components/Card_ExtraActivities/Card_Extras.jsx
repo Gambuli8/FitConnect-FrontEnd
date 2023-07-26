@@ -54,12 +54,12 @@ export default function Card_Extras({
         <h1 className="font-titulo text-center text-[#ffd277]  uppercase text-[25px] my-2">
           {name}
         </h1>
-        <h3 className="font-parrafo my-1 text-[20px]">Schedule: {schedule}</h3>
+        <h3 className="font-parrafo my-1 text-[20px]">Horario: {schedule}</h3>
         <h3 className="font-parrafo my-1 text-[20px]">
-          Type Activity: {type_activity}
+          Tipo de Actividad: {type_activity}
         </h3>
         <h3 className="font-parrafo text-[23px] uppercase text-[#ffd277]">
-          Price: ${price}
+          Precio: ${price}
         </h3>
         <p className="font-Inconsolata my-1 text-[17px] font-medium capitalize text-gray-400">
           {buttonInfo}
@@ -102,7 +102,7 @@ export default function Card_Extras({
           <div>{button}</div>
         ) : (
           <p className="flex max-w-[100%] m-3 text-center items-center text-[20px] text-[#ffd277]">
-            You must have an active membership to be able to buy
+            Debes tener una membresía activa para poder comprar
           </p>
         )}
       </div>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import Swal from "sweetalert2";
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +27,6 @@ const SignUp = () => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
       navigate("/");
       Swal.fire({
         icon: "success",
@@ -77,6 +77,7 @@ const SignUp = () => {
             required
           ></input>
         </div>
+
         {error && <p className="text-red-500">{error}</p>}
         <button
           className="border border-yellow-500 bg-yellow-400 hover:bg-yellow-500 text-black py-4 my-2 w-full"

@@ -15,6 +15,7 @@ import {
   PUT_USER,
   PUT_ACTIVITY,
   POST_EXTRA_ACTIVITIES,
+  DELETE_USER,
   SEARCH_ACTIVITIES,
 } from "../Actions/ActionsType";
 
@@ -100,6 +101,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, userId: action.payload };
     case PUT_USER:
       return { ...state, allUsers: [...state.allUsers, action.payload] };
+    case DELETE_USER:
+      return {
+        ...state,
+        allUsers: state.allUsers.filter((user) => user.id !== action.payload),
+      };
+
     case PUT_ACTIVITY:
       return {
         ...state,

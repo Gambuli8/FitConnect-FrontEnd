@@ -15,3 +15,4 @@ export const GET_USERID = "GET_USERID";
 export const PUT_USER = "PUT_USER";
 export const PUT_ACTIVITY = "PUT_ACTIVITY";
 export const POST_EXTRA_ACTIVITIES = "POST_EXTRA_ACTIVITIES";
+export const DELETE_USER = "DELETE_USER";

@@ -1,10 +1,12 @@
 import {
   GET_ACTIVITIES,
+  GET_EXTRA_ACTIVITIES,
   GET_MEMBERSHIP,
   GET_USERS,
   POST_ACTIVITIES,
   POST_USERS,
   FILTER_ACTIVITIES,
+  FILTER_EXTRA_ACTIVITIES,
   FILTER_MEMBERSHIP,
   USER_FIREBASE,
   GET_USERID,
@@ -12,11 +14,13 @@ import {
   PUT_ACTIVITY,
   POST_USERFORM,
   GET_PAYMENT_ID_USER,
+  POST_EXTRA_ACTIVITIES,
 } from "../Actions/ActionsType";
 
 let initialState = {
   allUsers: [],
   allActivities: [],
+  allExtraActivities: [],
   allMemberships: [],
   user: {},
   userId: {},
@@ -28,6 +32,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:
       return { ...state, allUser: action.payload };
+    case GET_EXTRA_ACTIVITIES:
+      return { ...state, allExtraActivities: action.payload };
     case GET_ACTIVITIES:
       return { ...state, allActivities: action.payload };
     case GET_MEMBERSHIP:
@@ -39,8 +45,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allActivities: [...state.allActivities, action.payload],
       };
+    case POST_EXTRA_ACTIVITIES:
+      return {
+        ...state,
+        allExtraActivities: [...state.allExtraActivities, action.payload],
+      };
     case FILTER_ACTIVITIES:
       return { ...state, allActivities: action.payload };
+    case FILTER_EXTRA_ACTIVITIES:
+      return {
+        ...state,
+        allExtraActivities: [...state.allExtraActivities].sort((a, b) =>
+          a.price.localeCompare(b.price)
+        ),
+      };
     case FILTER_MEMBERSHIP:
       return { ...state, allMemberships: action.payload };
     case USER_FIREBASE:

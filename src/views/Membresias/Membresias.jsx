@@ -5,6 +5,7 @@ import { getMembership, filterMembership } from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useCart from "../../Hooks/useCart";
+import { Link } from "react-router-dom";
 
 export default function Membresias() {
   const dispatch = useDispatch();
@@ -13,12 +14,19 @@ export default function Membresias() {
 
   useEffect(() => {
     setAux(!aux);
+    return;
   }, [isLoggedIn, aux]);
 
-  const { addToCart, cart, removeFromCart } = useCart();
+  const { addToCart, cart, removeFromCart, cleanCart } = useCart();
 
   const checkMembership = (membership) => {
-    return cart.some((p) => p.id === membership.idMembership);
+    const membershipIndex = cart.findIndex(
+      (p) => p.idMembership === membership.idMembership
+    );
+    if (membershipIndex >= 0 && cart[membershipIndex].quantity > 0) {
+      return true;
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -62,35 +70,28 @@ export default function Membresias() {
 
       <div className="grid grid-cols-3">
         {allMemberships?.map((membership) => {
-          const isAdded = checkMembership(membership.idMembership);
+          const isAdded = checkMembership(membership);  
           return (
-            <div key={membership?.id} className="bg-gray-700">
+            <li key={membership?.idMembership}>
               <Card_Membresias
                 levelMembreship={membership.levelMembership}
                 price={membership?.price}
                 duration={membership?.duration}
                 idMembership={membership?.idMembership}
+                activities={membership?.activities}
+                cleanCart={cleanCart}
                 button={
-                  <button
-                    style={{
-                      backgroundColor: isAdded ? "red" : "yellow",
-                      width: "100px",
-                      textAlign: "center",
-                      marginLeft: "100px",
-                      justifyContent: "center",
-                    }}
-                    onClick={() => {
-                      isAdded
-                        ? removeFromCart(membership)
-                        : addToCart(membership);
-                    }}
-                    className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"
-                  >
-                    {isAdded ? "Eliminar" : "Comprar"}
-                  </button>
-                }
+                    isAdded ? <button className="border-[2px] border-slate-950 text-black items-center justify-center rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
+                    onClick={() => removeFromCart(membership)}
+                    >
+                      Eliminar
+                    </button> : <Link to={`/carrito/${membership?.idMembership}`} onClick={() => addToCart(membership)}><button className="border-[2px] border-slate-950 text-black rounded-full w-[80px] h-[45px] m-3 bg-[#ffd277] font-bold hover:scale-110 transition"
+                    >
+                      Comprar
+                    </button></Link> 
+                  }
               />
-            </div>
+            </li>
           );
         })}
       </div>

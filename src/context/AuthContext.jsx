@@ -13,27 +13,27 @@ import { auth } from "../FireBase/firebase";
 import { useDispatch } from "react-redux";
 import { userFirebase } from "../redux/Actions/Actions";
 
-
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
-  const [isLoggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('isLoggedIn')) || false);
+  const [isLoggedIn, setLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn")) || false
+  );
   const [isLoggedOut, setLoggedOut] = useState(false);
 
-  localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-  console.log(isLoggedIn);
+  localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
 
   useEffect(() => {
     dispatch(userFirebase(user));
-  }, [user,dispatch]);
+  }, [user, dispatch]);
 
   const createUser = (email, password) => {
     setLoggedIn(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  
+
   const signIn = (email, password) => {
     setLoggedIn(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -56,17 +56,13 @@ export const AuthContextProvider = ({ children }) => {
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
       return signInMethods.length > 0;
     } catch (error) {
-      console.log(
-        "An error occurred while checking email registration:",
-        error
-      );
+      alert("An error occurred while checking email registration:", error);
       return false;
     }
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
     return () => {

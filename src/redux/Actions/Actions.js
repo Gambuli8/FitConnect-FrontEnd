@@ -2,14 +2,17 @@ import Swal from "sweetalert2";
 import {
   GET_USERS,
   GET_ACTIVITIES,
+  GET_EXTRA_ACTIVITIES,
   GET_MEMBERSHIP,
+  GET_USERID,
   POST_USERS,
   POST_ACTIVITIES,
+  POST_USERSBACK,
+  POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  POST_USERSBACK,
+  // FILTER_EXTRA_ACTIVITIES,
   USER_FIREBASE,
-  GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
   POST_USERFORM,
@@ -27,11 +30,21 @@ export const getUser = () => {
 export const getActivities = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/activitie");
-      console.log(response);
+      const response = await axios("http://localhost:3001/activitie");
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
+    }
+  };
+};
+
+export const getExtraActivities = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios("http://localhost:3001/extra");
+      dispatch({ type: GET_EXTRA_ACTIVITIES, payload: response.data });
+    } catch (error) {
+      alert(error.message);
     }
   };
 };
@@ -42,7 +55,7 @@ export const getMembership = () => {
       const response = await axios("http://localhost:3001/membership");
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -59,7 +72,7 @@ export const postUser = (payload) => {
         throw new Error("Hubo un problema al crear el usuario");
       }
     } catch (error) {
-      console.error("Error al crear el usuario:", error);
+      alert("Error al crear el usuario:", error);
     }
   };
 };
@@ -71,10 +84,26 @@ export const postActivity = (payload) => {
         "http://localhost:3001/activitie",
         payload
       );
-      console.log(response.status);
       if (response.status === 200) {
         alert("La actividad ha sido creada exitosamente");
         dispatch({ type: POST_ACTIVITIES, payload: response.data });
+      } else {
+        throw new Error("Hubo un problema al crear la actividad");
+      }
+    } catch (error) {
+      alert("Error al crear la actividad:", error);
+    }
+  };
+};
+
+export const postExtraActivity = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/extra", payload);
+      console.log(response.data);
+      if (response.status === 200) {
+        alert("La actividad ha sido creada exitosamente");
+        dispatch({ type: POST_EXTRA_ACTIVITIES, payload: response.data });
       } else {
         throw new Error("Hubo un problema al crear la actividad");
       }
@@ -83,7 +112,6 @@ export const postActivity = (payload) => {
     }
   };
 };
-
 export const filterActivities = (filters) => {
   const filter = filters.filter;
   const order = filters.order;
@@ -94,10 +122,25 @@ export const filterActivities = (filters) => {
       );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
+
+// export const FilterExtraAct = (filters) => {
+//   const filter = filters.filter;
+//   const order = filters.order;
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios(
+//         `http://localhost:3001/extra?filter=${filter}&&order=${order}`
+//       );
+//       dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: response.data });
+//     } catch (error) {
+//       alert(error.response.data);
+//     }
+//   };
+// };
 
 export const filterMembership = (filter) => {
   return async function (dispatch) {
@@ -107,7 +150,7 @@ export const filterMembership = (filter) => {
       );
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };
@@ -140,7 +183,7 @@ export const userFirebase = (user) => {
     try {
       dispatch({ type: USER_FIREBASE, payload: user });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 };

@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
@@ -62,6 +62,15 @@ const NavBar = () => {
             Actividades
           </Link>
         </li>
+        {isAuthenticated ? (
+          <li className="mx-4">
+            <button
+              className="text-white text-xl hover:text-yellow-500 duration-500"
+              onClick={handleLogout}
+            >
+              Cerrar sesion
+            </button>
+          </li>
         {isLoggedIn && user ? (
           <>
             <p className="mx-3 text-white text-lg font-semibold mt-1">
@@ -71,14 +80,6 @@ const NavBar = () => {
               {" "}
               ✉️{user.email}
             </p>
-            <li className="mx-3">
-              <button
-                className="text-white text-xl hover:text-yellow-500 duration-500"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </li>
           </>
         ) : (
           <li className="mx-4">
@@ -86,7 +87,7 @@ const NavBar = () => {
               className="text-white text-xl hover:text-yellow-500 duration-500"
               to={"/signin"}
             >
-              Sign in!
+              Iniciar sesion!
             </Link>
           </li>
         )}
@@ -94,9 +95,6 @@ const NavBar = () => {
           <Carrito />
         </li>
       </ul>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Outlet />
-      </Suspense>
     </nav>
   );
 };

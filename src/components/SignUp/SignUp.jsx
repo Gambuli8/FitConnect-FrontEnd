@@ -27,7 +27,7 @@ const SignUp = () => {
     e.preventDefault();
     setError("");
     try {
-
+      await createUser(email, password);
       navigate("/");
     } catch (error) {
       if (error.message.includes("email already in use")) {

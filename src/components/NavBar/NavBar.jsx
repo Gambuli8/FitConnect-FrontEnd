@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
@@ -68,7 +68,7 @@ const NavBar = () => {
               className="text-white text-xl hover:text-yellow-500 duration-500"
               onClick={handleLogout}
             >
-              Logout
+              Cerrar sesion
             </button>
           </li>
         ) : (
@@ -77,7 +77,7 @@ const NavBar = () => {
               className="text-white text-xl hover:text-yellow-500 duration-500"
               to={"/signin"}
             >
-              Sign in!
+              Iniciar sesion!
             </Link>
           </li>
         )}
@@ -85,9 +85,6 @@ const NavBar = () => {
           <Carrito />
         </li>
       </ul>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Outlet />
-      </Suspense>
     </nav>
   );
 };

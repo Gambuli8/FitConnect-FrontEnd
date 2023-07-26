@@ -10,7 +10,8 @@ import {
   GET_USERID,
   PUT_USER,
   PUT_ACTIVITY,
-  POST_USERFORM
+  POST_USERFORM,
+  GET_PAYMENT_ID_USER,
 } from "../Actions/ActionsType";
 
 let initialState = {
@@ -19,7 +20,8 @@ let initialState = {
   allMemberships: [],
   user: {},
   userId: {},
-  form: {}
+  form: {},
+  paymentIduser:{}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -54,6 +56,8 @@ const rootReducer = (state = initialState, action) => {
       };
     case POST_USERFORM:
         return { ...state, form: action.payload };
+    case GET_PAYMENT_ID_USER:
+        return { ...state, paymentIduser: action.payload };
   }
   return state;
 };

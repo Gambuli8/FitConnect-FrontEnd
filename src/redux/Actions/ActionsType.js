@@ -11,4 +11,6 @@ export const GET_USERID = "GET_USERID";
 export const PUT_USER = "PUT_USER";
 export const PUT_ACTIVITY = "PUT_ACTIVITY";
 export const POST_USERFORM = "POST_USERFORM";
+export const GET_PAYMENT_ID_USER = "GET_PAYMENT_ID_USER";
+
 

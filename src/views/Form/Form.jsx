@@ -115,7 +115,7 @@ const Form = (props) => {
   
           setData(JSON.stringify(newData)); // Guardar datos    
           dispatch(postUserForm(newData))      
-          const response =  await axios.get(`http://localhost:3001/paystore/${membershipId}`)
+          const response =  await axios.get(`http://localhost:3001/paystore?idMembership=${membershipId}&uid=${newData.uid}&email=${newData.email}&name=${formData.name}&surname=${formData.name}&password=${newData.password}`)
           window.location.href = response.data.url;
     };
   

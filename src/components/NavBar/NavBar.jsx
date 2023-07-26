@@ -17,7 +17,7 @@ const NavBar = () => {
   }, [isLoggedIn]);
 
   return (
-    <nav className="p-05 bg-black shadow md:flex md:items-center md:justify-between">
+    <nav className="p-0 bg-black shadow md:flex md:items-center md:justify-between">
       <div>
         <span>
           <Link to="/">
@@ -29,7 +29,7 @@ const NavBar = () => {
         </span>
       </div>
 
-      <ul className="md:flex md:items-center mr-5">
+      <ul className="md:flex w-[75%] md:items-center">
         <li className="mx-4">
           <Link
             to="/"
@@ -63,7 +63,7 @@ const NavBar = () => {
           </Link>
         </li>
         {isAuthenticated ? (
-          <div>
+          <div className='flex '>
             <li className="mx-4">
               <button
                 className="text-white text-xl hover:text-yellow-500 duration-500"

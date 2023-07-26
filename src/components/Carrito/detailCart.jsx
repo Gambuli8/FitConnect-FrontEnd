@@ -26,10 +26,10 @@ export default function detailCart() {
                   />
                   <div className="flex flex-col">
                     <h3 className="text-[20px] uppercase text-[#ffd277]">
-                      Membership: {membership.levelMembership}
+                      Membresia: {membership.levelMembership}
                     </h3>
-                    <p className="">Duration: {membership.duration} Days</p>
-                    <p className="">Price: ${membership.price}</p>
+                    <p className="">Duracion: {membership.duration} Dias</p>
+                    <p className="">Precio: ${membership.price}</p>
                   </div>
                 </div>
               );
@@ -50,9 +50,9 @@ export default function detailCart() {
                     <h1 className="text-[20px] uppercase text-[#ffd277]">
                       Activity: {item.name}
                     </h1>
-                    <h3 className="">Type Activity: {item.type_activity}</h3>
-                    <h3>Schedule {item.schedule}</h3>
-                    <p className="">Price: ${item.price}</p>
+                    <h3 className="">Tipo de Actividad: {item.type_activity}</h3>
+                    <h3>Horario: {item.schedule}</h3>
+                    <p className="">Precio: ${item.price}</p>
                   </div>
                   <button onClick={removeFromCart}>
                     <svg
@@ -104,7 +104,7 @@ export default function detailCart() {
             })
           : null}
         <h1 className="text-[30px] m-5 uppercase font-medium text-[#ffd277]">
-          total price: ${cart.reduce((acc, item) => acc + item.price, 0)}
+          Total: ${cart.reduce((acc, item) => acc + item.price, 0)}
         </h1>
         <button onClick={ClearCart}>
           <svg

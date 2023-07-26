@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   TableHead,
   TableBody,
@@ -15,6 +16,7 @@ import {
 } from "@tremor/react";
 import {
   getUser,
+  getUserId,
   getActivities,
   getExtraActivities,
   postActivity,
@@ -22,8 +24,13 @@ import {
   putActivity,
 } from "../../redux/Actions/Actions";
 
-export default function AdminDashboard() {
+export default function AdminDashboard() { 
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+  const userId = useSelector((state)=> state.userId)
+
+
   const allUsers = useSelector((state) => state.allUser);
   const allActivities = useSelector((state) => state.allActivities);
   const allExtraActivities = useSelector((state) => state.allExtraActivities);
@@ -47,6 +54,7 @@ export default function AdminDashboard() {
     setShowForm(true);
     setExtraShowForm(false);
   };
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -156,6 +164,9 @@ export default function AdminDashboard() {
     dispatch(getExtraActivities());
   }, [dispatch]);
 
+const userRole=userId?.rol
+  if(userRole===userId?.rol){
+    
   return (
     <main>
       <Grid numItemsLg={6} className="gap-6 mt-">
@@ -504,6 +515,10 @@ export default function AdminDashboard() {
           </div>
         </Col>
       </Grid>
-    </main>
-  );
-}
+    </main>);}
+   
+    else{
+      return ("You are not an administrator authorized")
+     }
+    
+    }

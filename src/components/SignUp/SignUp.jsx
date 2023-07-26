@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const SignUp = () => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, password);
+
       navigate("/");
     } catch (error) {
       if (error.message.includes("email already in use")) {
@@ -72,6 +73,8 @@ const SignUp = () => {
             required
           ></input>
         </div>
+     
+
         {error && <p className="text-red-500">{error}</p>}
         <button
           className="border border-yellow-500 bg-yellow-400 hover:bg-yellow-500 text-black py-4 my-2 w-full"
@@ -103,3 +106,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

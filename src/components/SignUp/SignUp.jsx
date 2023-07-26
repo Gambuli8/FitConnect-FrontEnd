@@ -27,6 +27,7 @@ const SignUp = () => {
     e.preventDefault();
     setError("");
     try {
+      await createUser(email, password);
       navigate("/");
       Swal.fire({
         icon: "success",

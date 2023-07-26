@@ -12,6 +12,8 @@ export default function detailExtraAct() {
     const {id} = useParams();
 
     const { cart, addToCart, removeFromCart } = useCart();
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const userId = useSelector((state) => state.userId);
     
     const checkActivity = (Activity) => {
         return cart.some((p) => p.id === Activity?.idExtraAct);
@@ -49,16 +51,22 @@ export default function detailExtraAct() {
                     <h3 className="font-parrafo text-[23px] my-3 uppercase text-[#ffd277]">
                     Description: {extraAct?.description}
                     </h3>
+                    {isLoggedIn === "true" && userId?.uid?.length > 0 ? (
                     <button className="bg-[#ffd277] text-black font-parrafo text-[20px] rounded-xl px-4 py-2 my-2 hover:bg-[#fab62c] duration-300"
-                            style={{ backgroundColor: isAdded ? "red" : "#ffd277" }}
-                            onClick={() => {
-                                isAdded 
-                                ? removeFromCart(extraAct)
-                                : addToCart(extraAct) && alert('Actividad agregada al carrito')
-                            }}
-                            >
+                    style={{ backgroundColor: isAdded ? "red" : "#ffd277" }}
+                    onClick={() => {
+                        isAdded 
+                        ? removeFromCart(extraAct)
+                        : addToCart(extraAct) && alert('Actividad agregada al carrito')
+                    }}
+                    >
                             {isAdded.id ? "Remove from cart" : "Add to cart"}
                     </button>
+                    ) : (
+                      <p className="flex max-w-[100%] m-3 text-center items-center text-[20px] text-[#ffd277]">
+                        Debes tener una membresía activa para poder comprar
+                      </p>
+                    )}
                 </div>
                 </div>
         </>

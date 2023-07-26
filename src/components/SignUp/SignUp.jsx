@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +29,11 @@ const SignUp = () => {
     try {
       await createUser(email, password);
       navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Welcome!",
+        text: "You have successfully registered!",
+      });
     } catch (error) {
       if (error.message.includes("email already in use")) {
         setError("Email is already in use");
@@ -73,7 +78,6 @@ const SignUp = () => {
             required
           ></input>
         </div>
-     
 
         {error && <p className="text-red-500">{error}</p>}
         <button
@@ -106,4 +110,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

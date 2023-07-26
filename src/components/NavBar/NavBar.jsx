@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 
 const NavBar = () => {
-  const { isLoggedIn, logout } = UserAuth();
+  const { user, isLoggedIn, logout } = UserAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
 
   const handleLogout = () => {
@@ -71,6 +71,16 @@ const NavBar = () => {
               Cerrar sesion
             </button>
           </li>
+        {isLoggedIn && user ? (
+          <>
+            <p className="mx-3 text-white text-lg font-semibold mt-1">
+              {user.displayName ? `Hello, ${user.displayName}!` : "Hello!"}
+            </p>
+            <p className="mx-3 text-white font-semibold mt-1 text-lg">
+              {" "}
+              ✉️{user.email}
+            </p>
+          </>
         ) : (
           <li className="mx-4">
             <Link

@@ -11,7 +11,9 @@ import {
   POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  // FILTER_EXTRA_ACTIVITIES,
+  FILTER_EXTRA_ACTIVITIES,
+  FILTER_EXTRA_ACTIVITIES_ORDER,
+  SEARCH_ACTIVITIES,
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
@@ -125,20 +127,35 @@ export const filterActivities = (filters) => {
   };
 };
 
-// export const FilterExtraAct = (filters) => {
-//   const filter = filters.filter;
-//   const order = filters.order;
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios(
-//         `http://localhost:3001/extra?filter=${filter}&&order=${order}`
-//       );
-//       dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: response.data });
-//     } catch (error) {
-//       alert(error.response.data);
-//     }
-//   };
-// };
+export const filterActivitiesForCAtegori = (filters) => {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: FILTER_EXTRA_ACTIVITIES_ORDER, payload: filters });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const FilterExtraAct = (order) => {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: order });
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+};
+
+export const searchActivities = (name) => {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: SEARCH_ACTIVITIES, payload: name });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
 
 export const filterMembership = (filter) => {
   return async function (dispatch) {

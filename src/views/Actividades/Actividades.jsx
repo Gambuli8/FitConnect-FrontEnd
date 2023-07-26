@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 import Card_Actividades from "../../components/Card_Actividades/Card_Actividades";
 import Card_Extras from "../../components/Card_ExtraActivities/Card_Extras";
 import { Link } from "react-router-dom";
-import { getActivities, filterActivities, getExtraActivities, filterMembership } from "../../redux/Actions/Actions";
+import { getActivities, filterActivities, getExtraActivities, filterMembership, FilterExtraAct, filterActivitiesForCAtegori } from "../../redux/Actions/Actions";
 import useCart from "../../Hooks/useCart";
 import style from "./act.module.css";
 
 function Actividades() {
   const dispatch = useDispatch();
-
 
   window.onscroll = function () {
     if(scrollY > 100){
@@ -44,12 +43,20 @@ function Actividades() {
 
   const allActivities = useSelector((state) => state.allActivities);
   const allExtraActivities = useSelector((state) => state.allExtraActivities);
+  const filterExtraAct = useSelector((state) => state.filterExtraAct);
   
+  console.log(filterExtraAct);
   //logica del filter y order Activities.
   const [filters, setFilters] = useState({
     filter: 0,
     order: "az",
   });
+
+  const filterOrder = (e) => {
+    dispatch(FilterExtraAct(e.target.value));
+    dispatch(filterActivitiesForCAtegori(e.target.value));
+    // dispatch(searchActivities(e.target.value));
+  };
 
   const [Search, setSearch] = useState('');
   
@@ -164,39 +171,36 @@ function Actividades() {
         ))}
       </div>
       <div className=' text-center justify-center items-center'>
-      <h1 className='text-[#ffd277] font-bold uppercase text-[30px] my-8 ml-2 flex w-[620px]'>Every activity is an opportunity to...</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[400px] w-[500px]'>learn</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[530px] w-[500px]'>grow</h1>
-      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[850px] w-[400px]'>And have fun to the fullest.</h1>
+      <h1 className='text-[#ffd277] font-bold uppercase text-[30px] my-8 ml-2 flex w-[620px]'>Cada actividad es una oportunidad para...</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[400px] w-[500px]'>aprender</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[530px] w-[500px]'>crecer</h1>
+      <h1 className='text-[#ffd277] uppercase font-bold text-[30px] my-8 ml-[850px] w-[400px]'>Y diviértete al máximo.</h1>
       <p className='flex justify-center items-center'>
         <img className='w-[80px] h-[80px]' src="https://res.cloudinary.com/djqwbu0my/image/upload/v1690138662/arrow-circle-down-svgrepo-com_1_dhcqqr.svg" alt="" />
       </p>
       </div>
-        <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Here are some Extras Activities that you will like!</h1>
+        <h1 className='text-[#ffd277] font-bold text-[40px] ml-0 flex justify-center items-center my-10'>¡Aquí tienes algunas Actividades Extras que te van a gustar!</h1>
       
       <div className='flex items-center mt-20 justify-evenly'>
-        <select name="Categori" onChange={changeHandler}>
+        <select name="Categori" onChange={e => filterOrder(e)}>
           <option value="all">All</option>
           {allExtraActivities?.map((extraActivity) => (
             <option key={extraActivity?.idExtraAct} value={extraActivity?.type_activity}>
               {extraActivity?.type_activity}
             </option>
-          ))
-        }
+          ))}
         </select>
-        <div className=''>
-        <input value={Search} onChange={searchHandler} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-black font-medium justify-center text-center rounded-xl w-[200px]' />
-        </div>
-        <select name="OrderPrice">
-          <option value="all">All</option>
-          <option value="0-5000">$0-$5000</option>
-          <option value="5000-0">$5000-$0</option>
+        <input value={Search} onChange={e => searchHandler(e)} type="text" placeholder="Swimming, Lockers ..." className='flex bg-[#ffd277] text-black items-center h-[30px] placeholder:text-gray-600 font-medium justify-center text-center rounded-xl w-[200px]' />
+        <select name="OrderPrice" onChange={e => filterOrder(e)}>
+          <option value="all">Order for Price</option>
+          <option value="asc">ASC</option>
+          <option value="desc">DESC</option>
         </select>
       </div>
       
       
       <div className='mt-[100px] w-[100%] h-[100%] grid grid-cols-3 grid-rows-3 justify-between items-star my-4'>
-        {result?.map((extraActivity) => {
+        {(filterExtraAct || result)?.map((extraActivity) => {
           const isAdded = checkActivity(extraActivity);
           return (
             <li key={extraActivity?.idExtraAct}>
@@ -208,7 +212,7 @@ function Actividades() {
             type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
-            description={extraActivity?.description}
+            buttonInfo= {<Link to={`/detailExtraAct/${extraActivity?.idExtraAct}`}><button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center">Mas Info</button></Link>}
             button={ 
               <button
           className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center"

@@ -22,7 +22,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>}/>
             <Route path="/actividades" element={<Actividades />} />
             <Route path= "/detailExtraAct/:id" element={<DetailExtraAct />} />
             <Route path="/signin" element={<SignIn />} />

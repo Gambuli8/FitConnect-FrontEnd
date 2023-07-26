@@ -22,7 +22,7 @@ const NavBar = () => {
         <span>
           <Link to="/">
             <img
-              className="h-24 inline mx-10"
+              className="h-24 inline mx-0"
               src="https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png"
             />
           </Link>
@@ -30,7 +30,7 @@ const NavBar = () => {
       </div>
 
       <ul className="md:flex w-[75%] md:items-center">
-        <li className="mx-4">
+        <li className="mx-2">
           <Link
             to="/"
             className="text-white text-xl hover:text-yellow-500 duration-500 "
@@ -38,7 +38,7 @@ const NavBar = () => {
             Inicio
           </Link>
         </li>
-        <li className="mx-4">
+        <li className="mx-3">
           <a
             href="#contacto"
             className="text-white text-xl hover:text-yellow-500 duration-500"
@@ -46,7 +46,7 @@ const NavBar = () => {
             Contacto
           </a>
         </li>
-        <li className="mx-4">
+        <li className="mx-3">
           <a
             href="/#Membresia"
             className="text-white text-xl hover:text-yellow-500 duration-500"
@@ -54,7 +54,7 @@ const NavBar = () => {
             Membresias
           </a>
         </li>
-        <li className="mx-4">
+        <li className="mx-3">
           <Link
             to={"/actividades"}
             className="text-white text-xl hover:text-yellow-500 duration-500"
@@ -64,7 +64,7 @@ const NavBar = () => {
         </li>
         {isAuthenticated ? (
           <div className='flex '>
-            <li className="mx-4">
+            <li className="mx-3 mt-[18px]">
               <button
                 className="text-white text-xl hover:text-yellow-500 duration-500"
                 onClick={handleLogout}
@@ -73,7 +73,7 @@ const NavBar = () => {
               </button>
             </li>
             {isLoggedIn && user ? (
-              <>
+              <div className='flex flex-col'>
                 <p className="mx-3 text-white text-lg font-semibold mt-1">
                   {user.displayName ? `Hello, ${user.displayName}!` : "Hello!"}
                 </p>
@@ -81,9 +81,9 @@ const NavBar = () => {
                   {" "}
                   ✉️{user.email}
                 </p>
-              </>
+              </div>
             ) : (
-              <li className="mx-4">
+              <li className="mx-3">
                 <Link
                   className="text-white text-xl hover:text-yellow-500 duration-500"
                   to={"/signin"}
@@ -94,7 +94,7 @@ const NavBar = () => {
             )}
           </div>
         ) : (
-          <li className="mx-4">
+          <li className="mx-3">
             <Link
               className="text-white text-xl hover:text-yellow-500 duration-500"
               to={"/signin"}
@@ -104,7 +104,7 @@ const NavBar = () => {
           </li>
         )}
 
-        <li className="mx-4">
+        <li className="mx-3">
           <Carrito />
         </li>
       </ul>

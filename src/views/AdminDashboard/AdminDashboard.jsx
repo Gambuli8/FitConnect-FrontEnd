@@ -25,9 +25,11 @@ import {
   // deleteUser,
   putUser,
 } from "../../redux/Actions/Actions";
+// import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
   const userId = useSelector((state) => state.userId);

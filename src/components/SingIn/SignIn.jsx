@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
+import Swal from "sweetalert2";
+
 
 const SignIn = () => {
   const { signIn } = UserAuth();
@@ -23,6 +26,7 @@ const SignIn = () => {
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -34,7 +38,20 @@ const SignIn = () => {
     }
     try {
       await signIn(email, password);
-      navigate("/");
+      if (email === "Administrador@gmail.com"){
+        navigate("/admin");
+      } else {
+        navigate("/");
+        Swal.fire({
+          imageUrl: "https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png",
+          imageWidth: 400,
+          imageHeight: 200,
+          icon: 'success',
+          title: `Bienvenido! ${email}`,
+          text: 'Iniciaste sesión correctamente',
+          
+        })
+      }
     } catch (error) {
       if (error.message === "Correo electrónico ya existente") {
         setEmailExists(true);

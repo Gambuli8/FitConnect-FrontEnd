@@ -163,7 +163,6 @@ function Actividades() {
             name={activity?.name}
             schedule={activity?.schedule}
             rating={activity?.rating}
-            type_activity={activity?.type_activity}
             image={activity?.image}
             memberships={activity?.memberships}
           />
@@ -195,7 +194,6 @@ function Actividades() {
             name={extraActivity?.name}
             schedule={extraActivity?.schedule}
             rating={extraActivity?.rating}
-            type_activity={extraActivity?.type_activity}
             image={extraActivity?.image}
             price={extraActivity?.price}
             buttonInfo= {<Link to={`/detailExtraAct/${extraActivity?.idExtraAct}`}><button className="w-[100%] bg-[#ffd277] rounded-lg hover:bg-yellow-500 my-3 text-black font-bold items-center text-center">Mas Info</button></Link>}

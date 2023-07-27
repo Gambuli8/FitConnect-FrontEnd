@@ -42,9 +42,6 @@ export default function detailExtraAct() {
                     {extraAct?.name}
                     </h1>
                     <h3 className="font-parrafo my-3 text-[20px]">Horario: {extraAct?.schedule}</h3>
-                    <h3 className="font-parrafo my-3 text-[20px]">
-                    tipo de Actividad: {extraAct?.type_activity}
-                    </h3>
                     <h3 className="text-[20px] text-black w-[150px] rounded-xl text-center bg-green-500 uppercase font-semibold">
                     Precio: ${extraAct?.price}
                     </h3>

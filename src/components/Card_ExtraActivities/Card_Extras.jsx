@@ -55,9 +55,6 @@ export default function Card_Extras({
           {name}
         </h1>
         <h3 className="font-parrafo my-1 text-[20px]">Horario: {schedule}</h3>
-        <h3 className="font-parrafo my-1 text-[20px]">
-          Tipo de Actividad: {type_activity}
-        </h3>
         <h3 className=" text-[20px] text-black w-[150px] rounded-xl text-center bg-green-500 uppercase font-semibold">
           Precio: ${price}
         </h3>

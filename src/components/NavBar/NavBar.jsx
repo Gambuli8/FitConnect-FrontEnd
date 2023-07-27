@@ -3,17 +3,20 @@ import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
 import { useSelector } from "react-redux";
+import useCart from "../../Hooks/useCart";
 
 const NavBar = () => {
   const { user, isLoggedIn, logout } = UserAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
   const userStatus = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const {cart} = useCart();
 
   const handleLogout = () => {
     logout();
     setIsAuthenticated(false);
     navigate("/");
+    cart.splice(0, cart.length)
   };
 
   useEffect(() => {

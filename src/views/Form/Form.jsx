@@ -6,7 +6,7 @@ import { getMembership, getUserId, postUserForm } from "../../redux/Actions/Acti
 import axios from 'axios';
 
 const Form = (props) => {
-  let membershipId = props.idMembership
+  let membershipId = Number(props.idMembership)
   membershipId = Number(membershipId)
   const dispatch = useDispatch()
 

@@ -224,13 +224,17 @@ export const putUser = (payload) => {
   };
 };
 
-export const putActivity = (idAct, formData) => {
+export const putActivity = (payload, id) => {
   return async (dispatch) => {
     try {
+      console.log("Request payload:", payload); // Add this line to log the request payload
+      console.log("Activity ID:", id);
       const response = await axios.put(
-        `https://fitconnect-r5gr.onrender.com/activitie/put/${idAct}`,
-        formData
+        `https://fitconnect-r5gr.onrender.com/activitie/put/${id}`,
+        payload
       );
+
+      console.log("Response:", response.data);
       Swal.fire({
         icon: "success",
         title: "The Activity has been updated",

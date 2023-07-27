@@ -29,7 +29,7 @@ const SignIn = () => {
           title: `Bienvenido! ${email}`,
           text: 'Iniciaste sesión correctamente',
         })
-      }, 3000);
+      }, 4000);
     } catch (error) {
       setError(error.message);
       console.log(error.message);

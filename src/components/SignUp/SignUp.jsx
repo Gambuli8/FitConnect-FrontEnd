@@ -17,14 +17,16 @@ const SignUp = () => {
     try {
       await googleSignIn();
       navigate("/");
-      Swal.fire({
-        imageUrl: "https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png",
-        imageWidth: 400,
-        imageHeight: 200,
-        icon: 'success',
-        title: `Bienvenido! ${email}`,
-        text: 'Iniciaste sesión correctamente',
-      })
+      setTimeout(() => {
+        Swal.fire({
+          imageUrl: "https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png",
+          imageWidth: 400,
+          imageHeight: 200,
+          icon: 'success',
+          title: `Bienvenido! ${email}`,
+          text: 'Iniciaste sesión correctamente',
+        })
+      }, 5000);
     } catch (error) {
       setError(error.message);
       console.log(error.message);
@@ -37,14 +39,14 @@ const SignUp = () => {
     try {
       await createUser(email, password);
       navigate("/");
-      Swal.fire({
-        imageUrl: "https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png",
-        imageWidth: 400,
-        imageHeight: 200,
-        icon: 'success',
-        title: `Bienvenido! ${email}`,
-        text: 'Iniciaste sesión correctamente',
-      })
+        Swal.fire({
+          imageUrl: "https://res.cloudinary.com/djqwbu0my/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1689956873/logoFitConnect-removebg-preview_g34p2p.png",
+          imageWidth: 400,
+          imageHeight: 200,
+          icon: 'success',
+          title: `Bienvenido! ${email}`,
+          text: 'Iniciaste sesión correctamente',
+        })
     } catch (error) {
       if (error.message.includes("email already in use")) {
         setError("Email is already in use");

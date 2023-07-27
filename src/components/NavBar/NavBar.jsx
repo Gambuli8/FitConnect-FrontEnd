@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
@@ -8,10 +8,12 @@ const NavBar = () => {
   const { user, isLoggedIn, logout } = UserAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
   const userStatus = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     setIsAuthenticated(false);
+    navigate("/");
   };
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const NavBar = () => {
         </li>
         {isAuthenticated ? (
           <div className='flex '>
-            <li className="mx-3 mt-[18px]">
+              <li className="mx-3 mt-[18px]">
               <button
                 className="text-white text-xl hover:text-yellow-500 duration-500"
                 onClick={handleLogout}

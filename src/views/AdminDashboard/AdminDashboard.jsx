@@ -50,12 +50,6 @@ export default function AdminDashboard() {
   const descRef = useRef();
 
   //HANDLE DEL PUT
-  const handleEditActivity = (activity) => {
-    setSelectedActivity(activity);
-    setFormData(activity);
-    setShowForm(true);
-    setExtraShowForm(false);
-  };
 
   //HABILITAR Y DESHABILITAR USUARIO
   const handleDisableUser = (userId, email) => {
@@ -142,8 +136,6 @@ export default function AdminDashboard() {
         newExtraActivity.image = data.secure_url;
       }
       dispatch(postExtraActivity(newExtraActivity));
-      console.log(newExtraActivity);
-      setExtraShowForm(false);
     } catch (error) {
       console.log(error);
     }
@@ -153,37 +145,30 @@ export default function AdminDashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (selectedActivity.idAct) {
-        console.log(selectedActivity);
-        dispatch(putActivity(selectedActivity.idAct, formData));
-        console.log(selectedActivity.idAct);
-        console.log(formData);
-      } else {
-        const newActivity = {
-          name: nameRef.current.value,
-          schedule: scheduleRef.current.value,
-          type_activity: typeRef.current.value,
-          rating: ratingRef.current.value,
-          image: imageRef.current.files[0],
-        };
+      const newActivity = {
+        name: nameRef.current?.value,
+        schedule: scheduleRef.current?.value,
+        type_activity: typeRef.current?.value,
+        rating: ratingRef.current?.value,
+        image: imageRef.current?.files[0],
+      };
 
-        const imageFile = imageRef.current.files[0];
-        console.log(imageFile);
-        if (imageFile) {
-          const imageFormData = new FormData();
-          imageFormData.append("file", imageFile);
-          imageFormData.append("upload_preset", "Activities");
-          const response = await fetch(
-            "https://api.cloudinary.com/v1_1/djqwbu0my/upload",
-            {
-              method: "POST",
-              body: imageFormData,
-            }
-          );
-          const data = await response.json();
-          console.log(data);
-          newActivity.image = data.secure_url;
-        }
+      const imageFile = imageRef.current.files[0];
+      console.log(imageFile);
+      if (imageFile) {
+        const imageFormData = new FormData();
+        imageFormData.append("file", imageFile);
+        imageFormData.append("upload_preset", "Activities");
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/djqwbu0my/upload",
+          {
+            method: "POST",
+            body: imageFormData,
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        newActivity.image = data.secure_url;
 
         dispatch(postActivity(newActivity));
         console.log(newActivity);
@@ -221,7 +206,7 @@ export default function AdminDashboard() {
                 >
                   PUSH ME TO CREATE AN EXTRA ACTIVITY!
                 </Button>
-  
+
                 {showExtraForm && (
                   <div className="flex space-x-4">
                     <Card>
@@ -233,6 +218,12 @@ export default function AdminDashboard() {
                       </p>
                       <form onSubmit={handleExtraSubmit}>
                         <div>
+                          {selectedActivity.idAct && (
+                            <input
+                              type="hidden"
+                              value={selectedActivity.idAct}
+                            />
+                          )}
                           <label htmlFor="name">Name:</label>
                           <input
                             type="text"
@@ -344,7 +335,11 @@ export default function AdminDashboard() {
                           />
                         </div>
                         {/* Add more input fields for other properties of the user */}
-                        <Button type="submit" className="bg-green-500" size="xl">
+                        <Button
+                          type="submit"
+                          className="bg-green-500"
+                          size="xl"
+                        >
                           Submit
                         </Button>
                         <Button
@@ -387,7 +382,10 @@ export default function AdminDashboard() {
                           ref={scheduleRef}
                           value={formData.schedule}
                           onChange={(e) =>
-                            setFormData({ ...formData, schedule: e.target.value })
+                            setFormData({
+                              ...formData,
+                              schedule: e.target.value,
+                            })
                           }
                         />
                       </div>
@@ -428,7 +426,10 @@ export default function AdminDashboard() {
                           name="image"
                           ref={imageRef}
                           onChange={(e) =>
-                            setFormData({ ...formData, image: e.target.files[0] })
+                            setFormData({
+                              ...formData,
+                              image: e.target.files[0],
+                            })
                           }
                         />
                       </div>
@@ -541,15 +542,6 @@ export default function AdminDashboard() {
                             <TableCell>{act.schedule}</TableCell>
                             <TableCell>{act.type_activity}</TableCell>
                             <TableCell>{act.rating}</TableCell>
-                            <TableCell>
-                              <Button
-                                onClick={() => handleEditActivity(act)}
-                                className="bg-yellow-500"
-                                size="xl"
-                              >
-                                Edit
-                              </Button>
-                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -588,10 +580,8 @@ export default function AdminDashboard() {
             </Col>
           </Grid>
         </main>
-        );
+      );
     default:
-      return (<h1>You are not an administrator authorized</h1>)
+      return <h1>You are not an administrator authorized</h1>;
   }
-
-    
 }

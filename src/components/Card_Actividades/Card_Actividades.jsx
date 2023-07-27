@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 function Card_Actividades({
   name,
   schedule,
-  type_activity,
   rating,
   image,
   memberships,
@@ -24,9 +23,6 @@ function Card_Actividades({
           {name}
         </h1>
         <h3 className="font-parrafo my-2 text-[20px]">Horario: {schedule}</h3>
-        <h3 className="font-parrafo my-2 text-[20px]">
-          Tipo de actividad: {type_activity}
-        </h3>
         <h3 className="font-parrafo my-2 text-[20px]">Rating: {rating}</h3>
         <h3 className="font-parrafo my-2 text-[14px]">Memberships:</h3>
         <div className="grid grid-cols-3 text-[#fff990]">

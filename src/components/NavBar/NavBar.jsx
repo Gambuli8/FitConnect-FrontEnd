@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import Carrito from "../Carrito/Carrito";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const { user, isLoggedIn, logout } = UserAuth();
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
+  const userStatus = useSelector((state) => state.user);
 
   const handleLogout = () => {
     logout();
@@ -30,6 +32,17 @@ const NavBar = () => {
       </div>
 
       <ul className="md:flex w-[75%] md:items-center">
+        {userStatus?.email === "administrador@gmail.com" ? (
+          <li className="mx-2">
+          <Link
+            to="/admin"
+            className="text-white text-xl hover:text-yellow-500 duration-500 "
+            >
+            Admin
+          </Link>
+        </li>
+        ) : null
+          }
         <li className="mx-2">
           <Link
             to="/"

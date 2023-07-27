@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Route, Routes, Outlet } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Actividades from "./views/Actividades/Actividades";
 import Home from "./views/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
@@ -37,9 +37,6 @@ function App() {
           <Footer />
         </section>
         </AuthContextProvider>
-          {/* <Suspense fallback={<h1>Loading...</h1>}>
-          <Outlet />
-          </Suspense> */}
     </div>
   );
 }

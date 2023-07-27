@@ -11,9 +11,6 @@ import {
   POST_EXTRA_ACTIVITIES,
   FILTER_ACTIVITIES,
   FILTER_MEMBERSHIP,
-  FILTER_EXTRA_ACTIVITIES,
-  FILTER_EXTRA_ACTIVITIES_ORDER,
-  SEARCH_ACTIVITIES,
   USER_FIREBASE,
   PUT_USER,
   PUT_ACTIVITY,
@@ -25,7 +22,7 @@ import axios from "axios";
 
 export const getUser = () => {
   return async (dispatch) => {
-    const response = await axios("http://localhost:3001/user");
+    const response = await axios("https://fitconnect-r5gr.onrender.com/user");
     return dispatch({ type: GET_USERS, payload: response.data });
   };
 };
@@ -33,7 +30,9 @@ export const getUser = () => {
 export const getActivities = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/activitie");
+      const response = await axios(
+        "https://fitconnect-r5gr.onrender.com/activitie"
+      );
       console.log(response);
       dispatch({ type: GET_ACTIVITIES, payload: response.data });
     } catch (error) {
@@ -45,7 +44,9 @@ export const getActivities = () => {
 export const getExtraActivities = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/extra");
+      const response = await axios(
+        "https://fitconnect-r5gr.onrender.com/extra"
+      );
       dispatch({ type: GET_EXTRA_ACTIVITIES, payload: response.data });
     } catch (error) {
       alert(error.message);
@@ -56,7 +57,9 @@ export const getExtraActivities = () => {
 export const getMembership = () => {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/membership");
+      const response = await axios(
+        "https://fitconnect-r5gr.onrender.com/membership"
+      );
       dispatch({ type: GET_MEMBERSHIP, payload: response.data });
     } catch (error) {
       alert(error.message);
@@ -67,7 +70,10 @@ export const getMembership = () => {
 export const postUser = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/user", payload);
+      const response = await axios.post(
+        "https://fitconnect-r5gr.onrender.com/user",
+        payload
+      );
       // Verificar si el usuario fue creado exitosamente
       if (response.status === 201) {
         alert("El usuario ha sido creado exitosamente");
@@ -85,7 +91,7 @@ export const postActivity = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/activitie",
+        "https://fitconnect-r5gr.onrender.com/activitie",
         payload
       );
       if (response.status === 200) {
@@ -103,7 +109,10 @@ export const postActivity = (payload) => {
 export const postExtraActivity = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/extra", payload);
+      const response = await axios.post(
+        "https://fitconnect-r5gr.onrender.com/extra",
+        payload
+      );
       console.log(response.data);
       if (response.status === 200) {
         alert("La actividad ha sido creada exitosamente");
@@ -122,39 +131,9 @@ export const filterActivities = (filters) => {
   return async function (dispatch) {
     try {
       const response = await axios(
-        `http://localhost:3001/activitie?filter=${filter}&&order=${order}`
+        `https://fitconnect-r5gr.onrender.com/activitie?filter=${filter}&&order=${order}`
       );
       dispatch({ type: FILTER_ACTIVITIES, payload: response.data });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const filterActivitiesForCAtegori = (filters) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: FILTER_EXTRA_ACTIVITIES_ORDER, payload: filters });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const FilterExtraAct = (order) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: FILTER_EXTRA_ACTIVITIES, payload: order });
-    } catch (error) {
-      alert(error.response.data);
-    }
-  };
-};
-
-export const searchActivities = (name) => {
-  return async function (dispatch) {
-    try {
-      dispatch({ type: SEARCH_ACTIVITIES, payload: name });
     } catch (error) {
       alert(error.message);
     }
@@ -165,7 +144,7 @@ export const filterMembership = (filter) => {
   return async function (dispatch) {
     try {
       const response = await axios(
-        `http://localhost:3001/membership?filter=${filter}`
+        `https://fitconnect-r5gr.onrender.com/membership?filter=${filter}`
       );
       dispatch({ type: FILTER_MEMBERSHIP, payload: response.data });
     } catch (error) {
@@ -177,7 +156,10 @@ export const filterMembership = (filter) => {
 export const postUserBack = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/user", payload);
+      const response = await axios.post(
+        "https://fitconnect-r5gr.onrender.com/user",
+        payload
+      );
       // Verificar si el usuario fue creado exitosamente
       Swal.fire({
         icon: "success",
@@ -209,7 +191,9 @@ export const userFirebase = (user) => {
 
 export const getUserId = (id) => {
   return async (dispatch) => {
-    const response = await axios(`http://localhost:3001/user/${id}`);
+    const response = await axios(
+      `https://fitconnect-r5gr.onrender.com/user/${id}`
+    );
     return dispatch({ type: GET_USERID, payload: response.data });
   };
 };
@@ -217,7 +201,10 @@ export const getUserId = (id) => {
 export const putUser = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put("http://localhost:3001/user", payload);
+      const response = await axios.put(
+        "https://fitconnect-r5gr.onrender.com/user",
+        payload
+      );
       // Verificar si el usuario fue actualizado exitosamente
       Swal.fire({
         icon: "success",
@@ -241,7 +228,7 @@ export const putActivity = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
-        "http://localhost:3001/activitie",
+        "https://fitconnect-r5gr.onrender.com/activitie",
         payload
       );
       Swal.fire({
@@ -265,7 +252,7 @@ export const putActivity = (payload) => {
 export const deleteUser = (userId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:3001/${userId}`);
+      await axios.delete(`https://fitconnect-r5gr.onrender.com/${userId}`);
       dispatch({ type: DELETE_USER, payload: userId });
       Swal.fire({
         icon: "success",
@@ -297,7 +284,9 @@ export const postUserForm = (payload) => {
 
 export const getPaymentIdUser = (idUser) => {
   return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/paystore/last/${idUser}`);
+    const response = await axios.get(
+      `https://fitconnect-r5gr.onrender.com/paystore/last/${idUser}`
+    );
     return dispatch({ type: GET_PAYMENT_ID_USER, payload: response.data });
   };
 };

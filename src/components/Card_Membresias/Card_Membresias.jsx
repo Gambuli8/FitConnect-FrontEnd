@@ -79,7 +79,7 @@ const Card_Membresias = ({
       </div><p className="border-t-2 m-3 border-gray-300 text-[20px] items-center justify-center text-center">
         Más que un <strong className='text-[#ffd277]'>gimnasio</strong>, somos una <strong className='text-[#ffd277]'>FAMILIA</strong> fitness. ¡Únete con nuestra increíble membresía!
       </p></div>
-      <div>Precio: {price}</div>
+      <div className='text-[20px] w-[150px] text-black rounded-xl text-center bg-green-500 uppercase font-semibold'>Precio: ${price}</div>
       {isLoggedIn === "true" ? (
         <div className="flex items-center justify-center">{button}</div>
         ) : (

@@ -4,11 +4,11 @@
 import useCart from "../../Hooks/useCart";
 import Form from "../../views/Form/Form";
 import { useParams } from "react-router";
+import FormExtras from "../../views/Form/FormExtras";
 
 export default function detailCart() {
   const { cart, ClearCart, removeFromCart } = useCart();
   let { id } = useParams();
-  id = Number(id);
   return (
     <div className="flex">
       <div className="w-[50%] h-[68vh] pb-6 overflow-x-auto justify-center items-center text-center bg-gray-700">
@@ -153,7 +153,10 @@ export default function detailCart() {
         </button>
       </div>
       <div className="w-[50%] h-[68vh] flex justify-center items-center text-center">
+      {id==="undefined"?
+        <FormExtras cart={cart}/>:
         <Form idMembership={id} />
+      }
       </div>
     </div>
   );

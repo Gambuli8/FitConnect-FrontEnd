@@ -224,12 +224,12 @@ export const putUser = (payload) => {
   };
 };
 
-export const putActivity = (payload) => {
+export const putActivity = (idAct, formData) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
-        "https://fitconnect-r5gr.onrender.com/activitie",
-        payload
+        `https://fitconnect-r5gr.onrender.com/activitie/put/${idAct}`,
+        formData
       );
       Swal.fire({
         icon: "success",
@@ -237,6 +237,7 @@ export const putActivity = (payload) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      console.log(response.data);
       dispatch({ type: PUT_ACTIVITY, payload: response.data });
     } catch (error) {
       Swal.fire({
